@@ -1,280 +1,195 @@
 <!DOCTYPE html>
-
 <html lang="zh-TW">
-
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>tripleS 生涯表 3.0 產生器</title>
-
     <style>
-
         body { font-family: sans-serif; text-align: center; background: #f4f4f4; padding: 20px; }
-
         .container { max-width: 800px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-
         canvas { max-width: 100%; height: auto; border: 1px solid #ccc; cursor: pointer; background-color: #eee; }
-
         .controls { margin-top: 15px; }
-
         button { padding: 12px 24px; font-size: 16px; cursor: pointer; background: #ff4757; color: #fff; border: none; border-radius: 5px; font-weight: bold; }
-
         button:hover { background: #ff6b81; }
-
         p { color: #666; font-size: 14px; }
 
+        /* --- 新增：彈出視窗的樣式 --- */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 1000; justify-content: center; align-items: center; }
+        .modal-content { background: white; padding: 20px; border-radius: 10px; width: 90%; max-width: 500px; text-align: center; }
+        .upload-btn { display: block; width: 100%; padding: 15px; background: #000; color: #fff; border: none; border-radius: 5px; font-size: 16px; cursor: pointer; margin-bottom: 15px; font-weight: bold; }
+        .upload-btn:hover { background: #333; }
+        .divider { margin: 15px 0; border-bottom: 2px dashed #eee; }
+        .member-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; max-height: 40vh; overflow-y: auto; margin-bottom: 15px; padding: 5px;}
+        .member-btn { padding: 10px; cursor: pointer; border: 1px solid #ddd; border-radius: 5px; background: #f9f9f9; font-weight: bold; color: #333; }
+        .member-btn:hover { background: #ff4757; color: white; border-color: #ff4757; }
+        .close-btn { padding: 10px 30px; background: #ccc; color: #333; border: none; border-radius: 5px; font-size: 16px; cursor: pointer; }
     </style>
-
 </head>
-
 <body>
 
-
-
 <div class="container">
-
     <h2>tripleS 生涯表 3.0 產生器</h2>
-
-    <p>💡 使用方式：點擊格子即可上傳照片，完成後按下方下載</p>
-
+    <p>💡 使用方式：點擊格子選擇成員或上傳照片，完成後按下方下載</p>
     
-
     <canvas id="canvas"></canvas>
-
     <input type="file" id="fileInput" accept="image/*" style="display: none;">
-
     
-
     <div class="controls">
-
         <button id="downloadBtn">保存我的生涯表 (PNG)</button>
-
     </div>
-
     <p style="margin-top: 20px;">Designed for WAVs</p>
-
 </div>
 
-
+<div id="memberModal" class="modal">
+    <div class="modal-content">
+        <button class="upload-btn" onclick="triggerUpload()">📁 從手機/電腦上傳照片</button>
+        <div class="divider"></div>
+        <h3 style="margin-top: 5px; margin-bottom: 15px; color: #555;">或直接點選成員</h3>
+        <div id="memberGrid" class="member-grid"></div>
+        <button onclick="closeModal()" class="close-btn">取消</button>
+    </div>
+</div>
 
 <script>
-
     const canvas = document.getElementById('canvas');
-
     const ctx = canvas.getContext('2d');
-
     const fileInput = document.getElementById('fileInput');
-
     const downloadBtn = document.getElementById('downloadBtn');
-
-
-
-    // 注意：這裡的檔名必須跟你上傳到 GitHub 的圖片檔名「完全一模一樣」
+    const modal = document.getElementById('memberModal');
+    const memberGrid = document.getElementById('memberGrid');
 
     const templateSrc = 'triples.png'; 
-
     const imgTemplate = new Image();
-
     
-
-    // 設定底圖載入
-
     imgTemplate.onload = () => {
-
         canvas.width = imgTemplate.width;
-
         canvas.height = imgTemplate.height;
-
         initGrids();
-
         drawCanvas();
-
     };
-
     imgTemplate.src = templateSrc;
 
-
-
     let selectedGrid = -1;
-
     const grids = [];
 
-
-
-    // 初始化 12 個格子的位置 (根據 3.0 模板比例預估)
-
+    // --- 保留你校正好的座標 ---
     function initGrids() {
-
         const startX = 14;  
-
         const startY = 280; 
-
         const cellW = 340; 
-
         const cellH = 376;
-
         const gapX = 20;
-
         const gapY = 80;
 
-
-
         for (let row = 0; row < 3; row++) {
-
             for (let col = 0; col < 4; col++) {
-
                 grids.push({
-
                     x: startX + col * (cellW + gapX),
-
                     y: startY + row * (cellH + gapY),
-
                     w: cellW,
-
                     h: cellH,
-
                     img: null
-
                 });
-
             }
-
         }
-
     }
-
-
 
     function drawCanvas() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         
-        // 1. 先畫上傳的照片在最底層
         grids.forEach(grid => {
             if (grid.img) {
-                // 讓照片填滿格子
                 ctx.drawImage(grid.img, grid.x, grid.y, grid.w, grid.h);
             }
         });
 
-        // 🌟 魔法加在這裡：設定混合模式，過濾掉底圖的白色
         ctx.globalCompositeOperation = 'multiply';
-
-        // 2. 疊加底圖（此時白底會變透明，黑線與文字會印在照片上）
         ctx.drawImage(imgTemplate, 0, 0);
-
-        // 3. 畫完底圖後，恢復正常模式，以免影響後續操作
         ctx.globalCompositeOperation = 'source-over';
     }
 
+    // --- 新增：生成 24 個成員按鈕 ---
+    const members = [];
+    for(let i=1; i<=24; i++) {
+        members.push({ id: `S${i}`, src: `s${i}.png` });
+    }
 
-
-    // 點擊 Canvas 觸發檔案上傳
-
-    canvas.addEventListener('click', (e) => {
-
-        const rect = canvas.getBoundingClientRect();
-
-        const scaleX = canvas.width / rect.width;
-
-        const scaleY = canvas.height / rect.height;
-
-        const mouseX = (e.clientX - rect.left) * scaleX;
-
-        const mouseY = (e.clientY - rect.top) * scaleY;
-
-
-
-        selectedGrid = grids.findIndex(g => 
-
-            mouseX > g.x && mouseX < g.x + g.w &&
-
-            mouseY > g.y && mouseY < g.y + g.h
-
-        );
-
-
-
-        if (selectedGrid !== -1) {
-
-            fileInput.click();
-
-        }
-
+    members.forEach(member => {
+        const btn = document.createElement('div');
+        btn.className = 'member-btn';
+        btn.innerText = member.id;
+        btn.onclick = () => selectMember(member.src);
+        memberGrid.appendChild(btn);
     });
 
+    // --- 修改：點擊格子時開啟選單 ---
+    canvas.addEventListener('click', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        const scaleX = canvas.width / rect.width;
+        const scaleY = canvas.height / rect.height;
+        const mouseX = (e.clientX - rect.left) * scaleX;
+        const mouseY = (e.clientY - rect.top) * scaleY;
 
+        selectedGrid = grids.findIndex(g => 
+            mouseX > g.x && mouseX < g.x + g.w &&
+            mouseY > g.y && mouseY < g.y + g.h
+        );
 
-    // 處理上傳的照片
+        if (selectedGrid !== -1) {
+            modal.style.display = 'flex'; // 打開彈出視窗
+        }
+    });
 
-    fileInput.onchange = (e) => {
+    // --- 新增：選單操作邏輯 ---
+    function triggerUpload() {
+        fileInput.click(); // 觸發原本的上傳功能
+        closeModal();      // 關閉視窗
+    }
 
-        const file = e.target.files[0];
-
-        if (!file) return;
-
-        const reader = new FileReader();
-
-        reader.onload = (event) => {
-
-            const img = new Image();
-
-            img.onload = () => {
-
-                grids[selectedGrid].img = img;
-
-                drawCanvas();
-
-            };
-
-            img.src = event.target.result;
-
+    function selectMember(imgSrc) {
+        const img = new Image();
+        img.onload = () => {
+            grids[selectedGrid].img = img;
+            drawCanvas();
+            closeModal();
         };
+        img.onerror = () => {
+            alert('找不到圖片：' + imgSrc + '\n請確認圖檔已上傳至 GitHub。');
+            closeModal();
+        };
+        img.src = imgSrc;
+    }
 
+    function closeModal() {
+        modal.style.display = 'none';
+    }
+
+    // --- 處理本機上傳的照片 ---
+    fileInput.onchange = (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = (event) => {
+            const img = new Image();
+            img.onload = () => {
+                grids[selectedGrid].img = img;
+                drawCanvas();
+            };
+            img.src = event.target.result;
+        };
         reader.readAsDataURL(file);
-
+        // 清除 input 值，確保重複上傳同一張圖也能觸發
+        e.target.value = ''; 
     };
-
-
 
     // 下載功能
-
     downloadBtn.onclick = () => {
-
         const link = document.createElement('a');
-
         link.download = 'my_tripleS_table.png';
-
         link.href = canvas.toDataURL('image/png');
-
         link.click();
-
     };
-
 </script>
 
-
-
 </body>
-
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
