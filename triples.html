@@ -1,68 +1,73 @@
-!DOCTYPE html
-html lang=zh-TW
-head
-    meta charset=UTF-8
-    meta name=viewport content=width=device-width, initial-scale=1.0
-    titletripleS 生涯表 3.0 產生器title
-    style
-        body { font-family sans-serif; text-align center; background #f4f4f4; padding 20px; }
-        .container { max-width 600px; margin auto; background white; padding 20px; border-radius 10px; box-shadow 0 4px 6px rgba(0,0,0,0.1); }
-        canvas { max-width 100%; height auto; border 1px solid #ccc; cursor pointer; }
-        .controls { margin-top 15px; }
-        button { padding 10px 20px; font-size 16px; cursor pointer; background #000; color #fff; border none; border-radius 5px; }
-        p { color #666; font-size 14px; }
-    style
-head
-body
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tripleS 生涯表 3.0 產生器</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; background: #f4f4f4; padding: 20px; }
+        .container { max-width: 800px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        canvas { max-width: 100%; height: auto; border: 1px solid #ccc; cursor: pointer; background-color: #eee; }
+        .controls { margin-top: 15px; }
+        button { padding: 12px 24px; font-size: 16px; cursor: pointer; background: #ff4757; color: #fff; border: none; border-radius: 5px; font-weight: bold; }
+        button:hover { background: #ff6b81; }
+        p { color: #666; font-size: 14px; }
+    </style>
+</head>
+<body>
 
-div class=container
-    h2tripleS 生涯表 3.0 產生器h2
-    p💡 點擊格子即可上傳照片，完成後按下方下載p
-    canvas id=canvascanvas
-    input type=file id=fileInput accept=image style=display none;
+<div class="container">
+    <h2>tripleS 生涯表 3.0 產生器</h2>
+    <p>💡 使用方式：點擊格子即可上傳照片，完成後按下方下載</p>
     
-    div class=controls
-        button id=downloadBtn下載成品圖button
-    div
-div
+    <canvas id="canvas"></canvas>
+    <input type="file" id="fileInput" accept="image/*" style="display: none;">
+    
+    <div class="controls">
+        <button id="downloadBtn">保存我的生涯表 (PNG)</button>
+    </div>
+    <p style="margin-top: 20px;">Designed for WAVs</p>
+</div>
 
-script
+<script>
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext('2d');
     const fileInput = document.getElementById('fileInput');
     const downloadBtn = document.getElementById('downloadBtn');
 
-    const templateSrc = 'httpsi.imgur.com8QoO5Yn.png';  這裡我暫時使用了你上傳圖片的模擬網址
+    // 注意：這裡的檔名必須跟你上傳到 GitHub 的圖片檔名「完全一模一樣」
+    const templateSrc = 'tripleS 生涯表3.0 w.png'; 
     const imgTemplate = new Image();
-    imgTemplate.crossOrigin = anonymous;
-    imgTemplate.src = templateSrc;
-
-    let selectedGrid = -1;
-    const grids = [];  儲存 12 個格子的座標
-
-    imgTemplate.onload = () = {
+    
+    // 設定底圖載入
+    imgTemplate.onload = () => {
         canvas.width = imgTemplate.width;
         canvas.height = imgTemplate.height;
         initGrids();
         drawCanvas();
     };
+    imgTemplate.src = templateSrc;
 
+    let selectedGrid = -1;
+    const grids = [];
+
+    // 初始化 12 個格子的位置 (根據 3.0 模板比例預估)
     function initGrids() {
-        const startX = 25;  根據你的圖片調整起點
+        const startX = 25;  
         const startY = 160; 
         const cellW = 230; 
         const cellH = 230;
-        const gapX = 10;
-        const gapY = 80;
+        const gapX = 15;
+        const gapY = 82;
 
-        for (let row = 0; row  3; row++) {
-            for (let col = 0; col  4; col++) {
+        for (let row = 0; row < 3; row++) {
+            for (let col = 0; col < 4; col++) {
                 grids.push({
-                    x startX + col  (cellW + gapX),
-                    y startY + row  (cellH + gapY),
-                    w cellW,
-                    h cellH,
-                    img null
+                    x: startX + col * (cellW + gapX),
+                    y: startY + row * (cellH + gapY),
+                    w: cellW,
+                    h: cellH,
+                    img: null
                 });
             }
         }
@@ -71,27 +76,29 @@ script
     function drawCanvas() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         
-         先畫上傳的照片
-        grids.forEach(grid = {
+        // 1. 先畫上傳的照片
+        grids.forEach(grid => {
             if (grid.img) {
+                // 讓照片填滿格子
                 ctx.drawImage(grid.img, grid.x, grid.y, grid.w, grid.h);
             }
         });
 
-         再畫底圖（確保文字標籤在照片上方，或是調整順序）
+        // 2. 再疊加底圖（確保文字在最上面）
         ctx.drawImage(imgTemplate, 0, 0);
     }
 
-    canvas.addEventListener('click', (e) = {
+    // 點擊 Canvas 觸發檔案上傳
+    canvas.addEventListener('click', (e) => {
         const rect = canvas.getBoundingClientRect();
-        const scaleX = canvas.width  rect.width;
-        const scaleY = canvas.height  rect.height;
-        const mouseX = (e.clientX - rect.left)  scaleX;
-        const mouseY = (e.clientY - rect.top)  scaleY;
+        const scaleX = canvas.width / rect.width;
+        const scaleY = canvas.height / rect.height;
+        const mouseX = (e.clientX - rect.left) * scaleX;
+        const mouseY = (e.clientY - rect.top) * scaleY;
 
-        selectedGrid = grids.findIndex(g = 
-            mouseX  g.x && mouseX  g.x + g.w &&
-            mouseY  g.y && mouseY  g.y + g.h
+        selectedGrid = grids.findIndex(g => 
+            mouseX > g.x && mouseX < g.x + g.w &&
+            mouseY > g.y && mouseY < g.y + g.h
         );
 
         if (selectedGrid !== -1) {
@@ -99,13 +106,14 @@ script
         }
     });
 
-    fileInput.onchange = (e) = {
+    // 處理上傳的照片
+    fileInput.onchange = (e) => {
         const file = e.target.files[0];
         if (!file) return;
         const reader = new FileReader();
-        reader.onload = (event) = {
+        reader.onload = (event) => {
             const img = new Image();
-            img.onload = () = {
+            img.onload = () => {
                 grids[selectedGrid].img = img;
                 drawCanvas();
             };
@@ -114,13 +122,14 @@ script
         reader.readAsDataURL(file);
     };
 
-    downloadBtn.onclick = () = {
+    // 下載功能
+    downloadBtn.onclick = () => {
         const link = document.createElement('a');
-        link.download = 'tripleS_Life_Table.png';
-        link.href = canvas.toDataURL('imagepng');
+        link.download = 'my_tripleS_table.png';
+        link.href = canvas.toDataURL('image/png');
         link.click();
     };
-script
+</script>
 
-body
-html
+</body>
+</html>
