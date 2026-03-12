@@ -97,14 +97,40 @@
     function drawCanvas() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         
+        // 1. 先畫上傳的照片在最底層
         grids.forEach(grid => {
             if (grid.img) {
-                ctx.drawImage(grid.img, grid.x, grid.y, grid.w, grid.h);
+                // 🌟 啟動「等比例滿版裁切」魔法，解決變形問題
+                const imgRatio = grid.img.width / grid.img.height;
+                const gridRatio = grid.w / grid.h;
+                let sx, sy, sWidth, sHeight;
+
+                if (imgRatio > gridRatio) {
+                    // 照片比較寬：自動裁切左右邊緣
+                    sHeight = grid.img.height;
+                    sWidth = sHeight * gridRatio;
+                    sx = (grid.img.width - sWidth) / 2;
+                    sy = 0;
+                } else {
+                    // 照片比較高：自動裁切上下邊緣
+                    sWidth = grid.img.width;
+                    sHeight = sWidth / gridRatio;
+                    sx = 0;
+                    sy = (grid.img.height - sHeight) / 2; 
+                }
+                
+                // 將完美比例的畫面畫進格子裡
+                ctx.drawImage(grid.img, sx, sy, sWidth, sHeight, grid.x, grid.y, grid.w, grid.h);
             }
         });
 
+        // 🌟 設定混合模式，過濾掉底圖的白色
         ctx.globalCompositeOperation = 'multiply';
+
+        // 2. 疊加底圖
         ctx.drawImage(imgTemplate, 0, 0);
+
+        // 3. 恢復正常模式
         ctx.globalCompositeOperation = 'source-over';
     }
 
@@ -193,4 +219,5 @@
 
 </body>
 </html>
+
 
