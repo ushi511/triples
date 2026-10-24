@@ -19,11 +19,13 @@
 
 以靜態 HTTP 伺服器開啟，例如：
 
-    python -m http.server 8080 --directory studio
+    python -m http.server 8080
 
 開啟 http://localhost:8080 。JavaScript 使用模組，請勿直接雙擊 HTML。
 
-GitHub Pages 使用 main 分支根目錄時，網址為 https://ushi511.github.io/triples/studio/ ，原版首頁保留。
+GitHub Pages 使用 main 分支根目錄發佈，正式網址為 https://ushi511.github.io/triples/ 。新版已取代原版首頁；舊 /studio/ 連結會保留查詢參數與錨點並導向首頁。瀏覽器草稿使用相同來源的 IndexedDB，因此路徑調整不會搬移或清除既有草稿。
+
+主要頁面為根目錄 index.html；JavaScript、樣式及素材保留在 studio/。首頁以 base 指向 ./studio/，所有既有相對素材路徑維持有效。編輯頁面文字請修改根目錄 index.html；studio/index.html 僅作舊網址轉址。
 原始碼：https://github.com/ushi511/triples
 
 ## 成員網路照片

@@ -1,70 +1,17 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="tripleS 生涯表產生器，支援 1.0、2.0、3.0、3.5 表格，填入成員照片、歌曲、小分隊與 Objekt，完成後下載 PNG。">
-<title>tripleS 生涯表 3.5 產生器</title>
-<link rel="preload" href="assets/fonts/table-variable.woff2?v=20" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="styles.css?v=20"><script type="module" src="app.js?v=20"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>tripleS 生涯表已移至首頁</title>
+<link rel="canonical" href="https://ushi511.github.io/triples/">
+<meta http-equiv="refresh" content="0; url=../">
+<script>
+const target=new URL('../',location.href);
+target.search=location.search;
+target.hash=location.hash;
+location.replace(target.href);
+</script>
 </head>
-<body>
-<div class="container">
-<h2 id="pageTitle">tripleS 生涯表 3.5 產生器</h2>
-<div class="version-tabs" role="group" aria-label="選擇表格版本"><button class="secondary" data-table="1.0" aria-pressed="false">1.0</button><button class="secondary" data-table="2.0" aria-pressed="false">2.0</button><button class="secondary" data-table="3.0" aria-pressed="false">3.0</button><button class="secondary" data-table="3.5" aria-pressed="true">3.5</button></div>
-<p>點格子填入內容，點下方項目名稱可替換或自行打字。各版本會分開保留填寫內容。</p>
-<div class="canvas-wrap"><canvas id="canvas" aria-label="tripleS 生涯表預覽"></canvas><div id="gridButtons" aria-label="選擇要填入的格子"></div></div>
-<input type="file" id="fileInput" accept="image/*" hidden>
-<div class="controls"><button id="downloadBtn" disabled>保存我的生涯表 (PNG)</button></div>
-<div class="small-controls"><button id="undoBtn" class="secondary" disabled>復原上一步</button><button id="clearAllBtn" class="secondary" disabled>全部清空</button></div>
-<p id="saveStatus" class="status" role="status" hidden></p>
-</div>
-<dialog id="memberModal" aria-labelledby="modalTitle">
-<h3 id="modalTitle">選擇照片</h3><label class="fill-type-label">填入內容<select class="fill-kind"><option value="photo">照片／成員</option><option value="song">歌曲</option><option value="unit">小分隊</option><option value="objekt">Objekt 小卡</option></select></label>
-<button id="uploadBtn" class="upload-btn" type="button" aria-describedby="uploadHint"><span class="upload-title">將圖片拖曳到這裡</span><span id="uploadHint" class="upload-hint">或點一下，從手機／電腦選擇<br>也可按 Ctrl／⌘＋V 貼上圖片</span></button>
-<p id="uploadStatus" class="status" role="status" aria-live="polite" hidden></p>
-<div class="divider"></div>
-<section id="memberChooser"><p class="member-heading">點選成員，搜尋更多照片</p>
-<input id="searchInput" class="search" type="search" placeholder="搜尋名字或 S 編號" aria-label="搜尋成員" autocomplete="off">
-<div id="memberGrid" class="member-grid"></div>
-<p id="noResults" hidden>找不到這位成員，請換個名字或編號。</p>
-</section>
-<section id="memberPhotos" hidden aria-label="成員網路照片">
-<div class="photo-toolbar"><button id="backToMembersBtn" class="secondary">← 返回成員</button><strong id="photoMemberName"></strong></div>
-<form id="photoSearchForm" class="photo-search-form"><input id="photoSearchInput" class="search" type="search" placeholder="關鍵字：sns、photo diary、concept" maxlength="100" autocomplete="off"><button class="secondary" type="submit">搜尋</button></form>
-<label class="photo-source-picker">圖片來源<select id="photoSourceSelect"><option value="all">全部來源</option><option value="triples">tripleS Wiki</option><option value="kpop">Kpop Wiki</option></select></label>
-<p class="photo-hint">同時搜尋 tripleS Wiki 與 Kpop Wiki，優先顯示自拍、SNS 與日常照。點選照片即可套用。</p>
-<p id="photoStatus" class="status" role="status" aria-live="polite"></p>
-<div id="photoGrid" class="photo-grid" aria-label="圖片搜尋結果"></div>
-<p id="photoEmpty" hidden>試試專輯名稱，或清空關鍵字查看全部照片。</p>
-<button id="morePhotosBtn" class="secondary" hidden>載入更多照片</button>
-</section>
-<div id="noneSelection" class="none-selection" hidden><span>目前選擇：無</span><button id="clearNoneBtn" class="secondary">清除此格</button></div>
-<details id="cropSection" hidden>
-<summary>調整目前照片</summary>
-<p class="crop-hint">直接拖曳照片調整位置；放大後可增加移動範圍。</p>
-<canvas id="cropPreview" width="340" height="376" tabindex="0" role="img" aria-label="照片裁切預覽，可用滑鼠、手指拖曳，或使用方向鍵移動"></canvas>
-<label class="slider">縮放<input id="zoomRange" type="range" min="1" max="3" step="0.01" value="1"><output id="zoomValue">100%</output></label>
-<div class="crop-actions"><button id="resetCropBtn" class="secondary">置中重設</button><button id="clearSlotBtn" class="secondary">清除此格</button></div>
-</details>
-<p id="modalStatus" class="status" role="status"></p>
-<button id="closeBtn" class="close-btn">關閉</button>
-</dialog>
-
-<dialog id="songModal" aria-labelledby="songModalTitle">
-<h3 id="songModalTitle">選擇歌曲</h3><label class="fill-type-label">填入內容<select class="fill-kind"><option value="photo">照片／成員</option><option value="song">歌曲</option><option value="unit">小分隊</option><option value="objekt">Objekt 小卡</option></select></label>
-<input id="songSearch" class="search" type="search" placeholder="搜尋歌名、專輯或分隊名稱" aria-label="搜尋 tripleS 歌曲" autocomplete="off">
-<div class="song-toolbar"><button id="allAlbumsBtn" class="secondary" aria-pressed="true">全部專輯</button><span id="songCount"></span></div>
-<div id="albumGrid" class="album-grid" aria-label="依專輯封面挑選"></div>
-<div id="songList" class="song-list" aria-label="選擇歌曲"></div>
-<p id="songEmpty" hidden>找不到符合的歌曲，請換個關鍵字。</p>
-<p id="songStatus" class="status" role="status"></p>
-<div id="currentSong" class="current-song" hidden><span id="currentSongName"></span><button id="clearSongBtn" class="secondary">清除此格</button></div>
-<button id="closeSongBtn" class="close-btn">關閉</button>
-</dialog>
-<dialog id="unitModal" aria-labelledby="unitModalTitle"><h3 id="unitModalTitle">本命小分隊</h3><label class="fill-type-label">填入內容<select class="fill-kind"><option value="photo">照片／成員</option><option value="song">歌曲</option><option value="unit">小分隊</option><option value="objekt">Objekt 小卡</option></select></label><input id="unitSearch" class="search" type="search" aria-label="搜尋小分隊" placeholder="搜尋小分隊名稱、縮寫或成員"><div id="unitGrid" class="unit-grid"></div><p id="unitStatus" class="status" role="status"></p><div class="picker-actions"><button id="clearUnitBtn" class="secondary">清除此格</button><button id="closeUnitBtn" class="close-btn">關閉</button></div></dialog>
-<dialog id="objektModal" aria-labelledby="objektModalTitle"><h3 id="objektModalTitle">選擇 Objekt</h3><label class="fill-type-label">填入內容<select class="fill-kind"><option value="photo">照片／成員</option><option value="song">歌曲</option><option value="unit">小分隊</option><option value="objekt">Objekt 小卡</option></select></label><form id="objektSearchForm"><div class="objekt-filters"><label>成員<select id="objektMember"></select></label><label>Season<select id="objektSeason"><option value="">全部 Season</option></select></label></div><div class="photo-search-form"><input id="objektNumber" class="search" type="search" placeholder="卡款編號，例如 101Z" aria-label="Objekt 卡款編號" maxlength="40" autocomplete="off"><button class="secondary" type="submit">搜尋</button></div></form><p class="photo-hint">依成員、卡款編號與 Season 找卡面，不需輸入個別卡片流水號。</p><p id="objektStatus" class="status" role="status"></p><div id="objektGrid" class="objekt-grid"></div><button id="objektMoreBtn" class="secondary" hidden>載入更多小卡</button><p id="objektCatalogInfo" class="photo-hint"></p><div class="picker-actions"><button id="clearObjektBtn" class="secondary">清除此格</button><button id="closeObjektBtn" class="close-btn">關閉</button></div></dialog>
-<dialog id="topicModal" aria-labelledby="topicModalTitle"><h3 id="topicModalTitle">更換格子項目</h3><form id="topicForm"><label class="topic-field">選擇現有項目<select id="topicPreset"></select></label><label class="topic-field">項目名稱<input id="topicText" type="text" maxlength="80" autocomplete="off" placeholder="輸入自己想填的項目" aria-describedby="topicCount topicHint"></label><div id="topicCount" class="topic-count"></div><label class="topic-field">空白格的預設填入內容<select id="topicKind"><option value="photo">照片／成員</option><option value="song">歌曲</option><option value="unit">小分隊</option><option value="objekt">Objekt 小卡</option></select></label><p id="topicHint" class="photo-hint">最多 40 字，留白可隱藏名稱。更換項目會保留已填內容，文字會自動調整大小並出現在下載的圖片中。</p><div class="topic-actions"><button type="button" id="resetTopicBtn" class="secondary">恢復原始項目</button><button type="button" id="cancelTopicBtn" class="secondary">取消</button><button type="submit">套用</button></div></form></dialog>
-<dialog id="confirmModal" aria-labelledby="confirmTitle"><h3 id="confirmTitle">清空這個版本的內容與自訂項目？</h3><p>清空後，仍可按「復原上一步」還原。</p><div class="confirm-actions"><button id="cancelClearBtn" class="secondary">取消</button><button id="confirmClearBtn">確認清空</button></div></dialog>
-</body>
+<body><p>tripleS 生涯表已移至首頁。<a href="../">前往新版首頁</a></p></body>
 </html>
-
