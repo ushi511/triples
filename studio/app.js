@@ -206,6 +206,16 @@ uploadZone.addEventListener('dragover',e=>{if(!hasFiles(e))return;e.preventDefau
 uploadZone.addEventListener('dragleave',e=>{e.preventDefault();uploadDragDepth=Math.max(0,uploadDragDepth-1);if(!uploadDragDepth)uploadZone.classList.remove('drag-over')});
 uploadZone.addEventListener('drop',e=>{e.preventDefault();e.stopPropagation();resetUploadDrag();const files=Array.from(e.dataTransfer?.files||[]);if(files.length!==1){showUploadStatus(files.length>1?'每次請拖入一張圖片。':'請拖入圖片檔案，或點擊框框選擇圖片。',true);return}upload(files[0],newUploadRequest())});
 for(const type of ['dragover','drop'])document.addEventListener(type,e=>{if(hasFiles(e))e.preventDefault()});
+document.addEventListener('paste',e=>{
+ if(!modal.open||isSongSlot(selected)||!e.clipboardData)return;
+ const items=Array.from(e.clipboardData.items||[]).filter(item=>item.kind==='file'&&item.type.startsWith('image/'));
+ const fromItems=items.map(item=>item.getAsFile()).filter(Boolean);
+ const files=fromItems.length?fromItems:Array.from(e.clipboardData.files||[]).filter(file=>file.type.startsWith('image/'));
+ if(!files.length)return;
+ e.preventDefault();
+ if(files.length>1){showUploadStatus('每次請貼上一張圖片。',true);return}
+ upload(files[0],newUploadRequest());
+});
 $('closeBtn').onclick=closeModal;modal.addEventListener('close',()=>{resetUploadDrag();memberPhotos.cancel();stopDragging();finishEdit()});modal.addEventListener('cancel',()=>{memberPhotos.cancel();stopDragging();finishEdit()});
 for(const [id,key] of [['zoomRange','z']]){const el=$(id);el.onfocus=beginEdit;el.onpointerdown=beginEdit;el.oninput=()=>{beginEdit();if(!state.slots[selected])return;state.slots[selected][key]=Number(el.value);render();scheduleSave()};el.onchange=finishEdit;el.onblur=finishEdit}
 
