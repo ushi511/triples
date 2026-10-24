@@ -1,7 +1,7 @@
-import {createCollectionPickers} from './collection-pickers.js?v=19';
-import {createMemberPhotoBrowser} from './member-photos.js?v=19';
-import {FONT_FAMILY,fitSingleLine,songLayout,wrapText} from './typography.js?v=8';
-import {NAMES,freshState,cloneState,clamp,placement,validDraft,defaultCrop,restoreState,getTable,TABLE_IDS,slotType,TOPIC_OPTIONS,topicFor} from './core.js?v=19';
+import {createCollectionPickers} from './collection-pickers.js?v=20';
+import {createMemberPhotoBrowser} from './member-photos.js?v=20';
+import {FONT_FAMILY,songLayout,wrapText} from './typography.js?v=8';
+import {NAMES,freshState,cloneState,clamp,placement,validDraft,defaultCrop,restoreState,getTable,TABLE_IDS,slotType,TOPIC_OPTIONS,topicFor} from './core.js?v=20';
 const $=id=>document.getElementById(id),canvas=$('canvas'),modal=$('memberModal'),songModal=$('songModal');
 const images=new Map(),history=[],draftCache=new Map();
 const collectionPickers=createCollectionPickers({onChoose:chooseCollection,onClear:clearCollection});
@@ -35,31 +35,24 @@ function paintTableFrame(ctx){
  for(const [y,height] of [[272,9],[656,4],[732,4],[1113,4],[1190,3],[1570,4],[1645,9]])ctx.fillRect(2,y,1440,height);
  ctx.restore();
 }
-function paintTableTypography(ctx,source=template){
- ctx.save();ctx.fillStyle='#fff';ctx.fillRect(0,0,source.width,272);
- const title='tripleS 生涯表',version='(3.5)',logoW=123,logoH=141,gap=32,versionGap=20;
- ctx.font='700 108px '+FONT_FAMILY;const titleWidth=ctx.measureText(title).width;
- ctx.font='700 32px '+FONT_FAMILY;const versionWidth=ctx.measureText(version).width;
- const total=logoW+gap+titleWidth+versionGap+versionWidth,left=(source.width-total)/2;
- ctx.drawImage(source,262,68,123,141,Math.round(left),66,logoW,logoH);
- ctx.fillStyle='#111';ctx.textAlign='left';ctx.font='700 108px '+FONT_FAMILY;centeredText(ctx,title,left+logoW+gap,136);
- ctx.font='700 32px '+FONT_FAMILY;centeredText(ctx,version,left+logoW+gap+titleWidth+versionGap,136);
- const columns=[{x:11,w:349},{x:369,w:350},{x:727,w:350},{x:1085,w:350}],rows=[{y:660,h:72},{y:1117,h:73},{y:1574,h:71}];
- getTable('3.5').labels.forEach((text,index)=>{
-  const col=columns[index%4],row=rows[Math.floor(index/4)];
-  ctx.fillStyle='#fff';ctx.fillRect(col.x,row.y,col.w,row.h);
-  fitSingleLine(ctx,text,48,30,col.w-24);ctx.fillStyle=index===6?'#e92342':'#111';ctx.textAlign='center';
-  centeredText(ctx,text,col.x+col.w/2,row.y+row.h/2);
- });ctx.restore();
+function paintTableTypography(ctx,logoSource,config){
+ const headerHeight={'1.0':219,'2.0':236,'3.0':270,'3.5':272}[config.id],scale=config.width/1451;
+ const title='tripleS 生涯表',version=['3.0','3.5'].includes(config.id)?'('+config.id+')':'',hasLogo=config.id!=='1.0';
+ const logoW=hasLogo?123*scale:0,logoH=141*scale,gap=hasLogo?32*scale:0,versionGap=version?20*scale:0,titleSize=108*scale,versionSize=32*scale;
+ ctx.save();ctx.fillStyle='#fff';ctx.fillRect(0,0,config.width,headerHeight);ctx.font='700 '+titleSize+'px '+FONT_FAMILY;const titleWidth=ctx.measureText(title).width;
+ ctx.font='700 '+versionSize+'px '+FONT_FAMILY;const versionWidth=ctx.measureText(version).width,total=logoW+gap+titleWidth+versionGap+versionWidth,left=(config.width-total)/2;
+ if(hasLogo)ctx.drawImage(logoSource,262,68,123,141,left,(headerHeight-logoH)/2,logoW,logoH);
+ ctx.fillStyle='#111';ctx.textAlign='left';ctx.font='700 '+titleSize+'px '+FONT_FAMILY;centeredText(ctx,title,left+logoW+gap,headerHeight/2);
+ if(version){ctx.font='700 '+versionSize+'px '+FONT_FAMILY;centeredText(ctx,version,left+logoW+gap+titleWidth+versionGap,headerHeight/2)}ctx.restore();
 }
-function paintCustomTopics(ctx,snapshot,config){
+function paintTableCaptions(ctx,snapshot,config){
  ctx.save();ctx.beginPath();ctx.rect(0,0,config.width,config.height);ctx.clip();
- snapshot.topics.forEach((topic,index)=>{if(!topic)return;const r=config.captionRects[index],text=topic.text;ctx.fillStyle='#fff';ctx.fillRect(r.x,r.y,r.w,r.h);if(!text)return;
+ config.labels.forEach((original,index)=>{const r=config.captionRects[index],text=snapshot.topics[index]?.text??original;ctx.fillStyle='#fff';ctx.fillRect(r.x,r.y,r.w,r.h);if(!text)return;
  let size=Math.min(48,Math.floor(r.h*.62));ctx.font='700 '+size+'px '+FONT_FAMILY;
- while(size>30&&ctx.measureText(text).width>r.w-20){size--;ctx.font='700 '+size+'px '+FONT_FAMILY}
+ while(size>24&&ctx.measureText(text).width>r.w-20){size--;ctx.font='700 '+size+'px '+FONT_FAMILY}
  let lines=wrapText(ctx,text,r.w-20),lineHeight;
  while(size>8&&(lines.length>2||lines.length*size*1.18>r.h-10)){size--;ctx.font='700 '+size+'px '+FONT_FAMILY;lines=wrapText(ctx,text,r.w-20)}
- lineHeight=size*1.18;ctx.textAlign='center';ctx.fillStyle='#111';ctx.save();ctx.beginPath();ctx.rect(r.x,r.y,r.w,r.h);ctx.clip();lines.forEach((line,i)=>centeredText(ctx,line,r.x+r.w/2,r.y+r.h/2+(i-(lines.length-1)/2)*lineHeight));ctx.restore();
+ lineHeight=size*1.18;ctx.textAlign='center';ctx.fillStyle=text==='不准偷家'?'#e92342':'#111';ctx.save();ctx.beginPath();ctx.rect(r.x,r.y,r.w,r.h);ctx.clip();lines.forEach((line,i)=>centeredText(ctx,line,r.x+r.w/2,r.y+r.h/2+(i-(lines.length-1)/2)*lineHeight));ctx.restore();
  });ctx.restore();
 }
 function drawContained(ctx,img,x,y,w,h){const scale=Math.min(w/img.width,h/img.height);const dw=img.width*scale,dh=img.height*scale;ctx.drawImage(img,x+(w-dw)/2,y+(h-dh)/2,dw,dh)}
@@ -76,11 +69,11 @@ function clearCollection(){jobs[selected]++;change(()=>state.slots[selected]=nul
 function paint(ctx,img,w,h,s){if(s.kind==='none'){ctx.save();ctx.fillStyle='#fff';ctx.fillRect(0,0,w,h);ctx.font='700 86px '+FONT_FAMILY;ctx.fillStyle='#555';ctx.textAlign='center';centeredText(ctx,'無',w/2,h/2);ctx.restore();return}if(s.kind==='song'){paintSong(ctx,img,w,h,s);return}if(s.kind==='unit'||s.kind==='objekt'){paintCollection(ctx,img,w,h,s);return}const p=placement(img.width,img.height,w,h,s);ctx.save();ctx.beginPath();ctx.rect(0,0,w,h);ctx.clip();ctx.drawImage(img,p.dx,p.dy,p.dw,p.dh);ctx.restore()}
 async function draw(target=canvas,snapshot=cloneState(state)){
  const generation=++drawVersion,config=getTable(snapshot.tableId);await typographyReady;
- const [background,photos]=await Promise.all([image(config.template),Promise.all(snapshot.slots.map(s=>s&&s.kind!=='none'?image(s.src):null))]);
+ const [background,logoSource,photos]=await Promise.all([image(config.template),config.id==='1.0'?null:image(getTable('3.5').template),Promise.all(snapshot.slots.map(s=>s&&s.kind!=='none'?image(s.src):null))]);
  if(target===canvas&&(generation!==drawVersion||snapshot.tableId!==state.tableId))return;
  target.width=config.width;target.height=config.height;const ctx=target.getContext('2d');ctx.fillStyle='#fff';ctx.fillRect(0,0,target.width,target.height);ctx.drawImage(background,0,0);
  photos.forEach((img,i)=>{if(!snapshot.slots[i])return;const r=config.rects[i];ctx.save();ctx.translate(r.x,r.y);paint(ctx,img,r.w,r.h,snapshot.slots[i]);ctx.restore()});
- if(config.id==='3.5'){paintTableFrame(ctx);paintTableTypography(ctx,background)}paintCustomTopics(ctx,snapshot,config);
+ if(config.id==='3.5')paintTableFrame(ctx);paintTableTypography(ctx,logoSource,config);paintTableCaptions(ctx,snapshot,config);
 }
 function render(){const drawing=draw().catch(()=>status('有張照片無法讀取，請點選該格重新選擇。',true));updateButtons();document.querySelectorAll('.grid-button').forEach((b,i)=>b.setAttribute('aria-label',`第 ${i+1} 格：${labels()[i]}，${state.slots[i]?.kind==='none'?'無':['song','unit','objekt'].includes(state.slots[i]?.kind)?state.slots[i].title:state.slots[i]?'已有照片':'尚未填入'}`));document.querySelectorAll('.label-button').forEach((b,i)=>{b.setAttribute('aria-label','更換第 '+(i+1)+' 格項目：'+labels()[i]);b.title='更換項目：'+labels()[i]});if(modal.open)renderCrop();return drawing}
 function buildTargets(){$('gridButtons').replaceChildren();rects.forEach((r,i)=>{const b=document.createElement('button');b.className='grid-button';b.style.cssText=`left:${r.x/template.width*100}%;top:${r.y/template.height*100}%;width:${r.w/template.width*100}%;height:${r.h/template.height*100}%`;b.onclick=()=>openModal(i);$('gridButtons').append(b)});table().captionRects.forEach((r,i)=>{const b=document.createElement('button');b.className='label-button';b.style.cssText=`left:${r.x/template.width*100}%;top:${r.y/template.height*100}%;width:${r.w/template.width*100}%;height:${r.h/template.height*100}%`;b.onclick=()=>openTopicEditor(i);$('gridButtons').append(b)})}
@@ -308,5 +301,5 @@ document.querySelectorAll('[data-table]').forEach(button=>button.onclick=()=>swi
 document.querySelectorAll('.fill-kind').forEach(select=>select.onchange=()=>openModal(selected,select.value));
 try{let preferred='3.5';try{const stored=localStorage.getItem('wav-studio-table');if(TABLE_IDS.includes(stored))preferred=stored}catch{}
  state=freshState(preferred);let draft;try{draft=await openDraft(preferred)}catch{}
- if(validDraft(draft)&&restoreState(draft).tableId===preferred)state=restoreState(draft);template=await image(table().template);rects=table().rects;jobs=Array(state.slots.length).fill(0);buildTargets();buildMembers();updateTableUI();ready=true;render();$('downloadBtn').disabled=false;status(db?'各版本會分開保留填寫內容。':'無法保存草稿，完成後請下載圖片備份。',!db)
+ if(validDraft(draft)&&restoreState(draft).tableId===preferred)state=restoreState(draft);template=await image(table().template);rects=table().rects;jobs=Array(state.slots.length).fill(0);buildTargets();buildMembers();updateTableUI();await render();ready=true;updateButtons();$('downloadBtn').disabled=false;status(db?'各版本會分開保留填寫內容。':'無法保存草稿，完成後請下載圖片備份。',!db)
 }catch{status('表格載入失敗，請重新整理頁面。',true)}

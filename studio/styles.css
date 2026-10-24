@@ -1,8 +1,7 @@
-@font-face { font-family: 'Table Sans'; font-style: normal; font-weight: 400; font-display: swap; src: url('assets/fonts/table-regular.ttf?v=19') format('truetype'); }
-@font-face { font-family: 'Table Sans'; font-style: normal; font-weight: 700; font-display: swap; src: url('assets/fonts/table-bold.ttf?v=19') format('truetype'); }
+@font-face { font-family: 'Table Sans'; font-style: normal; font-weight: 100 900; font-display: swap; src: url('assets/fonts/table-variable.woff2?v=20') format('woff2'); }
 * { box-sizing: border-box; }
 body { font-family: 'Table Sans', 'Microsoft JhengHei', sans-serif; font-size: 14px; line-height: 1.65; text-align: center; background: #f4f4f4; padding: 20px; margin: 8px; color: #222; }
-button, input, output, summary { font-family: inherit; }
+button, input, select, textarea, output, summary { font-family: inherit; }
 .container { max-width: 840px; margin: auto; background: white; padding: 24px 20px 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
 h2 { font-size: 26px; font-weight: 700; line-height: 1.45; letter-spacing: .02em; margin: 10px 0 12px; text-wrap: balance; }
 p { color: #666; font-size: 14px; line-height: 1.75; margin: 12px 0; }
