@@ -4,13 +4,13 @@
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="tripleS 生涯表產生器，支援 1.0、2.0、3.0、3.5 表格，填入成員照片、歌曲、小分隊與 Objekt，完成後下載 PNG。">
 <title>tripleS 生涯表 3.5 產生器</title>
-<link rel="stylesheet" href="styles.css?v=18"><script type="module" src="app.js?v=18"></script>
+<link rel="stylesheet" href="styles.css?v=19"><script type="module" src="app.js?v=19"></script>
 </head>
 <body>
 <div class="container">
 <h2 id="pageTitle">tripleS 生涯表 3.5 產生器</h2>
 <div class="version-tabs" role="group" aria-label="選擇表格版本"><button class="secondary" data-table="1.0" aria-pressed="false">1.0</button><button class="secondary" data-table="2.0" aria-pressed="false">2.0</button><button class="secondary" data-table="3.0" aria-pressed="false">3.0</button><button class="secondary" data-table="3.5" aria-pressed="true">3.5</button></div>
-<p>點擊格子選擇照片、歌曲、小分隊或小卡。各版本會分開保留填寫內容。</p>
+<p>點格子填入內容，點下方項目名稱可替換或自行打字。各版本會分開保留填寫內容。</p>
 <div class="canvas-wrap"><canvas id="canvas" aria-label="tripleS 生涯表預覽"></canvas><div id="gridButtons" aria-label="選擇要填入的格子"></div></div>
 <input type="file" id="fileInput" accept="image/*" hidden>
 <div class="controls"><button id="downloadBtn" disabled>保存我的生涯表 (PNG)</button></div>
@@ -62,7 +62,8 @@
 </dialog>
 <dialog id="unitModal" aria-labelledby="unitModalTitle"><h3 id="unitModalTitle">本命小分隊</h3><label class="fill-type-label">填入內容<select class="fill-kind"><option value="photo">照片／成員</option><option value="song">歌曲</option><option value="unit">小分隊</option><option value="objekt">Objekt 小卡</option></select></label><input id="unitSearch" class="search" type="search" aria-label="搜尋小分隊" placeholder="搜尋小分隊名稱、縮寫或成員"><div id="unitGrid" class="unit-grid"></div><p id="unitStatus" class="status" role="status"></p><div class="picker-actions"><button id="clearUnitBtn" class="secondary">清除此格</button><button id="closeUnitBtn" class="close-btn">關閉</button></div></dialog>
 <dialog id="objektModal" aria-labelledby="objektModalTitle"><h3 id="objektModalTitle">選擇 Objekt</h3><label class="fill-type-label">填入內容<select class="fill-kind"><option value="photo">照片／成員</option><option value="song">歌曲</option><option value="unit">小分隊</option><option value="objekt">Objekt 小卡</option></select></label><form id="objektSearchForm"><div class="objekt-filters"><label>成員<select id="objektMember"></select></label><label>Season<select id="objektSeason"><option value="">全部 Season</option></select></label></div><div class="photo-search-form"><input id="objektNumber" class="search" type="search" placeholder="卡款編號，例如 101Z" aria-label="Objekt 卡款編號" maxlength="40" autocomplete="off"><button class="secondary" type="submit">搜尋</button></div></form><p class="photo-hint">依成員、卡款編號與 Season 找卡面，不需輸入個別卡片流水號。</p><p id="objektStatus" class="status" role="status"></p><div id="objektGrid" class="objekt-grid"></div><button id="objektMoreBtn" class="secondary" hidden>載入更多小卡</button><p id="objektCatalogInfo" class="photo-hint"></p><div class="picker-actions"><button id="clearObjektBtn" class="secondary">清除此格</button><button id="closeObjektBtn" class="close-btn">關閉</button></div></dialog>
-<dialog id="confirmModal" aria-labelledby="confirmTitle"><h3 id="confirmTitle">清空這個版本的內容？</h3><p>清空後，仍可按「復原上一步」還原。</p><div class="confirm-actions"><button id="cancelClearBtn" class="secondary">取消</button><button id="confirmClearBtn">確認清空</button></div></dialog>
+<dialog id="topicModal" aria-labelledby="topicModalTitle"><h3 id="topicModalTitle">更換格子項目</h3><form id="topicForm"><label class="topic-field">選擇現有項目<select id="topicPreset"></select></label><label class="topic-field">項目名稱<input id="topicText" type="text" maxlength="80" autocomplete="off" placeholder="輸入自己想填的項目" aria-describedby="topicCount topicHint"></label><div id="topicCount" class="topic-count"></div><label class="topic-field">空白格的預設填入內容<select id="topicKind"><option value="photo">照片／成員</option><option value="song">歌曲</option><option value="unit">小分隊</option><option value="objekt">Objekt 小卡</option></select></label><p id="topicHint" class="photo-hint">最多 40 字，留白可隱藏名稱。更換項目會保留已填內容，文字會自動調整大小並出現在下載的圖片中。</p><div class="topic-actions"><button type="button" id="resetTopicBtn" class="secondary">恢復原始項目</button><button type="button" id="cancelTopicBtn" class="secondary">取消</button><button type="submit">套用</button></div></form></dialog>
+<dialog id="confirmModal" aria-labelledby="confirmTitle"><h3 id="confirmTitle">清空這個版本的內容與自訂項目？</h3><p>清空後，仍可按「復原上一步」還原。</p><div class="confirm-actions"><button id="cancelClearBtn" class="secondary">取消</button><button id="confirmClearBtn">確認清空</button></div></dialog>
 </body>
 </html>
 
