@@ -112,3 +112,6 @@ summary { cursor: pointer; font-size: 15px; font-weight: 700; line-height: 1.6; 
 #memberPhotos[aria-busy='true'] .photo-choice { opacity:.65; cursor:progress; }
 .photo-unavailable img { opacity:.3; }
 @media(max-width:380px) { .photo-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } .photo-toolbar { gap:8px; } .photo-toolbar .secondary { padding:8px 10px; } }
+
+.member-btn .none-avatar { display:flex; align-items:center; justify-content:center; width:100%; aspect-ratio:170/188; margin:0; background:#eee; border-radius:2px; font-size:36px; color:#777; }
+.none-selection { display:flex; justify-content:space-between; align-items:center; gap:12px; border-top:1px solid #eee; margin-top:12px; padding-top:12px; color:#666; font-size:14px; }

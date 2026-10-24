@@ -8,6 +8,7 @@ export function validDraft(s){
  if(!s||![1,2,3].includes(s.version)||!Array.isArray(s.slots)||s.slots.length!==12)return false;
  return s.slots.every(v=>{
   if(v===null)return true;
+  if(v.kind==='none')return v.label==='無';
   if(typeof v.src!=='string')return false;
   if(v.kind==='song')return /^assets\/albums\/(?:[0-9]+|touch-plus)\.jpg$/.test(v.src)&&typeof v.title==='string'&&v.title.length<400&&typeof v.songId==='string'&&typeof v.albumId==='string';
   return /^assets\/s(?:[1-9]|1[0-9]|2[0-4])\.jpg$/.test(v.src)||/^data:image\/(jpeg|png|webp);base64,/.test(v.src);
