@@ -1,5 +1,5 @@
-@font-face { font-family: 'Table Sans'; font-style: normal; font-weight: 400; font-display: swap; src: url('assets/fonts/table-regular.ttf') format('truetype'); }
-@font-face { font-family: 'Table Sans'; font-style: normal; font-weight: 700; font-display: swap; src: url('assets/fonts/table-bold.ttf') format('truetype'); }
+@font-face { font-family: 'Table Sans'; font-style: normal; font-weight: 400; font-display: swap; src: url('assets/fonts/table-regular.ttf?v=16') format('truetype'); }
+@font-face { font-family: 'Table Sans'; font-style: normal; font-weight: 700; font-display: swap; src: url('assets/fonts/table-bold.ttf?v=16') format('truetype'); }
 * { box-sizing: border-box; }
 body { font-family: 'Table Sans', 'Microsoft JhengHei', sans-serif; font-size: 14px; line-height: 1.65; text-align: center; background: #f4f4f4; padding: 20px; margin: 8px; color: #222; }
 button, input, output, summary { font-family: inherit; }

@@ -1,6 +1,6 @@
-import {createMemberPhotoBrowser} from './member-photos.js?v=15';
+import {createMemberPhotoBrowser} from './member-photos.js?v=16';
 import {FONT_FAMILY,fitSingleLine,songLayout} from './typography.js?v=8';
-import {NAMES,LABELS,freshState,cloneState,clamp,placement,validDraft,defaultCrop,restoreState,isSongSlot} from './core.js?v=13';
+import {NAMES,LABELS,freshState,cloneState,clamp,placement,validDraft,defaultCrop,restoreState,isSongSlot} from './core.js?v=16';
 const $=id=>document.getElementById(id),canvas=$('canvas'),modal=$('memberModal'),songModal=$('songModal');
 const images=new Map(),history=[];
 const memberPhotos=createMemberPhotoBrowser({onPhoto:chooseInternetPhoto,onDefault:selectMember});
