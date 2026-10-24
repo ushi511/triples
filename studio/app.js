@@ -1,7 +1,7 @@
-import {createCollectionPickers} from './collection-pickers.js?v=23';
-import {createMemberPhotoBrowser} from './member-photos.js?v=23';
-import {FONT_FAMILY,songLayout,wrapText} from './typography.js?v=8';
-import {NAMES,freshState,cloneState,clamp,placement,validDraft,defaultCrop,restoreState,getTable,TABLE_IDS,slotType,TOPIC_OPTIONS,topicFor,normalizeGrid,resizeCustomState} from './core.js?v=23';
+import {createCollectionPickers} from './collection-pickers.js?v=24';
+import {createMemberPhotoBrowser} from './member-photos.js?v=24';
+import {FONT_FAMILY,songLayout,wrapText,headerLayout} from './typography.js?v=24';
+import {NAMES,freshState,cloneState,clamp,placement,validDraft,defaultCrop,restoreState,getTable,TABLE_IDS,slotType,TOPIC_OPTIONS,topicFor,normalizeGrid,resizeCustomState,DEFAULT_TITLE} from './core.js?v=24';
 const $=id=>document.getElementById(id),canvas=$('canvas'),modal=$('memberModal'),songModal=$('songModal');
 const images=new Map(),history=[],draftCache=new Map();
 const collectionPickers=createCollectionPickers({onChoose:chooseCollection,onClear:clearCollection});
@@ -17,7 +17,7 @@ function remember(before){if(!same(before,state)){history.push(before);if(histor
 function beginEdit(){if(!editStart)editStart=cloneState(state)}
 function finishEdit(){if(editStart){remember(editStart);editStart=null;scheduleSave()}}
 function change(fn){stopDragging();finishEdit();const before=cloneState(state);fn();remember(before);render();scheduleSave()}
-function updateButtons(){$('undoBtn').disabled=!ready||!history.length;$('clearAllBtn').disabled=!ready||!state.slots.some(Boolean)&&!state.topics.some(Boolean)}
+function updateButtons(){$('undoBtn').disabled=!ready||!history.length;$('clearAllBtn').disabled=!ready||!state.slots.some(Boolean)&&!state.topics.some(Boolean)&&state.title===DEFAULT_TITLE}
 function paintSong(ctx,img,w,h,s){
  ctx.save();ctx.fillStyle='#fff';ctx.fillRect(0,0,w,h);
  const layout=songLayout(ctx,w,h,s.title);
@@ -38,16 +38,13 @@ function paintTableFrame(ctx){
 function paintCustomFrame(ctx,config){
  ctx.save();for(const cell of config.cells){ctx.fillStyle='#000';ctx.fillRect(cell.x,cell.y,366,462);ctx.fillStyle='#fff';ctx.fillRect(cell.x+6,cell.y+6,354,450);ctx.fillStyle='#000';ctx.fillRect(cell.x+6,cell.y+382,354,4)}ctx.restore();
 }
-function paintTableTypography(ctx,logoSource,config){
- const headerHeight=config.headerHeight||{'1.0':219,'2.0':236,'3.0':270,'3.5':272}[config.id],scale=config.width/1451;
- const title='tripleS 生涯表',version=['3.0','3.5'].includes(config.id)?'('+config.id+')':'',hasLogo=config.id!=='1.0';
- const logoW=hasLogo?123*scale:0,logoH=141*scale,gap=hasLogo?32*scale:0,versionGap=version?20*scale:0,titleSize=108*scale,versionSize=32*scale;
- ctx.save();ctx.fillStyle='#fff';ctx.fillRect(0,0,config.width,headerHeight);ctx.font='700 '+titleSize+'px '+FONT_FAMILY;const titleWidth=ctx.measureText(title).width;
- ctx.font='700 '+versionSize+'px '+FONT_FAMILY;const versionWidth=ctx.measureText(version).width,total=logoW+gap+titleWidth+versionGap+versionWidth,left=(config.width-total)/2;
- if(hasLogo)ctx.drawImage(logoSource,262,68,123,141,left,(headerHeight-logoH)/2,logoW,logoH);
- ctx.fillStyle='#111';ctx.textAlign='left';ctx.font='700 '+titleSize+'px '+FONT_FAMILY;centeredText(ctx,title,left+logoW+gap,headerHeight/2);
- if(version){ctx.font='700 '+versionSize+'px '+FONT_FAMILY;centeredText(ctx,version,left+logoW+gap+titleWidth+versionGap,headerHeight/2)}ctx.restore();
+function paintTableTypography(ctx,logoSource,config,title){
+ const layout=headerLayout(ctx,config,title);ctx.save();ctx.fillStyle='#fff';ctx.fillRect(0,0,config.width,layout.headerHeight);
+ if(layout.hasLogo)ctx.drawImage(logoSource,262,68,123,141,layout.left,(layout.headerHeight-layout.logoH)/2,layout.logoW,layout.logoH);
+ ctx.fillStyle='#111';ctx.textAlign='center';ctx.font=layout.font;layout.lines.forEach((line,i)=>centeredText(ctx,line,layout.titleX+layout.titleWidth/2,layout.headerHeight/2+(i-(layout.lines.length-1)/2)*layout.lineHeight));
+ if(layout.version){ctx.textAlign='left';ctx.font='700 '+layout.versionSize+'px '+FONT_FAMILY;centeredText(ctx,layout.version,layout.versionX,layout.headerHeight/2)}ctx.restore();return layout;
 }
+function positionTitleButton(layout,config,title){const button=$('editTableTitleBtn');if(!button)return;const r=layout.titleRect;button.style.cssText='left:'+r.x/config.width*100+'%;top:'+r.y/config.height*100+'%;width:'+r.w/config.width*100+'%;height:'+r.h/config.height*100+'%';button.setAttribute('aria-label','更換表格標題：'+(title||'空白標題'));button.title='點擊修改表格標題';button.textContent=title?'':'點此輸入表格標題'}
 function paintTableCaptions(ctx,snapshot,config){
  ctx.save();ctx.beginPath();ctx.rect(0,0,config.width,config.height);ctx.clip();
  config.labels.forEach((original,index)=>{const r=config.captionRects[index],text=snapshot.topics[index]?.text??original;ctx.fillStyle='#fff';ctx.fillRect(r.x,r.y,r.w,r.h);if(!text)return;
@@ -76,10 +73,10 @@ async function draw(target=canvas,snapshot=cloneState(state)){
  if(target===canvas&&(generation!==drawVersion||snapshot.tableId!==state.tableId))return;
  target.width=config.width;target.height=config.height;const ctx=target.getContext('2d');ctx.fillStyle='#fff';ctx.fillRect(0,0,target.width,target.height);if(background)ctx.drawImage(background,0,0);if(config.id==='custom')paintCustomFrame(ctx,config);
  photos.forEach((img,i)=>{if(!snapshot.slots[i])return;const r=config.rects[i];ctx.save();ctx.translate(r.x,r.y);paint(ctx,img,r.w,r.h,snapshot.slots[i]);ctx.restore()});
- if(config.id==='3.5')paintTableFrame(ctx);paintTableTypography(ctx,logoSource,config);paintTableCaptions(ctx,snapshot,config);
+ if(config.id==='3.5')paintTableFrame(ctx);const header=paintTableTypography(ctx,logoSource,config,snapshot.title);if(target===canvas)positionTitleButton(header,config,snapshot.title);paintTableCaptions(ctx,snapshot,config);
 }
 function render(){const currentLabels=labels(),drawing=draw().catch(()=>status('有張照片無法讀取，請點選該格重新選擇。',true));updateButtons();document.querySelectorAll('.grid-button').forEach((b,i)=>b.setAttribute('aria-label',`第 ${i+1} 格：${currentLabels[i]}，${state.slots[i]?.kind==='none'?'無':['song','unit','objekt'].includes(state.slots[i]?.kind)?state.slots[i].title:state.slots[i]?'已有照片':'尚未填入'}`));document.querySelectorAll('.label-button').forEach((b,i)=>{b.setAttribute('aria-label','更換第 '+(i+1)+' 格項目：'+currentLabels[i]);b.title='更換項目：'+currentLabels[i];b.textContent=state.tableId==='custom'&&!state.topics[i]?.text?'點此填寫項目':''});if(modal.open)renderCrop();return drawing}
-function buildTargets(){$('gridButtons').replaceChildren();rects.forEach((r,i)=>{const b=document.createElement('button');b.className='grid-button';b.style.cssText=`left:${r.x/template.width*100}%;top:${r.y/template.height*100}%;width:${r.w/template.width*100}%;height:${r.h/template.height*100}%`;b.onclick=()=>openModal(i);$('gridButtons').append(b)});table().captionRects.forEach((r,i)=>{const b=document.createElement('button');b.className='label-button';b.style.cssText=`left:${r.x/template.width*100}%;top:${r.y/template.height*100}%;width:${r.w/template.width*100}%;height:${r.h/template.height*100}%`;b.onclick=()=>openTopicEditor(i);$('gridButtons').append(b)})}
+function buildTargets(){$('gridButtons').replaceChildren();const titleButton=document.createElement('button');titleButton.id='editTableTitleBtn';titleButton.className='title-button';titleButton.onclick=openTitleEditor;$('gridButtons').append(titleButton);rects.forEach((r,i)=>{const b=document.createElement('button');b.className='grid-button';b.style.cssText=`left:${r.x/template.width*100}%;top:${r.y/template.height*100}%;width:${r.w/template.width*100}%;height:${r.h/template.height*100}%`;b.onclick=()=>openModal(i);$('gridButtons').append(b)});table().captionRects.forEach((r,i)=>{const b=document.createElement('button');b.className='label-button';b.style.cssText=`left:${r.x/template.width*100}%;top:${r.y/template.height*100}%;width:${r.w/template.width*100}%;height:${r.h/template.height*100}%`;b.onclick=()=>openTopicEditor(i);$('gridButtons').append(b)})}
 function setFillKind(kind){document.querySelectorAll('.fill-kind').forEach(select=>select.value=kind)}
 function openModal(i,kind){
  if(!ready)return;const saved=state.slots[i];kind=kind||(['song','unit','objekt'].includes(saved?.kind)?saved.kind:saved?'photo':topicFor(state,i).kind);
@@ -89,6 +86,11 @@ function openModal(i,kind){
  if(kind==='unit'||kind==='objekt'){session++;if(kind==='unit')collectionPickers.openUnit({title:labels()[i]});else collectionPickers.openObjekt({title:labels()[i],member:saved?.member||NAMES[0],number:saved?.number||'',season:saved?.season||''});return}
  session++;memberPhotos.reset();showUploadStatus('');resetUploadDrag();$('uploadBtn').removeAttribute('aria-busy');$('modalTitle').textContent=`第 ${i+1} 格：${labels()[i]}`;$('searchInput').value='';filterMembers();$('cropSection').open=false;status('',false,true);const rect=rects[i];$('cropPreview').width=rect.w;$('cropPreview').height=rect.h;renderCrop();modal.showModal();
 }
+let titleTableId='3.5';
+function openTitleEditor(){if(!ready)return;stopDragging();finishEdit();titleTableId=state.tableId;$('tableTitleText').setCustomValidity('');$('tableTitleText').value=state.title;updateTitleCount();$('titleModal').showModal()}
+function updateTitleCount(){$('tableTitleCount').textContent=Array.from($('tableTitleText').value).length+'／40 字'}
+function applyTitle(reset=false){if(!ready||titleTableId!==state.tableId){$('titleModal').close();return}const title=reset?DEFAULT_TITLE:$('tableTitleText').value.replace(/\s+/g,' ').trim();if(Array.from(title).length>40){$('tableTitleText').setCustomValidity('標題最多 40 字。');$('tableTitleText').reportValidity();return}change(()=>state.title=title);$('titleModal').close()}
+$('tableTitleText').oninput=()=>{$('tableTitleText').setCustomValidity('');updateTitleCount()};$('tableTitleForm').onsubmit=e=>{e.preventDefault();applyTitle()};$('resetTableTitleBtn').onclick=()=>applyTitle(true);$('cancelTableTitleBtn').onclick=()=>$('titleModal').close();
 let topicTarget=0,topicTableId='3.5';
 function refreshModalTitles(){const title=labels()[selected];$('modalTitle').textContent='第 '+(selected+1)+' 格：'+title;$('songModalTitle').textContent=title;$('unitModalTitle').textContent=title;$('objektModalTitle').textContent=title}
 function openTopicEditor(index){
@@ -299,7 +301,7 @@ $('resetCropBtn').onclick=()=>change(()=>{if(state.slots[selected])Object.assign
 $('clearNoneBtn').onclick=$('clearSlotBtn').onclick=()=>{jobs[selected]++;change(()=>state.slots[selected]=null);closeModal()};
 $('downloadBtn').onclick=download;$('undoBtn').onclick=undo;
 $('clearAllBtn').onclick=()=>$('confirmModal').showModal();$('cancelClearBtn').onclick=()=>$('confirmModal').close();$('confirmClearBtn').onclick=()=>{$('confirmModal').close();epoch++;jobs=jobs.map(v=>v+1);change(()=>state=freshState(state.tableId,state.grid))};
-for(const d of [modal,songModal,$('unitModal'),$('objektModal'),$('confirmModal'),$('topicModal')])d.addEventListener('click',e=>{if(e.target!==d)return;const r=d.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)d.close()});
+for(const d of [modal,songModal,$('unitModal'),$('objektModal'),$('confirmModal'),$('topicModal'),$('titleModal')])d.addEventListener('click',e=>{if(e.target!==d)return;const r=d.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)d.close()});
 document.addEventListener('keydown',e=>{if(!e.target.closest('input,textarea')&&!document.querySelector('dialog[open]')&&(e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='z'){e.preventDefault();undo()}});
 document.addEventListener('visibilitychange',()=>{if(document.hidden&&ready)save()});window.addEventListener('pagehide',()=>{if(ready)save()});
 document.querySelectorAll('[data-table]').forEach(button=>button.onclick=()=>switchTable(button.dataset.table));
