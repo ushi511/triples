@@ -115,3 +115,7 @@ summary { cursor: pointer; font-size: 15px; font-weight: 700; line-height: 1.6; 
 
 .member-btn .none-avatar { display:flex; align-items:center; justify-content:center; width:100%; aspect-ratio:170/188; margin:0; background:#eee; border-radius:2px; font-size:36px; color:#777; }
 .none-selection { display:flex; justify-content:space-between; align-items:center; gap:12px; border-top:1px solid #eee; margin-top:12px; padding-top:12px; color:#666; font-size:14px; }
+
+.photo-source-picker { display:flex; align-items:center; justify-content:space-between; gap:12px; margin:10px 0; text-align:left; font-size:13px; color:#666; }
+.photo-source-picker select { max-width:70%; padding:7px 10px; border:1px solid #ddd; border-radius:5px; background:#fff; color:#333; font:inherit; }
+.photo-source-picker select:focus-visible { outline:3px solid #bd2338; outline-offset:3px; }

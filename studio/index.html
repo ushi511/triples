@@ -4,7 +4,7 @@
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="tripleS 生涯表產生器。點擊格子選擇成員或自己的照片，完成後下載 PNG。">
 <title>tripleS 生涯表 3.5 產生器</title>
-<link rel="stylesheet" href="styles.css?v=13"><script type="module" src="app.js?v=14"></script>
+<link rel="stylesheet" href="styles.css?v=15"><script type="module" src="app.js?v=15"></script>
 </head>
 <body>
 <div class="container">
@@ -28,8 +28,9 @@
 </section>
 <section id="memberPhotos" hidden aria-label="成員網路照片">
 <div class="photo-toolbar"><button id="backToMembersBtn" class="secondary">← 返回成員</button><strong id="photoMemberName"></strong></div>
-<form id="photoSearchForm" class="photo-search-form"><input id="photoSearchInput" class="search" type="search" placeholder="加上關鍵字，例如 Assemble、concept" maxlength="100" autocomplete="off"><button class="secondary" type="submit">搜尋</button></form>
-<p class="photo-hint">點選喜歡的照片即可套用。圖片即時搜尋自 <a href="https://kpop.fandom.com/" target="_blank" rel="noopener noreferrer">Kpop Wiki</a>。</p>
+<form id="photoSearchForm" class="photo-search-form"><input id="photoSearchInput" class="search" type="search" placeholder="關鍵字：sns、photo diary、concept" maxlength="100" autocomplete="off"><button class="secondary" type="submit">搜尋</button></form>
+<label class="photo-source-picker">圖片來源<select id="photoSourceSelect"><option value="all">全部來源</option><option value="triples">tripleS Wiki</option><option value="kpop">Kpop Wiki</option></select></label>
+<p class="photo-hint">同時搜尋 tripleS Wiki 與 Kpop Wiki，優先顯示自拍、SNS 與日常照。點選照片即可套用。</p>
 <p id="photoStatus" class="status" role="status" aria-live="polite"></p>
 <div id="photoGrid" class="photo-grid" aria-label="圖片搜尋結果"></div>
 <p id="photoEmpty" hidden>試試專輯名稱，或清空關鍵字查看全部照片。</p>
