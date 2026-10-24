@@ -1,7 +1,9 @@
+import {createMemberPhotoBrowser} from './member-photos.js?v=9';
 import {FONT_FAMILY,fitSingleLine,songLayout} from './typography.js?v=8';
 import {NAMES,LABELS,freshState,cloneState,clamp,placement,validDraft,defaultCrop,restoreState,isSongSlot} from './core.js?v=7';
 const $=id=>document.getElementById(id),canvas=$('canvas'),modal=$('memberModal'),songModal=$('songModal');
 const images=new Map(),history=[];
+const memberPhotos=createMemberPhotoBrowser({onPhoto:chooseInternetPhoto,onDefault:selectMember});
 const typographyReady=Promise.all([document.fonts.load('400 14px "Table Sans"'),document.fonts.load('700 48px "Table Sans"')]).then(()=>document.fonts.ready);
 let state=freshState(),selected=0,template,db=null,ready=false,epoch=0,session=0,drawVersion=0,jobs=Array(12).fill(0),editStart=null,saveTimer,writeChain=Promise.resolve(),uploadRequest,drag=null,previewImage=null,previewSource=null,cropFrame=0;
 const rects=Array.from({length:12},(_,i)=>({x:14+i%4*360,y:280+Math.floor(i/4)*456,w:340,h:376}));
@@ -32,7 +34,7 @@ function paintTableFrame(ctx){
 }
 function paintTableTypography(ctx){
  ctx.save();ctx.fillStyle='#fff';ctx.fillRect(0,0,template.width,272);
- const title='tripleS 生涯表',version='(3.0)',logoW=123,logoH=141,gap=32,versionGap=20;
+ const title='tripleS 生涯表',version='(3.5)',logoW=123,logoH=141,gap=32,versionGap=20;
  ctx.font='700 108px '+FONT_FAMILY;const titleWidth=ctx.measureText(title).width;
  ctx.font='700 32px '+FONT_FAMILY;const versionWidth=ctx.measureText(version).width;
  const total=logoW+gap+titleWidth+versionGap+versionWidth,left=(template.width-total)/2;
@@ -51,7 +53,7 @@ function paint(ctx,img,w,h,s){if(s.kind==='song'){paintSong(ctx,img,w,h,s);retur
 async function draw(target=canvas,snapshot=cloneState(state)){const generation=++drawVersion;await typographyReady;const photos=await Promise.all(snapshot.slots.map(s=>s?image(s.src):null));if(target===canvas&&generation!==drawVersion)return;target.width=template.width;target.height=template.height;const ctx=target.getContext('2d');ctx.fillStyle='#fff';ctx.fillRect(0,0,target.width,target.height);photos.forEach((img,i)=>{if(!img)return;const r=rects[i];ctx.save();ctx.translate(r.x,r.y);paint(ctx,img,r.w,r.h,snapshot.slots[i]);ctx.restore()});paintTableFrame(ctx);paintTableTypography(ctx)}
 function render(){draw().catch(()=>status('有張照片無法讀取，請點選該格重新選擇。',true));updateButtons();document.querySelectorAll('.grid-button').forEach((b,i)=>b.setAttribute('aria-label',`第 ${i+1} 格：${LABELS[i]}，${state.slots[i]?.kind==='song'?state.slots[i].title:state.slots[i]?'已有照片':'尚未填入'}`));if(modal.open)renderCrop()}
 function buildTargets(){rects.forEach((r,i)=>{const b=document.createElement('button');b.className='grid-button';b.style.cssText=`left:${r.x/template.width*100}%;top:${r.y/template.height*100}%;width:${r.w/template.width*100}%;height:${r.h/template.height*100}%`;b.onclick=()=>openModal(i);$('gridButtons').append(b)})}
-function openModal(i){if(isSongSlot(i)){openSongModal(i);return}stopDragging();finishEdit();selected=i;session++;$('modalTitle').textContent=`第 ${i+1} 格：${LABELS[i]}`;$('searchInput').value='';filterMembers();$('cropSection').open=false;status('',false,true);renderCrop();modal.showModal()}
+function openModal(i){if(isSongSlot(i)){openSongModal(i);return}stopDragging();finishEdit();selected=i;session++;memberPhotos.reset();$('modalTitle').textContent=`第 ${i+1} 格：${LABELS[i]}`;$('searchInput').value='';filterMembers();$('cropSection').open=false;status('',false,true);renderCrop();modal.showModal()}
 function closeModal(){stopDragging();finishEdit();modal.close()}
 function renderCrop(){
  const s=state.slots[selected];$('cropSection').hidden=!s;
@@ -99,9 +101,19 @@ function moveWithKeyboard(e){
  if(dy&&p.dh-box.height>.01)s.y=clamp((s.y??0)+dy*delta*2/(p.dh-box.height),-1,1);
  refreshCrop();
 }
-function buildMembers(){NAMES.forEach((name,i)=>{const b=document.createElement('button');b.className='member-btn';b.dataset.member=i+1;b.setAttribute('aria-label',`S${i+1} ${name}`);const img=document.createElement('img');img.src=`assets/thumbs/s${i+1}.webp?v=5`;img.alt='';img.loading='lazy';const code=document.createElement('b');code.textContent=`S${i+1}`;const label=document.createElement('span');label.textContent=name;b.append(img,code,label);b.onclick=()=>selectMember(i+1);$('memberGrid').append(b)})}
+function buildMembers(){NAMES.forEach((name,i)=>{const b=document.createElement('button');b.className='member-btn';b.dataset.member=i+1;b.setAttribute('aria-label',`S${i+1} ${name}`);const img=document.createElement('img');img.src=`assets/thumbs/s${i+1}.webp?v=5`;img.alt='';img.loading='lazy';const code=document.createElement('b');code.textContent=`S${i+1}`;const label=document.createElement('span');label.textContent=name;b.append(img,code,label);b.onclick=()=>memberPhotos.open(i+1);$('memberGrid').append(b)})}
 function filterMembers(){const q=$('searchInput').value.trim().toLowerCase().replace(/^s0+(\d)/,'s$1');let n=0;document.querySelectorAll('.member-btn').forEach((b,i)=>{const match=!q||NAMES[i].toLowerCase().includes(q)||`s${i+1}`===q||String(i+1)===q;b.hidden=!match;if(match)n++});$('noResults').hidden=n>0}
-async function selectMember(id){const target=selected,currentEpoch=epoch,currentSession=session,job=++jobs[target],src=`assets/s${id}.jpg`;status('正在載入照片…',false,true);try{await image(src);if(currentEpoch!==epoch||job!==jobs[target])return;change(()=>state.slots[target]={src,label:NAMES[id-1],memberId:id,...defaultCrop(id),cropPreset:1});if(modal.open&&currentSession===session)closeModal()}catch{if(currentSession===session)status('照片載入失敗，請再試一次。',true,true)}}
+async function selectMember(id){const target=selected,currentEpoch=epoch,currentSession=session,job=++jobs[target],src=`assets/s${id}.jpg`;status('正在載入照片…',false,true);try{await image(src);if(currentEpoch!==epoch||job!==jobs[target]||currentSession!==session||!modal.open)return;change(()=>state.slots[target]={src,label:NAMES[id-1],memberId:id,...defaultCrop(id),cropPreset:1});if(modal.open&&currentSession===session)closeModal()}catch{if(currentSession===session)status('照片載入失敗，請再試一次。',true,true)}}
+async function chooseInternetPhoto(photo,id,signal){
+ const target=selected,currentEpoch=epoch,currentSession=session,job=++jobs[target];
+ const response=await fetch(photo.url,{signal,credentials:'omit',referrerPolicy:'no-referrer'});if(!response.ok)throw new Error('photo');
+ const blob=await response.blob();if(blob.size>20*1024*1024||!/^image\/(jpeg|png|webp)(?:;|$)/i.test(blob.type))throw new Error('photo');
+ const objectURL=URL.createObjectURL(blob);let src;
+ try{const img=await image(objectURL);const ratio=Math.min(1,1600/Math.max(img.width,img.height)),c=document.createElement('canvas');c.width=Math.max(1,Math.round(img.width*ratio));c.height=Math.max(1,Math.round(img.height*ratio));const ctx=c.getContext('2d');ctx.fillStyle='#fff';ctx.fillRect(0,0,c.width,c.height);ctx.drawImage(img,0,0,c.width,c.height);src=c.toDataURL('image/jpeg',.9)}finally{images.delete(objectURL);URL.revokeObjectURL(objectURL)}
+ if(signal.aborted||currentEpoch!==epoch||currentSession!==session||job!==jobs[target]||!modal.open||selected!==target)return;
+ await image(src);if(signal.aborted||currentSession!==session||currentEpoch!==epoch||job!==jobs[target]||!modal.open)return;
+ change(()=>state.slots[target]={src,label:NAMES[id-1],memberId:id,z:1,x:0,y:0,cropPreset:1,photoSource:photo.source,photoTitle:photo.title});closeModal();
+}
 async function upload(file,request){if(!file||!request)return;const {target,currentEpoch,job}=request;if(!file.type.startsWith('image/')){status('請選擇圖片檔案。',true);return}if(file.size>20*1024*1024){status('照片超過 20 MB，請先縮小檔案。',true);return}status('正在處理照片…');try{const data=await new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(reader.result);reader.onerror=()=>reject(reader.error);reader.readAsDataURL(file)});const img=await image(data);const ratio=Math.min(1,1600/Math.max(img.width,img.height));const c=document.createElement('canvas');c.width=Math.max(1,Math.round(img.width*ratio));c.height=Math.max(1,Math.round(img.height*ratio));const ctx=c.getContext('2d');ctx.fillStyle='#fff';ctx.fillRect(0,0,c.width,c.height);ctx.drawImage(img,0,0,c.width,c.height);const src=c.toDataURL('image/jpeg',.9);images.delete(data);await image(src);if(currentEpoch!==epoch||job!==jobs[target])return;change(()=>state.slots[target]={src,label:'我的照片',memberId:null,z:1,x:0,y:0})}catch{status('無法讀取這張圖片，請使用 JPG、PNG 或 WebP。',true)}}
 async function openDraft(){return new Promise((resolve,reject)=>{const req=indexedDB.open('wav-studio',1);req.onupgradeneeded=()=>{if(!req.result.objectStoreNames.contains('drafts'))req.result.createObjectStore('drafts')};req.onerror=()=>reject(req.error);req.onsuccess=()=>{db=req.result;db.onversionchange=()=>db.close();const get=db.transaction('drafts','readonly').objectStore('drafts').get('current');get.onsuccess=()=>resolve(get.result);get.onerror=()=>reject(get.error)}})}
 function scheduleSave(){if(!ready)return;clearTimeout(saveTimer);status('正在儲存草稿…');saveTimer=setTimeout(save,200)}
@@ -173,7 +185,7 @@ $('clearSongBtn').onclick=()=>{jobs[selected]++;change(()=>state.slots[selected]
 $('searchInput').oninput=filterMembers;
 $('uploadBtn').onclick=()=>{uploadRequest={target:selected,currentEpoch:epoch,job:++jobs[selected]};$('fileInput').click();closeModal()};
 $('fileInput').onchange=e=>{const file=e.target.files[0],request=uploadRequest;e.target.value='';uploadRequest=null;upload(file,request)};
-$('closeBtn').onclick=closeModal;modal.addEventListener('close',()=>{stopDragging();finishEdit()});modal.addEventListener('cancel',()=>{stopDragging();finishEdit()});
+$('closeBtn').onclick=closeModal;modal.addEventListener('close',()=>{memberPhotos.cancel();stopDragging();finishEdit()});modal.addEventListener('cancel',()=>{memberPhotos.cancel();stopDragging();finishEdit()});
 for(const [id,key] of [['zoomRange','z']]){const el=$(id);el.onfocus=beginEdit;el.onpointerdown=beginEdit;el.oninput=()=>{beginEdit();if(!state.slots[selected])return;state.slots[selected][key]=Number(el.value);render();scheduleSave()};el.onchange=finishEdit;el.onblur=finishEdit}
 
 const cropPreview=$('cropPreview');
@@ -183,7 +195,7 @@ for(const type of ['pointerup','pointercancel','lostpointercapture'])cropPreview
 cropPreview.addEventListener('keydown',moveWithKeyboard);
 cropPreview.addEventListener('keyup',e=>{if(e.key.startsWith('Arrow'))finishEdit()});
 cropPreview.addEventListener('blur',()=>{stopDragging();finishEdit()});
-$('resetCropBtn').onclick=()=>change(()=>{if(state.slots[selected])Object.assign(state.slots[selected],defaultCrop(state.slots[selected].memberId),{cropPreset:1})});
+$('resetCropBtn').onclick=()=>change(()=>{if(state.slots[selected])Object.assign(state.slots[selected],defaultCrop(state.slots[selected].photoSource?null:state.slots[selected].memberId),{cropPreset:1})});
 $('clearSlotBtn').onclick=()=>{jobs[selected]++;change(()=>state.slots[selected]=null);closeModal()};
 $('downloadBtn').onclick=download;$('undoBtn').onclick=undo;
 $('clearAllBtn').onclick=()=>$('confirmModal').showModal();$('cancelClearBtn').onclick=()=>$('confirmModal').close();$('confirmClearBtn').onclick=()=>{$('confirmModal').close();epoch++;jobs=jobs.map(v=>v+1);change(()=>state=freshState())};
