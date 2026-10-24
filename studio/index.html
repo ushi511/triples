@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="tripleS 生涯表產生器。點擊格子選擇成員或自己的照片，完成後下載 PNG。">
+<title>tripleS 生涯表 3.0 產生器</title>
+<link rel="stylesheet" href="styles.css?v=8"><script type="module" src="app.js?v=8"></script>
+</head>
+<body>
+<div class="container">
+<h2>tripleS 生涯表 3.0 產生器</h2>
+<p>💡 點擊格子選擇成員、照片或歌曲，完成後按下方下載。</p>
+<div class="canvas-wrap"><canvas id="canvas" aria-label="tripleS 生涯表預覽"></canvas><div id="gridButtons" aria-label="選擇要填入的格子"></div></div>
+<input type="file" id="fileInput" accept="image/*" hidden>
+<div class="controls"><button id="downloadBtn" disabled>保存我的生涯表 (PNG)</button></div>
+<div class="small-controls"><button id="undoBtn" class="secondary" disabled>復原上一步</button><button id="clearAllBtn" class="secondary" disabled>全部清空</button></div>
+<p id="saveStatus" class="status" role="status" hidden></p>
+</div>
+<dialog id="memberModal" aria-labelledby="modalTitle">
+<h3 id="modalTitle">選擇照片</h3>
+<button id="uploadBtn" class="upload-btn">📁 從手機／電腦選擇照片</button>
+<div class="divider"></div>
+<p class="member-heading">或直接點選成員</p>
+<input id="searchInput" class="search" type="search" placeholder="搜尋名字或 S 編號" aria-label="搜尋成員" autocomplete="off">
+<div id="memberGrid" class="member-grid"></div>
+<p id="noResults" hidden>找不到這位成員，請換個名字或編號。</p>
+<details id="cropSection" hidden>
+<summary>調整目前照片</summary>
+<p class="crop-hint">直接拖曳照片調整位置；放大後可增加移動範圍。</p>
+<canvas id="cropPreview" width="340" height="376" tabindex="0" role="img" aria-label="照片裁切預覽，可用滑鼠、手指拖曳，或使用方向鍵移動"></canvas>
+<label class="slider">縮放<input id="zoomRange" type="range" min="1" max="3" step="0.01" value="1"><output id="zoomValue">100%</output></label>
+<div class="crop-actions"><button id="resetCropBtn" class="secondary">置中重設</button><button id="clearSlotBtn" class="secondary">清除此格</button></div>
+</details>
+<p id="modalStatus" class="status" role="status"></p>
+<button id="closeBtn" class="close-btn">關閉</button>
+</dialog>
+
+<dialog id="songModal" aria-labelledby="songModalTitle">
+<h3 id="songModalTitle">選擇歌曲</h3>
+<input id="songSearch" class="search" type="search" placeholder="搜尋歌名、專輯或分隊名稱" aria-label="搜尋 tripleS 歌曲" autocomplete="off">
+<div class="song-toolbar"><button id="allAlbumsBtn" class="secondary" aria-pressed="true">全部專輯</button><span id="songCount"></span></div>
+<div id="albumGrid" class="album-grid" aria-label="依專輯封面挑選"></div>
+<div id="songList" class="song-list" aria-label="選擇歌曲"></div>
+<p id="songEmpty" hidden>找不到符合的歌曲，請換個關鍵字。</p>
+<p id="songStatus" class="status" role="status"></p>
+<div id="currentSong" class="current-song" hidden><span id="currentSongName"></span><button id="clearSongBtn" class="secondary">清除此格</button></div>
+<button id="closeSongBtn" class="close-btn">關閉</button>
+</dialog>
+<dialog id="confirmModal" aria-labelledby="confirmTitle"><h3 id="confirmTitle">清空所有照片？</h3><p>清空後，仍可按「復原上一步」還原。</p><div class="confirm-actions"><button id="cancelClearBtn" class="secondary">取消</button><button id="confirmClearBtn">確認清空</button></div></dialog>
+</body>
+</html>
+

@@ -1,0 +1,1791 @@
+{
+  "updatedAt": "2026-10-24",
+  "artist": "tripleS",
+  "sources": [
+    "https://www.triples-official.jp/discography/",
+    "https://music.apple.com/tw/artist/triples/1651595986"
+  ],
+  "albums": [
+    {
+      "id": "6820082427",
+      "title": "Andless - Single",
+      "artist": "tripleS",
+      "date": "2026-10-16",
+      "cover": "assets/albums/6820082427.jpg",
+      "source": "https://music.apple.com/tw/album/andless-single/6820082427?uo=4",
+      "trackCount": 1
+    },
+    {
+      "id": "6815633826",
+      "title": "Welcome to Heaven - Single",
+      "artist": "tripleS",
+      "date": "2026-10-01",
+      "cover": "assets/albums/6815633826.jpg",
+      "source": "https://music.apple.com/tw/album/welcome-to-heaven-single/6815633826?uo=4",
+      "trackCount": 1
+    },
+    {
+      "id": "6803078543",
+      "title": "DNA - Single",
+      "artist": "tripleS",
+      "date": "2026-09-01",
+      "cover": "assets/albums/6803078543.jpg",
+      "source": "https://music.apple.com/tw/album/dna-single/6803078543?uo=4",
+      "trackCount": 1
+    },
+    {
+      "id": "6800363331",
+      "title": "<World Wild Women> - Single",
+      "artist": "tripleS",
+      "date": "2026-08-17",
+      "cover": "assets/albums/6800363331.jpg",
+      "source": "https://music.apple.com/tw/album/world-wild-women-single/6800363331?uo=4",
+      "trackCount": 1
+    },
+    {
+      "id": "6793950974",
+      "title": "Dream Dress - Single",
+      "artist": "tripleS",
+      "date": "2026-08-01",
+      "cover": "assets/albums/6793950974.jpg",
+      "source": "https://music.apple.com/tw/album/dream-dress-single/6793950974?uo=4",
+      "trackCount": 1
+    },
+    {
+      "id": "6776937466",
+      "title": "<Baby Flower City Remixes> - Single",
+      "artist": "tripleS",
+      "date": "2026-06-08",
+      "cover": "assets/albums/6776937466.jpg",
+      "source": "https://music.apple.com/tw/album/baby-flower-city-remixes-single/6776937466?uo=4",
+      "trackCount": 4
+    },
+    {
+      "id": "6772121261",
+      "title": "Baby Flower -Japanese Ver.- - Single",
+      "artist": "tripleS",
+      "date": "2026-06-03",
+      "cover": "assets/albums/6772121261.jpg",
+      "source": "https://music.apple.com/tw/album/baby-flower-japanese-ver-single/6772121261?uo=4",
+      "trackCount": 1
+    },
+    {
+      "id": "6767454374",
+      "title": "<LOVE&POP> pt.1",
+      "artist": "tripleS",
+      "date": "2026-06-01",
+      "cover": "assets/albums/6767454374.jpg",
+      "source": "https://music.apple.com/tw/album/love-pop-pt-1/6767454374?uo=4",
+      "trackCount": 7
+    },
+    {
+      "id": "1873878248",
+      "title": "トキメティック - Single",
+      "artist": "tripleS",
+      "date": "2026-02-05",
+      "cover": "assets/albums/1873878248.jpg",
+      "source": "https://music.apple.com/tw/album/%E3%83%88%E3%82%AD%E3%83%A1%E3%83%86%E3%82%A3%E3%83%83%E3%82%AF-single/1873878248?uo=4",
+      "trackCount": 3
+    },
+    {
+      "id": "1871990597",
+      "title": "4study4work4inst Vol.3",
+      "artist": "tripleS",
+      "date": "2026-02-02",
+      "cover": "assets/albums/1871990597.jpg",
+      "source": "https://music.apple.com/tw/album/4study4work4inst-vol-3/1871990597?uo=4",
+      "trackCount": 14
+    },
+    {
+      "id": "1852753248",
+      "title": "msnz <Beyond Beauty> - EP",
+      "artist": "tripleS",
+      "date": "2025-11-24",
+      "cover": "assets/albums/1852753248.jpg",
+      "source": "https://music.apple.com/tw/album/msnz-beyond-beauty-ep/1852753248?uo=4",
+      "trackCount": 6
+    },
+    {
+      "id": "1837696798",
+      "title": "tripleS ∞! <SecretHimitsuBimil>",
+      "artist": "tripleS",
+      "date": "2025-10-01",
+      "cover": "assets/albums/1837696798.jpg",
+      "source": "https://music.apple.com/tw/album/triples-secrethimitsubimil/1837696798?uo=4",
+      "trackCount": 7
+    },
+    {
+      "id": "1825832803",
+      "title": "Pink Power - Single",
+      "artist": "ZANMANG LOOPY & tripleS",
+      "date": "2025-07-17",
+      "cover": "assets/albums/1825832803.jpg",
+      "source": "https://music.apple.com/tw/album/pink-power-single/1825832803?uo=4",
+      "trackCount": 2
+    },
+    {
+      "id": "1809896514",
+      "title": "<ASSEMBLE25>",
+      "artist": "tripleS",
+      "date": "2025-05-12",
+      "cover": "assets/albums/1809896514.jpg",
+      "source": "https://music.apple.com/tw/album/assemble25/1809896514?uo=4",
+      "trackCount": 10
+    },
+    {
+      "id": "1806645990",
+      "title": "Girls Never Die -Japanese Ver.- - Single",
+      "artist": "tripleS",
+      "date": "2025-04-12",
+      "cover": "assets/albums/1806645990.jpg",
+      "source": "https://music.apple.com/tw/album/girls-never-die-japanese-ver-single/1806645990?uo=4",
+      "trackCount": 1
+    },
+    {
+      "id": "1806616183",
+      "title": "Rising -Japanese Ver.- - Single",
+      "artist": "tripleS",
+      "date": "2025-04-12",
+      "cover": "assets/albums/1806616183.jpg",
+      "source": "https://music.apple.com/tw/album/rising-japanese-ver-single/1806616183?uo=4",
+      "trackCount": 1
+    },
+    {
+      "id": "1797578919",
+      "title": "Friendly Rivalry (Music from the U+ Original Series), Pt. 4 [with SeoYeon, JiWoo, YuBin, SoHyun] - Single",
+      "artist": "tripleS",
+      "date": "2025-03-04",
+      "cover": "assets/albums/1797578919.jpg",
+      "source": "https://music.apple.com/tw/album/friendly-rivalry-music-from-the-u-original-series-pt/1797578919?uo=4",
+      "trackCount": 2
+    },
+    {
+      "id": "1792698609",
+      "title": "4study4work4inst Vol.2",
+      "artist": "tripleS",
+      "date": "2025-02-02",
+      "cover": "assets/albums/1792698609.jpg",
+      "source": "https://music.apple.com/tw/album/4study4work4inst-vol-2/1792698609?uo=4",
+      "trackCount": 18
+    },
+    {
+      "id": "1780671781",
+      "title": "Dreaming (Shooting Stars) - Single",
+      "artist": "tripleS",
+      "date": "2024-11-26",
+      "cover": "assets/albums/1780671781.jpg",
+      "source": "https://music.apple.com/tw/album/dreaming-shooting-stars-single/1780671781?uo=4",
+      "trackCount": 2
+    },
+    {
+      "id": "1778010145",
+      "title": "tripleS ∞! <アンタイトル> - Single",
+      "artist": "tripleS",
+      "date": "2024-11-20",
+      "cover": "assets/albums/1778010145.jpg",
+      "source": "https://music.apple.com/tw/album/triples-%E3%82%A2%E3%83%B3%E3%82%BF%E3%82%A4%E3%83%88%E3%83%AB-single/1778010145?uo=4",
+      "trackCount": 3
+    },
+    {
+      "id": "1779626240",
+      "title": "Polaroid - Single",
+      "artist": "tripleS",
+      "date": "2024-11-15",
+      "cover": "assets/albums/1779626240.jpg",
+      "source": "https://music.apple.com/tw/album/polaroid-single/1779626240?uo=4",
+      "trackCount": 2
+    },
+    {
+      "id": "1773026296",
+      "title": "Visionary Vision <Performante>",
+      "artist": "tripleS",
+      "date": "2024-10-23",
+      "cover": "assets/albums/1773026296.jpg",
+      "source": "https://music.apple.com/tw/album/visionary-vision-performante/1773026296?uo=4",
+      "trackCount": 10
+    },
+    {
+      "id": "1757565162",
+      "title": "### - Single",
+      "artist": "tripleS",
+      "date": "2024-07-20",
+      "cover": "assets/albums/1757565162.jpg",
+      "source": "https://music.apple.com/tw/album/single/1757565162?uo=4",
+      "trackCount": 1
+    },
+    {
+      "id": "1751857482",
+      "title": "Inner Dance - Single",
+      "artist": "tripleS",
+      "date": "2024-06-21",
+      "cover": "assets/albums/1751857482.jpg",
+      "source": "https://music.apple.com/tw/album/inner-dance-single/1751857482?uo=4",
+      "trackCount": 1
+    },
+    {
+      "id": "1743890798",
+      "title": "<ASSEMBLE24>",
+      "artist": "tripleS",
+      "date": "2024-05-08",
+      "cover": "assets/albums/1743890798.jpg",
+      "source": "https://music.apple.com/tw/album/assemble24/1743890798?uo=4",
+      "trackCount": 10
+    },
+    {
+      "id": "1737963360",
+      "title": "4study4work4inst Vol.1",
+      "artist": "tripleS",
+      "date": "2024-02-02",
+      "cover": "assets/albums/1737963360.jpg",
+      "source": "https://music.apple.com/tw/album/4study4work4inst-vol-1/1737963360?uo=4",
+      "trackCount": 31
+    },
+    {
+      "id": "1737936204",
+      "title": "Aria <Structure Of Sadness> - Single",
+      "artist": "tripleS",
+      "date": "2024-01-15",
+      "cover": "assets/albums/1737936204.jpg",
+      "source": "https://music.apple.com/tw/album/aria-structure-of-sadness-single/1737936204?uo=4",
+      "trackCount": 2
+    },
+    {
+      "id": "1737939782",
+      "title": "NXT <Just Do It> - Single",
+      "artist": "tripleS",
+      "date": "2023-12-23",
+      "cover": "assets/albums/1737939782.jpg",
+      "source": "https://music.apple.com/tw/album/nxt-just-do-it-single/1737939782?uo=4",
+      "trackCount": 1
+    },
+    {
+      "id": "1737952040",
+      "title": "EVOLution <⟡>",
+      "artist": "tripleS",
+      "date": "2023-10-11",
+      "cover": "assets/albums/1737952040.jpg",
+      "source": "https://music.apple.com/tw/album/evolution/1737952040?uo=4",
+      "trackCount": 8
+    },
+    {
+      "id": "1737943607",
+      "title": "LOVElution <ↀ>",
+      "artist": "tripleS",
+      "date": "2023-08-17",
+      "cover": "assets/albums/1737943607.jpg",
+      "source": "https://music.apple.com/tw/album/lovelution/1737943607?uo=4",
+      "trackCount": 8
+    },
+    {
+      "id": "1737939576",
+      "title": "Acid Eyes <Cherry Gene> - Single",
+      "artist": "tripleS",
+      "date": "2023-07-06",
+      "cover": "assets/albums/1737939576.jpg",
+      "source": "https://music.apple.com/tw/album/acid-eyes-cherry-gene-single/1737939576?uo=4",
+      "trackCount": 3
+    },
+    {
+      "id": "touch-plus",
+      "title": "+(KR) ystal Eyes <Touch+>",
+      "artist": "tripleS",
+      "date": "2023-06-27",
+      "cover": "assets/albums/touch-plus.jpg",
+      "source": "https://triples.lnk.to/kS7g0e",
+      "trackCount": 1
+    },
+    {
+      "id": "1737941299",
+      "title": "+(KR) ystal Eyes <AESTHETIC> - EP",
+      "artist": "tripleS",
+      "date": "2023-05-04",
+      "cover": "assets/albums/1737941299.jpg",
+      "source": "https://music.apple.com/tw/album/kr-ystal-eyes-aesthetic-ep/1737941299?uo=4",
+      "trackCount": 6
+    },
+    {
+      "id": "1737936304",
+      "title": "ASSEMBLE",
+      "artist": "tripleS",
+      "date": "2023-02-13",
+      "cover": "assets/albums/1737936304.jpg",
+      "source": "https://music.apple.com/tw/album/assemble/1737936304?uo=4",
+      "trackCount": 7
+    },
+    {
+      "id": "1737940296",
+      "title": "Acid Angel from Asia <ACCESS> - EP",
+      "artist": "tripleS",
+      "date": "2022-10-28",
+      "cover": "assets/albums/1737940296.jpg",
+      "source": "https://music.apple.com/tw/album/acid-angel-from-asia-access-ep/1737940296?uo=4",
+      "trackCount": 6
+    }
+  ],
+  "tracks": [
+    {
+      "id": "6820082431",
+      "title": "Andless",
+      "artist": "tripleS",
+      "albumId": "6820082427",
+      "number": 1,
+      "source": "https://music.apple.com/tw/album/andless/6820082427?i=6820082431&uo=4"
+    },
+    {
+      "id": "6815634059",
+      "title": "Welcome to Heaven",
+      "artist": "tripleS",
+      "albumId": "6815633826",
+      "number": 1,
+      "source": "https://music.apple.com/tw/album/welcome-to-heaven/6815633826?i=6815634059&uo=4"
+    },
+    {
+      "id": "6803078544",
+      "title": "DNA",
+      "artist": "tripleS",
+      "albumId": "6803078543",
+      "number": 1,
+      "source": "https://music.apple.com/tw/album/dna/6803078543?i=6803078544&uo=4"
+    },
+    {
+      "id": "6800363336",
+      "title": "<World Wild Women>",
+      "artist": "tripleS",
+      "albumId": "6800363331",
+      "number": 1,
+      "source": "https://music.apple.com/tw/album/world-wild-women/6800363331?i=6800363336&uo=4"
+    },
+    {
+      "id": "6793950978",
+      "title": "Dream Dress",
+      "artist": "tripleS",
+      "albumId": "6793950974",
+      "number": 1,
+      "source": "https://music.apple.com/tw/album/dream-dress/6793950974?i=6793950978&uo=4"
+    },
+    {
+      "id": "6776937752",
+      "title": "Baby Flower (Seoul Remix: Vendors)",
+      "artist": "tripleS",
+      "albumId": "6776937466",
+      "number": 1,
+      "source": "https://music.apple.com/tw/album/baby-flower-seoul-remix-vendors/6776937466?i=6776937752&uo=4"
+    },
+    {
+      "id": "6776937753",
+      "title": "Baby Flower (Bangkok Remix: Kurtz)",
+      "artist": "tripleS",
+      "albumId": "6776937466",
+      "number": 2,
+      "source": "https://music.apple.com/tw/album/baby-flower-bangkok-remix-kurtz/6776937466?i=6776937753&uo=4"
+    },
+    {
+      "id": "6776937756",
+      "title": "Baby Flower (Taipei Remix: ntrophy)",
+      "artist": "tripleS",
+      "albumId": "6776937466",
+      "number": 3,
+      "source": "https://music.apple.com/tw/album/baby-flower-taipei-remix-ntrophy/6776937466?i=6776937756&uo=4"
+    },
+    {
+      "id": "6776937759",
+      "title": "Baby Flower (Tokyo Remix: Full8loom)",
+      "artist": "tripleS",
+      "albumId": "6776937466",
+      "number": 4,
+      "source": "https://music.apple.com/tw/album/baby-flower-tokyo-remix-full8loom/6776937466?i=6776937759&uo=4"
+    },
+    {
+      "id": "6772121264",
+      "title": "Baby Flower -Japanese Ver.-",
+      "artist": "tripleS",
+      "albumId": "6772121261",
+      "number": 1,
+      "source": "https://music.apple.com/tw/album/baby-flower-japanese-ver/6772121261?i=6772121264&uo=4"
+    },
+    {
+      "id": "6767454376",
+      "title": "Sad Girls Schemin'",
+      "artist": "tripleS",
+      "albumId": "6767454374",
+      "number": 1,
+      "source": "https://music.apple.com/tw/album/sad-girls-schemin/6767454374?i=6767454376&uo=4"
+    },
+    {
+      "id": "6767454527",
+      "title": "Peer",
+      "artist": "tripleS",
+      "albumId": "6767454374",
+      "number": 2,
+      "source": "https://music.apple.com/tw/album/peer/6767454374?i=6767454527&uo=4"
+    },
+    {
+      "id": "6767454528",
+      "title": "Baby Flower",
+      "artist": "tripleS",
+      "albumId": "6767454374",
+      "number": 3,
+      "source": "https://music.apple.com/tw/album/baby-flower/6767454374?i=6767454528&uo=4"
+    },
+    {
+      "id": "6767454529",
+      "title": "Type of Girl",
+      "artist": "tripleS",
+      "albumId": "6767454374",
+      "number": 4,
+      "source": "https://music.apple.com/tw/album/type-of-girl/6767454374?i=6767454529&uo=4"
+    },
+    {
+      "id": "6767454530",
+      "title": "Sleek",
+      "artist": "tripleS",
+      "albumId": "6767454374",
+      "number": 5,
+      "source": "https://music.apple.com/tw/album/sleek/6767454374?i=6767454530&uo=4"
+    },
+    {
+      "id": "6767454531",
+      "title": "I Like That",
+      "artist": "tripleS",
+      "albumId": "6767454374",
+      "number": 6,
+      "source": "https://music.apple.com/tw/album/i-like-that/6767454374?i=6767454531&uo=4"
+    },
+    {
+      "id": "6767454533",
+      "title": "Me Myself Mode",
+      "artist": "tripleS",
+      "albumId": "6767454374",
+      "number": 7,
+      "source": "https://music.apple.com/tw/album/me-myself-mode/6767454374?i=6767454533&uo=4"
+    },
+    {
+      "id": "1873878249",
+      "title": "トキメティック",
+      "artist": "tripleS",
+      "albumId": "1873878248",
+      "number": 1,
+      "source": "https://music.apple.com/tw/album/%E3%83%88%E3%82%AD%E3%83%A1%E3%83%86%E3%82%A3%E3%83%83%E3%82%AF/1873878248?i=1873878249&uo=4"
+    },
+    {
+      "id": "1873878250",
+      "title": "トキメティック Shin Sakiura Remix",
+      "artist": "tripleS",
+      "albumId": "1873878248",
+      "number": 2,
+      "source": "https://music.apple.com/tw/album/%E3%83%88%E3%82%AD%E3%83%A1%E3%83%86%E3%82%A3%E3%83%83%E3%82%AF-shin-sakiura-remix/1873878248?i=1873878250&uo=4"
+    },
+    {
+      "id": "1873878251",
+      "title": "トキメティック TV Edit",
+      "artist": "tripleS",
+      "albumId": "1873878248",
+      "number": 3,
+      "source": "https://music.apple.com/tw/album/%E3%83%88%E3%82%AD%E3%83%A1%E3%83%86%E3%82%A3%E3%83%83%E3%82%AF-tv-edit/1873878248?i=1873878251&uo=4"
+    },
+    {
+      "id": "1871990598",
+      "title": "Are You Alive (Instrumental)",
+      "artist": "tripleS",
+      "albumId": "1871990597",
+      "number": 1,
+      "source": "https://music.apple.com/tw/album/are-you-alive-instrumental/1871990597?i=1871990598&uo=4"
+    },
+    {
+      "id": "1871990599",
+      "title": "Detective Soseol (Instrumental)",
+      "artist": "tripleS",
+      "albumId": "1871990597",
+      "number": 2,
+      "source": "https://music.apple.com/tw/album/detective-soseol-instrumental/1871990597?i=1871990599&uo=4"
+    },
+    {
+      "id": "1871990600",
+      "title": "Firework Diary (Instrumental)",
+      "artist": "tripleS",
+      "albumId": "1871990597",
+      "number": 3,
+      "source": "https://music.apple.com/tw/album/firework-diary-instrumental/1871990597?i=1871990600&uo=4"
+    },
+    {
+      "id": "1871990604",
+      "title": "Love Child (Instrumental)",
+      "artist": "tripleS",
+      "albumId": "1871990597",
+      "number": 4,
+      "source": "https://music.apple.com/tw/album/love-child-instrumental/1871990597?i=1871990604&uo=4"
+    },
+    {
+      "id": "1871990605",
+      "title": "Persona (Instrumental)",
+      "artist": "tripleS",
+      "albumId": "1871990597",
+      "number": 5,
+      "source": "https://music.apple.com/tw/album/persona-instrumental/1871990597?i=1871990605&uo=4"
+    },
+    {
+      "id": "1871990607",
+      "title": "Too Hot (Instrumental)",
+      "artist": "tripleS",
+      "albumId": "1871990597",
+      "number": 6,
+      "source": "https://music.apple.com/tw/album/too-hot-instrumental/1871990597?i=1871990607&uo=4"
+    },
+    {
+      "id": "1871990609",
+      "title": "Diablo (Instrumental)",
+      "artist": "tripleS",
+      "albumId": "1871990597",
+      "number": 7,
+      "source": "https://music.apple.com/tw/album/diablo-instrumental/1871990597?i=1871990609&uo=4"
+    },
+    {
+      "id": "1871990732",
+      "title": "Friend Zone (Instrumental)",
+      "artist": "tripleS",
+      "albumId": "1871990597",
+      "number": 8,
+      "source": "https://music.apple.com/tw/album/friend-zone-instrumental/1871990597?i=1871990732&uo=4"
+    },
+    {
+      "id": "1871990734",
+      "title": "Love2Love (Instrumental)",
+      "artist": "tripleS",
+      "albumId": "1871990597",
+      "number": 9,
+      "source": "https://music.apple.com/tw/album/love2love-instrumental/1871990597?i=1871990734&uo=4"
+    },
+    {
+      "id": "1871990735",
+      "title": "Fly Up (Instrumental)",
+      "artist": "tripleS",
+      "albumId": "1871990597",
+      "number": 10,
+      "source": "https://music.apple.com/tw/album/fly-up-instrumental/1871990597?i=1871990735&uo=4"
+    },
+    {
+      "id": "1871990739",
+      "title": "Cameo Love (Instrumental)",
+      "artist": "tripleS",
+      "albumId": "1871990597",
+      "number": 11,
+      "source": "https://music.apple.com/tw/album/cameo-love-instrumental/1871990597?i=1871990739&uo=4"
+    },
+    {
+      "id": "1871990742",
+      "title": "Bubble Gum Girl (Instrumental)",
+      "artist": "tripleS",
+      "albumId": "1871990597",
+      "number": 12,
+      "source": "https://music.apple.com/tw/album/bubble-gum-girl-instrumental/1871990597?i=1871990742&uo=4"
+    },
+    {
+      "id": "1871990747",
+      "title": "Q&A (Instrumental)",
+      "artist": "tripleS",
+      "albumId": "1871990597",
+      "number": 13,
+      "source": "https://music.apple.com/tw/album/q-a-instrumental/1871990597?i=1871990747&uo=4"
+    },
+    {
+      "id": "1871990754",
+      "title": "Christmas Alone (Instrumental)",
+      "artist": "tripleS",
+      "albumId": "1871990597",
+      "number": 14,
+      "source": "https://music.apple.com/tw/album/christmas-alone-instrumental/1871990597?i=1871990754&uo=4"
+    },
+    {
+      "id": "1852753554",
+      "title": "Magic Shine New Zone",
+      "artist": "tripleS",
+      "albumId": "1852753248",
+      "number": 1,
+      "source": "https://music.apple.com/tw/album/magic-shine-new-zone/1852753248?i=1852753554&uo=4"
+    },
+    {
+      "id": "1852753562",
+      "title": "Fly Up",
+      "artist": "tripleS",
+      "albumId": "1852753248",
+      "number": 2,
+      "source": "https://music.apple.com/tw/album/fly-up/1852753248?i=1852753562&uo=4"
+    },
+    {
+      "id": "1852753569",
+      "title": "Cameo Love",
+      "artist": "tripleS",
+      "albumId": "1852753248",
+      "number": 3,
+      "source": "https://music.apple.com/tw/album/cameo-love/1852753248?i=1852753569&uo=4"
+    },
+    {
+      "id": "1852753577",
+      "title": "Bubble Gum Girl",
+      "artist": "tripleS",
+      "albumId": "1852753248",
+      "number": 4,
+      "source": "https://music.apple.com/tw/album/bubble-gum-girl/1852753248?i=1852753577&uo=4"
+    },
+    {
+      "id": "1852753584",
+      "title": "Q&A",
+      "artist": "tripleS",
+      "albumId": "1852753248",
+      "number": 5,
+      "source": "https://music.apple.com/tw/album/q-a/1852753248?i=1852753584&uo=4"
+    },
+    {
+      "id": "1852753586",
+      "title": "Christmas Alone",
+      "artist": "tripleS",
+      "albumId": "1852753248",
+      "number": 6,
+      "source": "https://music.apple.com/tw/album/christmas-alone/1852753248?i=1852753586&uo=4"
+    },
+    {
+      "id": "1837696799",
+      "title": "Password",
+      "artist": "tripleS",
+      "albumId": "1837696798",
+      "number": 1,
+      "source": "https://music.apple.com/tw/album/password/1837696798?i=1837696799&uo=4"
+    },
+    {
+      "id": "1837696800",
+      "title": "ヘッドフォン",
+      "artist": "tripleS",
+      "albumId": "1837696798",
+      "number": 2,
+      "source": "https://music.apple.com/tw/album/%E3%83%98%E3%83%83%E3%83%89%E3%83%95%E3%82%A9%E3%83%B3/1837696798?i=1837696800&uo=4"
+    },
+    {
+      "id": "1837696803",
+      "title": "トキメティック",
+      "artist": "tripleS",
+      "albumId": "1837696798",
+      "number": 3,
+      "source": "https://music.apple.com/tw/album/%E3%83%88%E3%82%AD%E3%83%A1%E3%83%86%E3%82%A3%E3%83%83%E3%82%AF/1837696798?i=1837696803&uo=4"
+    },
+    {
+      "id": "1837696806",
+      "title": "TOKYO",
+      "artist": "tripleS",
+      "albumId": "1837696798",
+      "number": 4,
+      "source": "https://music.apple.com/tw/album/tokyo/1837696798?i=1837696806&uo=4"
+    },
+    {
+      "id": "1837696807",
+      "title": "Oshare",
+      "artist": "tripleS",
+      "albumId": "1837696798",
+      "number": 5,
+      "source": "https://music.apple.com/tw/album/oshare/1837696798?i=1837696807&uo=4"
+    },
+    {
+      "id": "1837696808",
+      "title": "アンタイトル",
+      "artist": "tripleS",
+      "albumId": "1837696798",
+      "number": 6,
+      "source": "https://music.apple.com/tw/album/%E3%82%A2%E3%83%B3%E3%82%BF%E3%82%A4%E3%83%88%E3%83%AB/1837696798?i=1837696808&uo=4"
+    },
+    {
+      "id": "1837696810",
+      "title": "### (∞! Ver.)",
+      "artist": "tripleS",
+      "albumId": "1837696798",
+      "number": 7,
+      "source": "https://music.apple.com/tw/album/ver/1837696798?i=1837696810&uo=4"
+    },
+    {
+      "id": "1825832804",
+      "title": "Pink Power",
+      "artist": "ZANMANG LOOPY & tripleS",
+      "albumId": "1825832803",
+      "number": 1,
+      "source": "https://music.apple.com/tw/album/pink-power/1825832803?i=1825832804&uo=4"
+    },
+    {
+      "id": "1825832807",
+      "title": "Pink Power (Instrumental)",
+      "artist": "ZANMANG LOOPY & tripleS",
+      "albumId": "1825832803",
+      "number": 2,
+      "source": "https://music.apple.com/tw/album/pink-power-instrumental/1825832803?i=1825832807&uo=4"
+    },
+    {
+      "id": "1809896515",
+      "title": "@%",
+      "artist": "tripleS",
+      "albumId": "1809896514",
+      "number": 1,
+      "source": "https://music.apple.com/tw/album/1809896514?i=1809896515&uo=4"
+    },
+    {
+      "id": "1809896517",
+      "title": "Are You Alive",
+      "artist": "tripleS",
+      "albumId": "1809896514",
+      "number": 2,
+      "source": "https://music.apple.com/tw/album/are-you-alive/1809896514?i=1809896517&uo=4"
+    },
+    {
+      "id": "1809896518",
+      "title": "Detective Soseol",
+      "artist": "tripleS",
+      "albumId": "1809896514",
+      "number": 3,
+      "source": "https://music.apple.com/tw/album/detective-soseol/1809896514?i=1809896518&uo=4"
+    },
+    {
+      "id": "1809896523",
+      "title": "Firework Diary",
+      "artist": "tripleS",
+      "albumId": "1809896514",
+      "number": 4,
+      "source": "https://music.apple.com/tw/album/firework-diary/1809896514?i=1809896523&uo=4"
+    },
+    {
+      "id": "1809896526",
+      "title": "Love Child",
+      "artist": "tripleS",
+      "albumId": "1809896514",
+      "number": 5,
+      "source": "https://music.apple.com/tw/album/love-child/1809896514?i=1809896526&uo=4"
+    },
+    {
+      "id": "1809896530",
+      "title": "Persona",
+      "artist": "tripleS",
+      "albumId": "1809896514",
+      "number": 6,
+      "source": "https://music.apple.com/tw/album/persona/1809896514?i=1809896530&uo=4"
+    },
+    {
+      "id": "1809896531",
+      "title": "Too Hot",
+      "artist": "tripleS",
+      "albumId": "1809896514",
+      "number": 7,
+      "source": "https://music.apple.com/tw/album/too-hot/1809896514?i=1809896531&uo=4"
+    },
+    {
+      "id": "1809896664",
+      "title": "Diablo",
+      "artist": "tripleS",
+      "albumId": "1809896514",
+      "number": 8,
+      "source": "https://music.apple.com/tw/album/diablo/1809896514?i=1809896664&uo=4"
+    },
+    {
+      "id": "1809896666",
+      "title": "Friend Zone",
+      "artist": "tripleS",
+      "albumId": "1809896514",
+      "number": 9,
+      "source": "https://music.apple.com/tw/album/friend-zone/1809896514?i=1809896666&uo=4"
+    },
+    {
+      "id": "1809896670",
+      "title": "Love2Love",
+      "artist": "tripleS",
+      "albumId": "1809896514",
+      "number": 10,
+      "source": "https://music.apple.com/tw/album/love2love/1809896514?i=1809896670&uo=4"
+    },
+    {
+      "id": "1806646312",
+      "title": "Girls Never Die -Japanese Ver.-",
+      "artist": "tripleS",
+      "albumId": "1806645990",
+      "number": 1,
+      "source": "https://music.apple.com/tw/album/girls-never-die-japanese-ver/1806645990?i=1806646312&uo=4"
+    },
+    {
+      "id": "1806616184",
+      "title": "Rising -Japanese Ver.-",
+      "artist": "tripleS",
+      "albumId": "1806616183",
+      "number": 1,
+      "source": "https://music.apple.com/tw/album/rising-japanese-ver/1806616183?i=1806616184&uo=4"
+    },
+    {
+      "id": "1797578925",
+      "title": "PainDrop (with SeoYeon, JiWoo, YuBin, SoHyun)",
+      "artist": "tripleS",
+      "albumId": "1797578919",
+      "number": 1,
+      "source": "https://music.apple.com/tw/album/paindrop-with-seoyeon-jiwoo-yubin-sohyun/1797578919?i=1797578925&uo=4"
+    },
+    {
+      "id": "1797578926",
+      "title": "PainDrop (with SeoYeon, JiWoo, YuBin, SoHyun) [Instrumental]",
+      "artist": "tripleS",
+      "albumId": "1797578919",
+      "number": 2,
+      "source": "https://music.apple.com/tw/album/paindrop-with-seoyeon-jiwoo-yubin-sohyun-instrumental/1797578919?i=1797578926&uo=4"
+    },
+    {
+      "id": "1792698611",
+      "title": "Girls Never Die (Instrumental)",
+      "artist": "tripleS",
+      "albumId": "1792698609",
+      "number": 1,
+      "source": "https://music.apple.com/tw/album/girls-never-die-instrumental/1792698609?i=1792698611&uo=4"
+    },
+    {
+      "id": "1792698613",
+      "title": "Heart Raider (Instrumental)",
+      "artist": "tripleS",
+      "albumId": "1792698609",
+      "number": 2,
+      "source": "https://music.apple.com/tw/album/heart-raider-instrumental/1792698609?i=1792698613&uo=4"
+    },
+    {
+      "id": "1792698614",
+      "title": "Midnight Flower (Instrumental)",
+      "artist": "tripleS",
+      "albumId": "1792698609",
+      "number": 3,
+      "source": "https://music.apple.com/tw/album/midnight-flower-instrumental/1792698609?i=1792698614&uo=4"
+    },
+    {
+      "id": "1792698616",
+      "title": "White Soul Sneakers (Instrumental)",
+      "artist": "tripleS",
+      "albumId": "1792698609",
+      "number": 4,
+      "source": "https://music.apple.com/tw/album/white-soul-sneakers-instrumental/1792698609?i=1792698616&uo=4"
+    },
+    {
+      "id": "1792698617",
+      "title": "Chiyu (Instrumental)",
+      "artist": "tripleS",
+      "albumId": "1792698609",
+      "number": 5,
+      "source": "https://music.apple.com/tw/album/chiyu-instrumental/1792698609?i=1792698617&uo=4"
+    },
+    {
+      "id": "1792698618",
+      "title": "24 (Instrumental)",
+      "artist": "tripleS",
+      "albumId": "1792698609",
+      "number": 6,
+      "source": "https://music.apple.com/tw/album/24-instrumental/1792698609?i=1792698618&uo=4"
+    },
+    {
+      "id": "1792698769",
+      "title": "Beyond the Beyond (Instrumental)",
+      "artist": "tripleS",
+      "albumId": "1792698609",
+      "number": 7,
+      "source": "https://music.apple.com/tw/album/beyond-the-beyond-instrumental/1792698609?i=1792698769&uo=4"
+    },
+    {
+      "id": "1792698770",
+      "title": "Non Scale (Instrumental)",
+      "artist": "tripleS",
+      "albumId": "1792698609",
+      "number": 8,
+      "source": "https://music.apple.com/tw/album/non-scale-instrumental/1792698609?i=1792698770&uo=4"
+    },
+    {
+      "id": "1792698771",
+      "title": "Dimension (Instrumental)",
+      "artist": "tripleS",
+      "albumId": "1792698609",
+      "number": 9,
+      "source": "https://music.apple.com/tw/album/dimension-instrumental/1792698609?i=1792698771&uo=4"
+    },
+    {
+      "id": "1792698772",
+      "title": "Inner Dance (Instrumental)",
+      "artist": "tripleS",
+      "albumId": "1792698609",
+      "number": 10,
+      "source": "https://music.apple.com/tw/album/inner-dance-instrumental/1792698609?i=1792698772&uo=4"
+    },
+    {
+      "id": "1792698773",
+      "title": "Hit the Floor (Instrumental)",
+      "artist": "tripleS",
+      "albumId": "1792698609",
+      "number": 11,
+      "source": "https://music.apple.com/tw/album/hit-the-floor-instrumental/1792698609?i=1792698773&uo=4"
+    },
+    {
+      "id": "1792698774",
+      "title": "Choom (Instrumental)",
+      "artist": "tripleS",
+      "albumId": "1792698609",
+      "number": 12,
+      "source": "https://music.apple.com/tw/album/choom-instrumental/1792698609?i=1792698774&uo=4"
+    },
+    {
+      "id": "1792698775",
+      "title": "Éclair (Instrumental)",
+      "artist": "tripleS",
+      "albumId": "1792698609",
+      "number": 13,
+      "source": "https://music.apple.com/tw/album/%C3%A9clair-instrumental/1792698609?i=1792698775&uo=4"
+    },
+    {
+      "id": "1792698776",
+      "title": "Love Soseol (Instrumental)",
+      "artist": "tripleS",
+      "albumId": "1792698609",
+      "number": 14,
+      "source": "https://music.apple.com/tw/album/love-soseol-instrumental/1792698609?i=1792698776&uo=4"
+    },
+    {
+      "id": "1792698777",
+      "title": "Atmosphere (VV Version.) [Instrumental]",
+      "artist": "tripleS",
+      "albumId": "1792698609",
+      "number": 15,
+      "source": "https://music.apple.com/tw/album/atmosphere-vv-version-instrumental/1792698609?i=1792698777&uo=4"
+    },
+    {
+      "id": "1792698778",
+      "title": "12 Rings (Instrumental)",
+      "artist": "tripleS",
+      "albumId": "1792698609",
+      "number": 16,
+      "source": "https://music.apple.com/tw/album/12-rings-instrumental/1792698609?i=1792698778&uo=4"
+    },
+    {
+      "id": "1792698779",
+      "title": "Vision (Instrumental)",
+      "artist": "tripleS",
+      "albumId": "1792698609",
+      "number": 17,
+      "source": "https://music.apple.com/tw/album/vision-instrumental/1792698609?i=1792698779&uo=4"
+    },
+    {
+      "id": "1792698780",
+      "title": "Bionic Power (Instrumental)",
+      "artist": "tripleS",
+      "albumId": "1792698609",
+      "number": 18,
+      "source": "https://music.apple.com/tw/album/bionic-power-instrumental/1792698609?i=1792698780&uo=4"
+    },
+    {
+      "id": "1780671782",
+      "title": "Dreaming (by YooYeon, YuBin, DaHyun, ShiOn)",
+      "artist": "tripleS",
+      "albumId": "1780671781",
+      "number": 1,
+      "source": "https://music.apple.com/tw/album/dreaming-by-yooyeon-yubin-dahyun-shion/1780671781?i=1780671782&uo=4"
+    },
+    {
+      "id": "1780671784",
+      "title": "Dreaming (by YooYeon, YuBin, DaHyun, ShiOn) [Instrumental]",
+      "artist": "tripleS",
+      "albumId": "1780671781",
+      "number": 2,
+      "source": "https://music.apple.com/tw/album/dreaming-by-yooyeon-yubin-dahyun-shion-instrumental/1780671781?i=1780671784&uo=4"
+    },
+    {
+      "id": "1778010146",
+      "title": "アンタイトル",
+      "artist": "tripleS",
+      "albumId": "1778010145",
+      "number": 1,
+      "source": "https://music.apple.com/tw/album/%E3%82%A2%E3%83%B3%E3%82%BF%E3%82%A4%E3%83%88%E3%83%AB/1778010145?i=1778010146&uo=4"
+    },
+    {
+      "id": "1778010150",
+      "title": "### (∞! Ver.)",
+      "artist": "tripleS",
+      "albumId": "1778010145",
+      "number": 2,
+      "source": "https://music.apple.com/tw/album/ver/1778010145?i=1778010150&uo=4"
+    },
+    {
+      "id": "1778010151",
+      "title": "###",
+      "artist": "tripleS",
+      "albumId": "1778010145",
+      "number": 3,
+      "source": "https://music.apple.com/tw/album/1778010145?i=1778010151&uo=4"
+    },
+    {
+      "id": "1779626241",
+      "title": "Polaroid (by NaKyoung, Mayu, ShiOn, ChaeWon)",
+      "artist": "tripleS",
+      "albumId": "1779626240",
+      "number": 1,
+      "source": "https://music.apple.com/tw/album/polaroid-by-nakyoung-mayu-shion-chaewon/1779626240?i=1779626241&uo=4"
+    },
+    {
+      "id": "1779626242",
+      "title": "Polaroid (by NaKyoung, Mayu, ShiOn, ChaeWon) [Instrumental]",
+      "artist": "tripleS",
+      "albumId": "1779626240",
+      "number": 2,
+      "source": "https://music.apple.com/tw/album/polaroid-by-nakyoung-mayu-shion-chaewon-instrumental/1779626240?i=1779626242&uo=4"
+    },
+    {
+      "id": "1773026570",
+      "title": "Visual Virtue",
+      "artist": "tripleS",
+      "albumId": "1773026296",
+      "number": 1,
+      "source": "https://music.apple.com/tw/album/visual-virtue/1773026296?i=1773026570&uo=4"
+    },
+    {
+      "id": "1773026577",
+      "title": "Hit the Floor",
+      "artist": "tripleS",
+      "albumId": "1773026296",
+      "number": 2,
+      "source": "https://music.apple.com/tw/album/hit-the-floor/1773026296?i=1773026577&uo=4"
+    },
+    {
+      "id": "1773026578",
+      "title": "Choom",
+      "artist": "tripleS",
+      "albumId": "1773026296",
+      "number": 3,
+      "source": "https://music.apple.com/tw/album/choom/1773026296?i=1773026578&uo=4"
+    },
+    {
+      "id": "1773026584",
+      "title": "Éclair",
+      "artist": "tripleS",
+      "albumId": "1773026296",
+      "number": 4,
+      "source": "https://music.apple.com/tw/album/e-clair/1773026296?i=1773026584&uo=4"
+    },
+    {
+      "id": "1773026586",
+      "title": "Love Soseol",
+      "artist": "tripleS",
+      "albumId": "1773026296",
+      "number": 5,
+      "source": "https://music.apple.com/tw/album/love-soseol/1773026296?i=1773026586&uo=4"
+    },
+    {
+      "id": "1773026587",
+      "title": "Atmosphere (VV Version)",
+      "artist": "tripleS",
+      "albumId": "1773026296",
+      "number": 6,
+      "source": "https://music.apple.com/tw/album/atmosphere-vv-version/1773026296?i=1773026587&uo=4"
+    },
+    {
+      "id": "1773026589",
+      "title": "12 Rings",
+      "artist": "tripleS",
+      "albumId": "1773026296",
+      "number": 7,
+      "source": "https://music.apple.com/tw/album/12-rings/1773026296?i=1773026589&uo=4"
+    },
+    {
+      "id": "1773026590",
+      "title": "Vision",
+      "artist": "tripleS",
+      "albumId": "1773026296",
+      "number": 8,
+      "source": "https://music.apple.com/tw/album/vision/1773026296?i=1773026590&uo=4"
+    },
+    {
+      "id": "1773026592",
+      "title": "Bionic Power",
+      "artist": "tripleS",
+      "albumId": "1773026296",
+      "number": 9,
+      "source": "https://music.apple.com/tw/album/bionic-power/1773026296?i=1773026592&uo=4"
+    },
+    {
+      "id": "1773026593",
+      "title": "Visionary Vision",
+      "artist": "tripleS",
+      "albumId": "1773026296",
+      "number": 10,
+      "source": "https://music.apple.com/tw/album/visionary-vision/1773026296?i=1773026593&uo=4"
+    },
+    {
+      "id": "1757565386",
+      "title": "###",
+      "artist": "tripleS",
+      "albumId": "1757565162",
+      "number": 1,
+      "source": "https://music.apple.com/tw/album/1757565162?i=1757565386&uo=4"
+    },
+    {
+      "id": "1751857760",
+      "title": "Inner Dance",
+      "artist": "tripleS",
+      "albumId": "1751857482",
+      "number": 1,
+      "source": "https://music.apple.com/tw/album/inner-dance/1751857482?i=1751857760&uo=4"
+    },
+    {
+      "id": "1743890799",
+      "title": "S",
+      "artist": "tripleS",
+      "albumId": "1743890798",
+      "number": 1,
+      "source": "https://music.apple.com/tw/album/s/1743890798?i=1743890799&uo=4"
+    },
+    {
+      "id": "1743890801",
+      "title": "Girls Never Die",
+      "artist": "tripleS",
+      "albumId": "1743890798",
+      "number": 2,
+      "source": "https://music.apple.com/tw/album/girls-never-die/1743890798?i=1743890801&uo=4"
+    },
+    {
+      "id": "1743890806",
+      "title": "Heart Raider",
+      "artist": "tripleS",
+      "albumId": "1743890798",
+      "number": 3,
+      "source": "https://music.apple.com/tw/album/heart-raider/1743890798?i=1743890806&uo=4"
+    },
+    {
+      "id": "1743890844",
+      "title": "Midnight Flower",
+      "artist": "tripleS",
+      "albumId": "1743890798",
+      "number": 4,
+      "source": "https://music.apple.com/tw/album/midnight-flower/1743890798?i=1743890844&uo=4"
+    },
+    {
+      "id": "1743890847",
+      "title": "White Soul Sneakers",
+      "artist": "tripleS",
+      "albumId": "1743890798",
+      "number": 5,
+      "source": "https://music.apple.com/tw/album/white-soul-sneakers/1743890798?i=1743890847&uo=4"
+    },
+    {
+      "id": "1743890856",
+      "title": "Chiyu",
+      "artist": "tripleS",
+      "albumId": "1743890798",
+      "number": 6,
+      "source": "https://music.apple.com/tw/album/chiyu/1743890798?i=1743890856&uo=4"
+    },
+    {
+      "id": "1743890862",
+      "title": "24",
+      "artist": "tripleS",
+      "albumId": "1743890798",
+      "number": 7,
+      "source": "https://music.apple.com/tw/album/24/1743890798?i=1743890862&uo=4"
+    },
+    {
+      "id": "1743890865",
+      "title": "Beyond the Beyond",
+      "artist": "tripleS",
+      "albumId": "1743890798",
+      "number": 8,
+      "source": "https://music.apple.com/tw/album/beyond-the-beyond/1743890798?i=1743890865&uo=4"
+    },
+    {
+      "id": "1743891111",
+      "title": "Non Scale",
+      "artist": "tripleS",
+      "albumId": "1743890798",
+      "number": 9,
+      "source": "https://music.apple.com/tw/album/non-scale/1743890798?i=1743891111&uo=4"
+    },
+    {
+      "id": "1743891129",
+      "title": "Dimension",
+      "artist": "tripleS",
+      "albumId": "1743890798",
+      "number": 10,
+      "source": "https://music.apple.com/tw/album/dimension/1743890798?i=1743891129&uo=4"
+    },
+    {
+      "id": "1737963367",
+      "title": "Generation (Instrumental)",
+      "artist": "tripleS",
+      "albumId": "1737963360",
+      "number": 1,
+      "source": "https://music.apple.com/tw/album/generation-instrumental/1737963360?i=1737963367&uo=4"
+    },
+    {
+      "id": "1737963376",
+      "title": "Rolex (Instrumental)",
+      "artist": "tripleS",
+      "albumId": "1737963360",
+      "number": 2,
+      "source": "https://music.apple.com/tw/album/rolex-instrumental/1737963360?i=1737963376&uo=4"
+    },
+    {
+      "id": "1737963620",
+      "title": "Charla (Instrumental)",
+      "artist": "tripleS",
+      "albumId": "1737963360",
+      "number": 3,
+      "source": "https://music.apple.com/tw/album/charla-instrumental/1737963360?i=1737963620&uo=4"
+    },
+    {
+      "id": "1737963632",
+      "title": "Dimension (AAA Ver.) [Instrumental]",
+      "artist": "tripleS",
+      "albumId": "1737963360",
+      "number": 4,
+      "source": "https://music.apple.com/tw/album/dimension-aaa-ver-instrumental/1737963360?i=1737963632&uo=4"
+    },
+    {
+      "id": "1737963638",
+      "title": "Beam (Instrumental)",
+      "artist": "tripleS",
+      "albumId": "1737963360",
+      "number": 5,
+      "source": "https://music.apple.com/tw/album/beam-instrumental/1737963360?i=1737963638&uo=4"
+    },
+    {
+      "id": "1737963876",
+      "title": "Rising (Instrumental)",
+      "artist": "tripleS",
+      "albumId": "1737963360",
+      "number": 6,
+      "source": "https://music.apple.com/tw/album/rising-instrumental/1737963360?i=1737963876&uo=4"
+    },
+    {
+      "id": "1737963879",
+      "title": "Colorful (Instrumental)",
+      "artist": "tripleS",
+      "albumId": "1737963360",
+      "number": 7,
+      "source": "https://music.apple.com/tw/album/colorful-instrumental/1737963360?i=1737963879&uo=4"
+    },
+    {
+      "id": "1737963881",
+      "title": "The Baddest (Instrumental)",
+      "artist": "tripleS",
+      "albumId": "1737963360",
+      "number": 8,
+      "source": "https://music.apple.com/tw/album/the-baddest-instrumental/1737963360?i=1737963881&uo=4"
+    },
+    {
+      "id": "1737963884",
+      "title": "New Look (Instrumental)",
+      "artist": "tripleS",
+      "albumId": "1737963360",
+      "number": 9,
+      "source": "https://music.apple.com/tw/album/new-look-instrumental/1737963360?i=1737963884&uo=4"
+    },
+    {
+      "id": "1737964179",
+      "title": "Cherry Talk (Instrumental)",
+      "artist": "tripleS",
+      "albumId": "1737963360",
+      "number": 10,
+      "source": "https://music.apple.com/tw/album/cherry-talk-instrumental/1737963360?i=1737964179&uo=4"
+    },
+    {
+      "id": "1737964308",
+      "title": "Touch (Instrumental)",
+      "artist": "tripleS",
+      "albumId": "1737963360",
+      "number": 11,
+      "source": "https://music.apple.com/tw/album/touch-instrumental/1737963360?i=1737964308&uo=4"
+    },
+    {
+      "id": "1737964318",
+      "title": "Hide & Seek (Instrumental)",
+      "artist": "tripleS",
+      "albumId": "1737963360",
+      "number": 12,
+      "source": "https://music.apple.com/tw/album/hide-seek-instrumental/1737963360?i=1737964318&uo=4"
+    },
+    {
+      "id": "1737964321",
+      "title": "Deju-Vu (Instrumental)",
+      "artist": "tripleS",
+      "albumId": "1737963360",
+      "number": 13,
+      "source": "https://music.apple.com/tw/album/deju-vu-instrumental/1737963360?i=1737964321&uo=4"
+    },
+    {
+      "id": "1737964332",
+      "title": "Dimension (KRE Ver.) [Instrumental]",
+      "artist": "tripleS",
+      "albumId": "1737963360",
+      "number": 14,
+      "source": "https://music.apple.com/tw/album/dimension-kre-ver-instrumental/1737963360?i=1737964332&uo=4"
+    },
+    {
+      "id": "1737964699",
+      "title": "Touch+ (Instrumental)",
+      "artist": "tripleS",
+      "albumId": "1737963360",
+      "number": 15,
+      "source": "https://music.apple.com/tw/album/touch-instrumental/1737963360?i=1737964699&uo=4"
+    },
+    {
+      "id": "1737964722",
+      "title": "Girls' Capitalism (Instrumental)",
+      "artist": "tripleS",
+      "albumId": "1737963360",
+      "number": 16,
+      "source": "https://music.apple.com/tw/album/girls-capitalism-instrumental/1737963360?i=1737964722&uo=4"
+    },
+    {
+      "id": "1737964907",
+      "title": "Complexity (Instrumental)",
+      "artist": "tripleS",
+      "albumId": "1737963360",
+      "number": 17,
+      "source": "https://music.apple.com/tw/album/complexity-instrumental/1737963360?i=1737964907&uo=4"
+    },
+    {
+      "id": "1737964915",
+      "title": "Black Soul Dress (Instrumental)",
+      "artist": "tripleS",
+      "albumId": "1737963360",
+      "number": 18,
+      "source": "https://music.apple.com/tw/album/black-soul-dress-instrumental/1737963360?i=1737964915&uo=4"
+    },
+    {
+      "id": "1737964930",
+      "title": "Seoul Sonyo Sound (Instrumental)",
+      "artist": "tripleS",
+      "albumId": "1737963360",
+      "number": 19,
+      "source": "https://music.apple.com/tw/album/seoul-sonyo-sound-instrumental/1737963360?i=1737964930&uo=4"
+    },
+    {
+      "id": "1737964935",
+      "title": "Cry Baby (Instrumental)",
+      "artist": "tripleS",
+      "albumId": "1737963360",
+      "number": 20,
+      "source": "https://music.apple.com/tw/album/cry-baby-instrumental/1737963360?i=1737964935&uo=4"
+    },
+    {
+      "id": "1737965242",
+      "title": "Speed Love (Instrumental)",
+      "artist": "tripleS",
+      "albumId": "1737963360",
+      "number": 21,
+      "source": "https://music.apple.com/tw/album/speed-love-instrumental/1737963360?i=1737965242&uo=4"
+    },
+    {
+      "id": "1737965249",
+      "title": "Invincible (Instrumental)",
+      "artist": "tripleS",
+      "albumId": "1737963360",
+      "number": 22,
+      "source": "https://music.apple.com/tw/album/invincible-instrumental/1737963360?i=1737965249&uo=4"
+    },
+    {
+      "id": "1737965263",
+      "title": "Rhodanthe (Instrumental)",
+      "artist": "tripleS",
+      "albumId": "1737963360",
+      "number": 23,
+      "source": "https://music.apple.com/tw/album/rhodanthe-instrumental/1737963360?i=1737965263&uo=4"
+    },
+    {
+      "id": "1737965583",
+      "title": "Heavy Metal Wings (Instrumental)",
+      "artist": "tripleS",
+      "albumId": "1737963360",
+      "number": 24,
+      "source": "https://music.apple.com/tw/album/heavy-metal-wings-instrumental/1737963360?i=1737965583&uo=4"
+    },
+    {
+      "id": "1737965593",
+      "title": "37.5 Celcius (Instrumental)",
+      "artist": "tripleS",
+      "albumId": "1737963360",
+      "number": 25,
+      "source": "https://music.apple.com/tw/album/37-5-celcius-instrumental/1737963360?i=1737965593&uo=4"
+    },
+    {
+      "id": "1737965852",
+      "title": "Moto Princess (Instrumental)",
+      "artist": "tripleS",
+      "albumId": "1737963360",
+      "number": 26,
+      "source": "https://music.apple.com/tw/album/moto-princess-instrumental/1737963360?i=1737965852&uo=4"
+    },
+    {
+      "id": "1737965864",
+      "title": "Oui (Instrumental)",
+      "artist": "tripleS",
+      "albumId": "1737963360",
+      "number": 27,
+      "source": "https://music.apple.com/tw/album/oui-instrumental/1737963360?i=1737965864&uo=4"
+    },
+    {
+      "id": "1737966128",
+      "title": "Enhanced Flower (Instrumental)",
+      "artist": "tripleS",
+      "albumId": "1737963360",
+      "number": 28,
+      "source": "https://music.apple.com/tw/album/enhanced-flower-instrumental/1737963360?i=1737966128&uo=4"
+    },
+    {
+      "id": "1737966245",
+      "title": "Just Do It (Instrumental)",
+      "artist": "tripleS",
+      "albumId": "1737963360",
+      "number": 29,
+      "source": "https://music.apple.com/tw/album/just-do-it-instrumental/1737963360?i=1737966245&uo=4"
+    },
+    {
+      "id": "1737966251",
+      "title": "Door (Instrumental)",
+      "artist": "tripleS",
+      "albumId": "1737963360",
+      "number": 30,
+      "source": "https://music.apple.com/tw/album/door-instrumental/1737963360?i=1737966251&uo=4"
+    },
+    {
+      "id": "1737966499",
+      "title": "Farewell My First (Instrumental)",
+      "artist": "tripleS",
+      "albumId": "1737963360",
+      "number": 31,
+      "source": "https://music.apple.com/tw/album/farewell-my-first-instrumental/1737963360?i=1737966499&uo=4"
+    },
+    {
+      "id": "1737936206",
+      "title": "Door",
+      "artist": "tripleS",
+      "albumId": "1737936204",
+      "number": 1,
+      "source": "https://music.apple.com/tw/album/door/1737936204?i=1737936206&uo=4"
+    },
+    {
+      "id": "1737936224",
+      "title": "Farewell My First",
+      "artist": "tripleS",
+      "albumId": "1737936204",
+      "number": 2,
+      "source": "https://music.apple.com/tw/album/farewell-my-first/1737936204?i=1737936224&uo=4"
+    },
+    {
+      "id": "1737939977",
+      "title": "Just Do It",
+      "artist": "tripleS",
+      "albumId": "1737939782",
+      "number": 1,
+      "source": "https://music.apple.com/tw/album/just-do-it/1737939782?i=1737939977&uo=4"
+    },
+    {
+      "id": "1737952059",
+      "title": "&#10209;",
+      "artist": "tripleS",
+      "albumId": "1737952040",
+      "number": 1,
+      "source": "https://music.apple.com/tw/album/10209/1737952040?i=1737952059&uo=4"
+    },
+    {
+      "id": "1737952065",
+      "title": "Invincible",
+      "artist": "tripleS",
+      "albumId": "1737952040",
+      "number": 2,
+      "source": "https://music.apple.com/tw/album/invincible/1737952040?i=1737952065&uo=4"
+    },
+    {
+      "id": "1737952251",
+      "title": "Rhodanthe",
+      "artist": "tripleS",
+      "albumId": "1737952040",
+      "number": 3,
+      "source": "https://music.apple.com/tw/album/rhodanthe/1737952040?i=1737952251&uo=4"
+    },
+    {
+      "id": "1737952260",
+      "title": "Heavy Metal Wings",
+      "artist": "tripleS",
+      "albumId": "1737952040",
+      "number": 4,
+      "source": "https://music.apple.com/tw/album/heavy-metal-wings/1737952040?i=1737952260&uo=4"
+    },
+    {
+      "id": "1737952263",
+      "title": "37.5 Celsius",
+      "artist": "tripleS",
+      "albumId": "1737952040",
+      "number": 5,
+      "source": "https://music.apple.com/tw/album/37-5-celsius/1737952040?i=1737952263&uo=4"
+    },
+    {
+      "id": "1737952269",
+      "title": "Moto Princess",
+      "artist": "tripleS",
+      "albumId": "1737952040",
+      "number": 6,
+      "source": "https://music.apple.com/tw/album/moto-princess/1737952040?i=1737952269&uo=4"
+    },
+    {
+      "id": "1737952582",
+      "title": "Oui",
+      "artist": "tripleS",
+      "albumId": "1737952040",
+      "number": 7,
+      "source": "https://music.apple.com/tw/album/oui/1737952040?i=1737952582&uo=4"
+    },
+    {
+      "id": "1737952602",
+      "title": "Enhanced Flower",
+      "artist": "tripleS",
+      "albumId": "1737952040",
+      "number": 8,
+      "source": "https://music.apple.com/tw/album/enhanced-flower/1737952040?i=1737952602&uo=4"
+    },
+    {
+      "id": "1737943611",
+      "title": "&#8576;",
+      "artist": "tripleS",
+      "albumId": "1737943607",
+      "number": 1,
+      "source": "https://music.apple.com/tw/album/8576/1737943607?i=1737943611&uo=4"
+    },
+    {
+      "id": "1737943621",
+      "title": "Girls' Capitalism",
+      "artist": "tripleS",
+      "albumId": "1737943607",
+      "number": 2,
+      "source": "https://music.apple.com/tw/album/girls-capitalism/1737943607?i=1737943621&uo=4"
+    },
+    {
+      "id": "1737943625",
+      "title": "Complexity",
+      "artist": "tripleS",
+      "albumId": "1737943607",
+      "number": 3,
+      "source": "https://music.apple.com/tw/album/complexity/1737943607?i=1737943625&uo=4"
+    },
+    {
+      "id": "1737943631",
+      "title": "Black Soul Dress",
+      "artist": "tripleS",
+      "albumId": "1737943607",
+      "number": 4,
+      "source": "https://music.apple.com/tw/album/black-soul-dress/1737943607?i=1737943631&uo=4"
+    },
+    {
+      "id": "1737943971",
+      "title": "Seoul Sonyo Sound",
+      "artist": "tripleS",
+      "albumId": "1737943607",
+      "number": 5,
+      "source": "https://music.apple.com/tw/album/seoul-sonyo-sound/1737943607?i=1737943971&uo=4"
+    },
+    {
+      "id": "1737943975",
+      "title": "Cry Baby",
+      "artist": "tripleS",
+      "albumId": "1737943607",
+      "number": 6,
+      "source": "https://music.apple.com/tw/album/cry-baby/1737943607?i=1737943975&uo=4"
+    },
+    {
+      "id": "1737943979",
+      "title": "Speed Love",
+      "artist": "tripleS",
+      "albumId": "1737943607",
+      "number": 7,
+      "source": "https://music.apple.com/tw/album/speed-love/1737943607?i=1737943979&uo=4"
+    },
+    {
+      "id": "1737943983",
+      "title": "Number 8",
+      "artist": "tripleS",
+      "albumId": "1737943607",
+      "number": 8,
+      "source": "https://music.apple.com/tw/album/number-8/1737943607?i=1737943983&uo=4"
+    },
+    {
+      "id": "1737939578",
+      "title": "Cherry Gene 'Baddest Mix'",
+      "artist": "tripleS",
+      "albumId": "1737939576",
+      "number": 1,
+      "source": "https://music.apple.com/tw/album/cherry-gene-baddest-mix/1737939576?i=1737939578&uo=4"
+    },
+    {
+      "id": "1737939778",
+      "title": "Cherry Gene 'Hy-Fluid Mix'",
+      "artist": "tripleS",
+      "albumId": "1737939576",
+      "number": 2,
+      "source": "https://music.apple.com/tw/album/cherry-gene-hy-fluid-mix/1737939576?i=1737939778&uo=4"
+    },
+    {
+      "id": "1737939779",
+      "title": "Cherry Gene 'Testarossa Mix'",
+      "artist": "tripleS",
+      "albumId": "1737939576",
+      "number": 3,
+      "source": "https://music.apple.com/tw/album/cherry-gene-testarossa-mix/1737939576?i=1737939779&uo=4"
+    },
+    {
+      "id": "touch-plus",
+      "title": "Touch+",
+      "artist": "tripleS",
+      "albumId": "touch-plus",
+      "number": 1,
+      "source": "https://triples.lnk.to/kS7g0e"
+    },
+    {
+      "id": "1737941306",
+      "title": "Cherry 100%",
+      "artist": "tripleS",
+      "albumId": "1737941299",
+      "number": 1,
+      "source": "https://music.apple.com/tw/album/cherry-100/1737941299?i=1737941306&uo=4"
+    },
+    {
+      "id": "1737941583",
+      "title": "Cherry Talk",
+      "artist": "tripleS",
+      "albumId": "1737941299",
+      "number": 2,
+      "source": "https://music.apple.com/tw/album/cherry-talk/1737941299?i=1737941583&uo=4"
+    },
+    {
+      "id": "1737941595",
+      "title": "Touch",
+      "artist": "tripleS",
+      "albumId": "1737941299",
+      "number": 3,
+      "source": "https://music.apple.com/tw/album/touch/1737941299?i=1737941595&uo=4"
+    },
+    {
+      "id": "1737941720",
+      "title": "Hide & Seek",
+      "artist": "tripleS",
+      "albumId": "1737941299",
+      "number": 4,
+      "source": "https://music.apple.com/tw/album/hide-seek/1737941299?i=1737941720&uo=4"
+    },
+    {
+      "id": "1737941740",
+      "title": "Deja-Vu",
+      "artist": "tripleS",
+      "albumId": "1737941299",
+      "number": 5,
+      "source": "https://music.apple.com/tw/album/deja-vu/1737941299?i=1737941740&uo=4"
+    },
+    {
+      "id": "1737941744",
+      "title": "Dimension (KRE Ver.)",
+      "artist": "tripleS",
+      "albumId": "1737941299",
+      "number": 6,
+      "source": "https://music.apple.com/tw/album/dimension-kre-ver/1737941299?i=1737941744&uo=4"
+    },
+    {
+      "id": "1737936308",
+      "title": "Beam",
+      "artist": "tripleS",
+      "albumId": "1737936304",
+      "number": 1,
+      "source": "https://music.apple.com/tw/album/beam/1737936304?i=1737936308&uo=4"
+    },
+    {
+      "id": "1737936312",
+      "title": "Before the Rise",
+      "artist": "tripleS",
+      "albumId": "1737936304",
+      "number": 2,
+      "source": "https://music.apple.com/tw/album/before-the-rise/1737936304?i=1737936312&uo=4"
+    },
+    {
+      "id": "1737936315",
+      "title": "Rising",
+      "artist": "tripleS",
+      "albumId": "1737936304",
+      "number": 3,
+      "source": "https://music.apple.com/tw/album/rising/1737936304?i=1737936315&uo=4"
+    },
+    {
+      "id": "1737936740",
+      "title": "Colorful",
+      "artist": "tripleS",
+      "albumId": "1737936304",
+      "number": 4,
+      "source": "https://music.apple.com/tw/album/colorful/1737936304?i=1737936740&uo=4"
+    },
+    {
+      "id": "1737936774",
+      "title": "The Baddest",
+      "artist": "tripleS",
+      "albumId": "1737936304",
+      "number": 5,
+      "source": "https://music.apple.com/tw/album/the-baddest/1737936304?i=1737936774&uo=4"
+    },
+    {
+      "id": "1737936776",
+      "title": "New Look",
+      "artist": "tripleS",
+      "albumId": "1737936304",
+      "number": 6,
+      "source": "https://music.apple.com/tw/album/new-look/1737936304?i=1737936776&uo=4"
+    },
+    {
+      "id": "1737936781",
+      "title": "Chowall",
+      "artist": "tripleS",
+      "albumId": "1737936304",
+      "number": 7,
+      "source": "https://music.apple.com/tw/album/chowall/1737936304?i=1737936781&uo=4"
+    },
+    {
+      "id": "1737940608",
+      "title": "Access",
+      "artist": "tripleS",
+      "albumId": "1737940296",
+      "number": 1,
+      "source": "https://music.apple.com/tw/album/access/1737940296?i=1737940608&uo=4"
+    },
+    {
+      "id": "1737940615",
+      "title": "Generation",
+      "artist": "tripleS",
+      "albumId": "1737940296",
+      "number": 2,
+      "source": "https://music.apple.com/tw/album/generation/1737940296?i=1737940615&uo=4"
+    },
+    {
+      "id": "1737940634",
+      "title": "Rolex",
+      "artist": "tripleS",
+      "albumId": "1737940296",
+      "number": 3,
+      "source": "https://music.apple.com/tw/album/rolex/1737940296?i=1737940634&uo=4"
+    },
+    {
+      "id": "1737940728",
+      "title": "Charla",
+      "artist": "tripleS",
+      "albumId": "1737940296",
+      "number": 4,
+      "source": "https://music.apple.com/tw/album/charla/1737940296?i=1737940728&uo=4"
+    },
+    {
+      "id": "1737940729",
+      "title": "Dimension (AAA Ver.)",
+      "artist": "tripleS",
+      "albumId": "1737940296",
+      "number": 5,
+      "source": "https://music.apple.com/tw/album/dimension-aaa-ver/1737940296?i=1737940729&uo=4"
+    },
+    {
+      "id": "1737940731",
+      "title": "+(82)",
+      "artist": "tripleS",
+      "albumId": "1737940296",
+      "number": 6,
+      "source": "https://music.apple.com/tw/album/82/1737940296?i=1737940731&uo=4"
+    }
+  ]
+}
