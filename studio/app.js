@@ -1,4 +1,4 @@
-import {createCollectionPickers} from './collection-pickers.js?v=21';
+import {createCollectionPickers} from './collection-pickers.js?v=22';
 import {createMemberPhotoBrowser} from './member-photos.js?v=21';
 import {FONT_FAMILY,songLayout,wrapText} from './typography.js?v=8';
 import {NAMES,freshState,cloneState,clamp,placement,validDraft,defaultCrop,restoreState,getTable,TABLE_IDS,slotType,TOPIC_OPTIONS,topicFor} from './core.js?v=21';
