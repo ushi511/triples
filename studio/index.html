@@ -2,14 +2,15 @@
 <html lang="zh-TW">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="tripleS 生涯表產生器。點擊格子選擇成員或自己的照片，完成後下載 PNG。">
+<meta name="description" content="tripleS 生涯表產生器，支援 1.0、2.0、3.0、3.5 表格，填入成員照片、歌曲、小分隊與 Objekt，完成後下載 PNG。">
 <title>tripleS 生涯表 3.5 產生器</title>
-<link rel="stylesheet" href="styles.css?v=16"><script type="module" src="app.js?v=17"></script>
+<link rel="stylesheet" href="styles.css?v=18"><script type="module" src="app.js?v=18"></script>
 </head>
 <body>
 <div class="container">
-<h2>tripleS 生涯表 3.5 產生器</h2>
-<p>💡 點擊格子選擇成員、照片或歌曲，完成後按下方下載。</p>
+<h2 id="pageTitle">tripleS 生涯表 3.5 產生器</h2>
+<div class="version-tabs" role="group" aria-label="選擇表格版本"><button class="secondary" data-table="1.0" aria-pressed="false">1.0</button><button class="secondary" data-table="2.0" aria-pressed="false">2.0</button><button class="secondary" data-table="3.0" aria-pressed="false">3.0</button><button class="secondary" data-table="3.5" aria-pressed="true">3.5</button></div>
+<p>點擊格子選擇照片、歌曲、小分隊或小卡。各版本會分開保留填寫內容。</p>
 <div class="canvas-wrap"><canvas id="canvas" aria-label="tripleS 生涯表預覽"></canvas><div id="gridButtons" aria-label="選擇要填入的格子"></div></div>
 <input type="file" id="fileInput" accept="image/*" hidden>
 <div class="controls"><button id="downloadBtn" disabled>保存我的生涯表 (PNG)</button></div>
@@ -17,7 +18,7 @@
 <p id="saveStatus" class="status" role="status" hidden></p>
 </div>
 <dialog id="memberModal" aria-labelledby="modalTitle">
-<h3 id="modalTitle">選擇照片</h3>
+<h3 id="modalTitle">選擇照片</h3><label class="fill-type-label">填入內容<select class="fill-kind"><option value="photo">照片／成員</option><option value="song">歌曲</option><option value="unit">小分隊</option><option value="objekt">Objekt 小卡</option></select></label>
 <button id="uploadBtn" class="upload-btn" type="button" aria-describedby="uploadHint"><span class="upload-title">將圖片拖曳到這裡</span><span id="uploadHint" class="upload-hint">或點一下，從手機／電腦選擇<br>也可按 Ctrl／⌘＋V 貼上圖片</span></button>
 <p id="uploadStatus" class="status" role="status" aria-live="polite" hidden></p>
 <div class="divider"></div>
@@ -49,7 +50,7 @@
 </dialog>
 
 <dialog id="songModal" aria-labelledby="songModalTitle">
-<h3 id="songModalTitle">選擇歌曲</h3>
+<h3 id="songModalTitle">選擇歌曲</h3><label class="fill-type-label">填入內容<select class="fill-kind"><option value="photo">照片／成員</option><option value="song">歌曲</option><option value="unit">小分隊</option><option value="objekt">Objekt 小卡</option></select></label>
 <input id="songSearch" class="search" type="search" placeholder="搜尋歌名、專輯或分隊名稱" aria-label="搜尋 tripleS 歌曲" autocomplete="off">
 <div class="song-toolbar"><button id="allAlbumsBtn" class="secondary" aria-pressed="true">全部專輯</button><span id="songCount"></span></div>
 <div id="albumGrid" class="album-grid" aria-label="依專輯封面挑選"></div>
@@ -59,7 +60,9 @@
 <div id="currentSong" class="current-song" hidden><span id="currentSongName"></span><button id="clearSongBtn" class="secondary">清除此格</button></div>
 <button id="closeSongBtn" class="close-btn">關閉</button>
 </dialog>
-<dialog id="confirmModal" aria-labelledby="confirmTitle"><h3 id="confirmTitle">清空所有照片？</h3><p>清空後，仍可按「復原上一步」還原。</p><div class="confirm-actions"><button id="cancelClearBtn" class="secondary">取消</button><button id="confirmClearBtn">確認清空</button></div></dialog>
+<dialog id="unitModal" aria-labelledby="unitModalTitle"><h3 id="unitModalTitle">本命小分隊</h3><label class="fill-type-label">填入內容<select class="fill-kind"><option value="photo">照片／成員</option><option value="song">歌曲</option><option value="unit">小分隊</option><option value="objekt">Objekt 小卡</option></select></label><input id="unitSearch" class="search" type="search" aria-label="搜尋小分隊" placeholder="搜尋小分隊名稱、縮寫或成員"><div id="unitGrid" class="unit-grid"></div><p id="unitStatus" class="status" role="status"></p><div class="picker-actions"><button id="clearUnitBtn" class="secondary">清除此格</button><button id="closeUnitBtn" class="close-btn">關閉</button></div></dialog>
+<dialog id="objektModal" aria-labelledby="objektModalTitle"><h3 id="objektModalTitle">選擇 Objekt</h3><label class="fill-type-label">填入內容<select class="fill-kind"><option value="photo">照片／成員</option><option value="song">歌曲</option><option value="unit">小分隊</option><option value="objekt">Objekt 小卡</option></select></label><form id="objektSearchForm"><div class="objekt-filters"><label>成員<select id="objektMember"></select></label><label>Season<select id="objektSeason"><option value="">全部 Season</option></select></label></div><div class="photo-search-form"><input id="objektNumber" class="search" type="search" placeholder="卡款編號，例如 101Z" aria-label="Objekt 卡款編號" maxlength="40" autocomplete="off"><button class="secondary" type="submit">搜尋</button></div></form><p class="photo-hint">依成員、卡款編號與 Season 找卡面，不需輸入個別卡片流水號。</p><p id="objektStatus" class="status" role="status"></p><div id="objektGrid" class="objekt-grid"></div><button id="objektMoreBtn" class="secondary" hidden>載入更多小卡</button><p id="objektCatalogInfo" class="photo-hint"></p><div class="picker-actions"><button id="clearObjektBtn" class="secondary">清除此格</button><button id="closeObjektBtn" class="close-btn">關閉</button></div></dialog>
+<dialog id="confirmModal" aria-labelledby="confirmTitle"><h3 id="confirmTitle">清空這個版本的內容？</h3><p>清空後，仍可按「復原上一步」還原。</p><div class="confirm-actions"><button id="cancelClearBtn" class="secondary">取消</button><button id="confirmClearBtn">確認清空</button></div></dialog>
 </body>
 </html>
 

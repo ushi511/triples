@@ -1,12 +1,15 @@
-import {createMemberPhotoBrowser} from './member-photos.js?v=17';
-import {FONT_FAMILY,fitSingleLine,songLayout} from './typography.js?v=8';
-import {NAMES,LABELS,freshState,cloneState,clamp,placement,validDraft,defaultCrop,restoreState,isSongSlot} from './core.js?v=17';
+import {createCollectionPickers} from './collection-pickers.js?v=18';
+import {createMemberPhotoBrowser} from './member-photos.js?v=18';
+import {FONT_FAMILY,fitSingleLine,songLayout,wrapText} from './typography.js?v=8';
+import {NAMES,LABELS,freshState,cloneState,clamp,placement,validDraft,defaultCrop,restoreState,getTable,TABLE_IDS,slotType} from './core.js?v=18';
 const $=id=>document.getElementById(id),canvas=$('canvas'),modal=$('memberModal'),songModal=$('songModal');
-const images=new Map(),history=[];
+const images=new Map(),history=[],draftCache=new Map();
+const collectionPickers=createCollectionPickers({onChoose:chooseCollection,onClear:clearCollection});
 const memberPhotos=createMemberPhotoBrowser({onPhoto:chooseInternetPhoto,onDefault:selectMember});
 const typographyReady=Promise.all([document.fonts.load('400 14px "Table Sans"'),document.fonts.load('700 48px "Table Sans"')]).then(()=>document.fonts.ready);
 let state=freshState(),selected=0,template,db=null,ready=false,epoch=0,session=0,drawVersion=0,jobs=Array(12).fill(0),editStart=null,saveTimer,writeChain=Promise.resolve(),uploadRequest,drag=null,previewImage=null,previewSource=null,cropFrame=0;
-const rects=Array.from({length:12},(_,i)=>({x:14+i%4*360,y:280+Math.floor(i/4)*456,w:340,h:376}));
+let rects=getTable(state.tableId).rects,switching=false;
+const table=()=>getTable(state.tableId),labels=()=>table().labels;
 function status(text,error=false,inModal=false){const el=$(inModal?'modalStatus':'saveStatus');el.textContent=text;el.classList.toggle('error',error);if(!inModal)el.hidden=!error}
 function image(src){if(!images.has(src))images.set(src,new Promise((resolve,reject)=>{const img=new Image();img.onload=()=>resolve(img);img.onerror=()=>{images.delete(src);reject(new Error('image'))};img.src=src}));return images.get(src)}
 function same(a,b){return JSON.stringify(a)===JSON.stringify(b)}
@@ -14,7 +17,7 @@ function remember(before){if(!same(before,state)){history.push(before);if(histor
 function beginEdit(){if(!editStart)editStart=cloneState(state)}
 function finishEdit(){if(editStart){remember(editStart);editStart=null;scheduleSave()}}
 function change(fn){stopDragging();finishEdit();const before=cloneState(state);fn();remember(before);render();scheduleSave()}
-function updateButtons(){$('undoBtn').disabled=!history.length;$('clearAllBtn').disabled=!state.slots.some(Boolean)}
+function updateButtons(){$('undoBtn').disabled=!ready||!history.length;$('clearAllBtn').disabled=!ready||!state.slots.some(Boolean)}
 function paintSong(ctx,img,w,h,s){
  ctx.save();ctx.fillStyle='#fff';ctx.fillRect(0,0,w,h);
  const layout=songLayout(ctx,w,h,s.title);
@@ -32,32 +35,58 @@ function paintTableFrame(ctx){
  for(const [y,height] of [[272,9],[656,4],[732,4],[1113,4],[1190,3],[1570,4],[1645,9]])ctx.fillRect(2,y,1440,height);
  ctx.restore();
 }
-function paintTableTypography(ctx){
- ctx.save();ctx.fillStyle='#fff';ctx.fillRect(0,0,template.width,272);
+function paintTableTypography(ctx,source=template){
+ ctx.save();ctx.fillStyle='#fff';ctx.fillRect(0,0,source.width,272);
  const title='tripleS 生涯表',version='(3.5)',logoW=123,logoH=141,gap=32,versionGap=20;
  ctx.font='700 108px '+FONT_FAMILY;const titleWidth=ctx.measureText(title).width;
  ctx.font='700 32px '+FONT_FAMILY;const versionWidth=ctx.measureText(version).width;
- const total=logoW+gap+titleWidth+versionGap+versionWidth,left=(template.width-total)/2;
- ctx.drawImage(template,262,68,123,141,Math.round(left),66,logoW,logoH);
+ const total=logoW+gap+titleWidth+versionGap+versionWidth,left=(source.width-total)/2;
+ ctx.drawImage(source,262,68,123,141,Math.round(left),66,logoW,logoH);
  ctx.fillStyle='#111';ctx.textAlign='left';ctx.font='700 108px '+FONT_FAMILY;centeredText(ctx,title,left+logoW+gap,136);
  ctx.font='700 32px '+FONT_FAMILY;centeredText(ctx,version,left+logoW+gap+titleWidth+versionGap,136);
  const columns=[{x:11,w:349},{x:369,w:350},{x:727,w:350},{x:1085,w:350}],rows=[{y:660,h:72},{y:1117,h:73},{y:1574,h:71}];
- LABELS.forEach((text,index)=>{
+ getTable('3.5').labels.forEach((text,index)=>{
   const col=columns[index%4],row=rows[Math.floor(index/4)];
   ctx.fillStyle='#fff';ctx.fillRect(col.x,row.y,col.w,row.h);
   fitSingleLine(ctx,text,48,30,col.w-24);ctx.fillStyle=index===6?'#e92342':'#111';ctx.textAlign='center';
   centeredText(ctx,text,col.x+col.w/2,row.y+row.h/2);
  });ctx.restore();
 }
-function paint(ctx,img,w,h,s){if(s.kind==='none'){ctx.save();ctx.fillStyle='#fff';ctx.fillRect(0,0,w,h);ctx.font='700 86px '+FONT_FAMILY;ctx.fillStyle='#555';ctx.textAlign='center';centeredText(ctx,'無',w/2,h/2);ctx.restore();return}if(s.kind==='song'){paintSong(ctx,img,w,h,s);return}const p=placement(img.width,img.height,w,h,s);ctx.save();ctx.beginPath();ctx.rect(0,0,w,h);ctx.clip();ctx.drawImage(img,p.dx,p.dy,p.dw,p.dh);ctx.restore()}
-async function draw(target=canvas,snapshot=cloneState(state)){const generation=++drawVersion;await typographyReady;const photos=await Promise.all(snapshot.slots.map(s=>s&&s.kind!=='none'?image(s.src):null));if(target===canvas&&generation!==drawVersion)return;target.width=template.width;target.height=template.height;const ctx=target.getContext('2d');ctx.fillStyle='#fff';ctx.fillRect(0,0,target.width,target.height);photos.forEach((img,i)=>{if(!snapshot.slots[i])return;const r=rects[i];ctx.save();ctx.translate(r.x,r.y);paint(ctx,img,r.w,r.h,snapshot.slots[i]);ctx.restore()});paintTableFrame(ctx);paintTableTypography(ctx)}
-function render(){draw().catch(()=>status('有張照片無法讀取，請點選該格重新選擇。',true));updateButtons();document.querySelectorAll('.grid-button').forEach((b,i)=>b.setAttribute('aria-label',`第 ${i+1} 格：${LABELS[i]}，${state.slots[i]?.kind==='none'?'無':state.slots[i]?.kind==='song'?state.slots[i].title:state.slots[i]?'已有照片':'尚未填入'}`));if(modal.open)renderCrop()}
-function buildTargets(){rects.forEach((r,i)=>{const b=document.createElement('button');b.className='grid-button';b.style.cssText=`left:${r.x/template.width*100}%;top:${r.y/template.height*100}%;width:${r.w/template.width*100}%;height:${r.h/template.height*100}%`;b.onclick=()=>openModal(i);$('gridButtons').append(b)})}
-function openModal(i){if(isSongSlot(i)){openSongModal(i);return}stopDragging();finishEdit();selected=i;session++;memberPhotos.reset();showUploadStatus('');resetUploadDrag();$('uploadBtn').removeAttribute('aria-busy');$('modalTitle').textContent=`第 ${i+1} 格：${LABELS[i]}`;$('searchInput').value='';filterMembers();$('cropSection').open=false;status('',false,true);renderCrop();modal.showModal()}
+function drawContained(ctx,img,x,y,w,h){const scale=Math.min(w/img.width,h/img.height);const dw=img.width*scale,dh=img.height*scale;ctx.drawImage(img,x+(w-dw)/2,y+(h-dh)/2,dw,dh)}
+function paintCollection(ctx,img,w,h,slot){
+ ctx.save();ctx.fillStyle='#fff';ctx.fillRect(0,0,w,h);
+ if(slot.kind==='unit'){const layout=songLayout(ctx,w,h,slot.title);drawContained(ctx,img,layout.coverX,layout.coverY,layout.cover,layout.cover);ctx.font=layout.font;ctx.textAlign='center';ctx.textBaseline='alphabetic';ctx.fillStyle='#111';layout.lines.forEach((line,index)=>ctx.fillText(line,w/2,layout.firstBaseline+index*layout.lineHeight))}
+ else{ctx.font='700 25px '+FONT_FAMILY;const lines=wrapText(ctx,slot.title,w-30),lineHeight=31,captionHeight=lines.length*lineHeight,maxH=h-captionHeight-36,maxW=w-32,scale=Math.min(maxW/img.width,maxH/img.height),dw=img.width*scale,dh=img.height*scale,top=(h-dh-captionHeight-12)/2;ctx.drawImage(img,(w-dw)/2,top,dw,dh);ctx.fillStyle='#111';ctx.textAlign='center';lines.forEach((line,index)=>centeredText(ctx,line,w/2,top+dh+18+index*lineHeight))}ctx.restore();
+}
+async function remoteCardImage(url,signal){const parsed=new URL(url);if(parsed.protocol!=='https:'||!['resources.cosmo.fans','imagedelivery.net','static.cosmo.fans','wsrv.nl','images.weserv.nl'].includes(parsed.hostname))throw new Error('image source');const response=await fetch(url,{signal,credentials:'omit'});if(!response.ok)throw new Error('card image');const blob=await response.blob();if(blob.size>20*1024*1024||!blob.type.startsWith('image/'))throw new Error('image');const objectURL=URL.createObjectURL(blob);try{const img=await image(objectURL),scale=Math.min(1,1600/Math.max(img.width,img.height)),c=document.createElement('canvas');c.width=Math.round(img.width*scale);c.height=Math.round(img.height*scale);const ctx=c.getContext('2d');ctx.fillStyle='#fff';ctx.fillRect(0,0,c.width,c.height);ctx.drawImage(img,0,0,c.width,c.height);return c.toDataURL('image/jpeg',.92)}finally{images.delete(objectURL);URL.revokeObjectURL(objectURL)}}
+async function chooseCollection(item,kind,signal){const target=selected,currentEpoch=epoch,currentSession=session,job=++jobs[target];const src=kind==='unit'?item.image:await remoteCardImage(item.image,signal);await image(src);if(signal.aborted||currentEpoch!==epoch||currentSession!==session||job!==jobs[target]||!$(kind==='unit'?'unitModal':'objektModal').open)return;
+ const slot=kind==='unit'?{kind:'unit',src,unitId:item.id,title:item.name,label:item.name}:{kind:'objekt',src,title:item.member+' '+item.number+' · '+item.season,label:item.member+' '+item.number,member:item.member,memberId:NAMES.indexOf(item.member)+1,number:item.number,season:item.season,cardSource:item.source};change(()=>state.slots[target]=slot);collectionPickers.close();
+}
+function clearCollection(){jobs[selected]++;change(()=>state.slots[selected]=null);collectionPickers.close()}
+function paint(ctx,img,w,h,s){if(s.kind==='none'){ctx.save();ctx.fillStyle='#fff';ctx.fillRect(0,0,w,h);ctx.font='700 86px '+FONT_FAMILY;ctx.fillStyle='#555';ctx.textAlign='center';centeredText(ctx,'無',w/2,h/2);ctx.restore();return}if(s.kind==='song'){paintSong(ctx,img,w,h,s);return}if(s.kind==='unit'||s.kind==='objekt'){paintCollection(ctx,img,w,h,s);return}const p=placement(img.width,img.height,w,h,s);ctx.save();ctx.beginPath();ctx.rect(0,0,w,h);ctx.clip();ctx.drawImage(img,p.dx,p.dy,p.dw,p.dh);ctx.restore()}
+async function draw(target=canvas,snapshot=cloneState(state)){
+ const generation=++drawVersion,config=getTable(snapshot.tableId);await typographyReady;
+ const [background,photos]=await Promise.all([image(config.template),Promise.all(snapshot.slots.map(s=>s&&s.kind!=='none'?image(s.src):null))]);
+ if(target===canvas&&(generation!==drawVersion||snapshot.tableId!==state.tableId))return;
+ target.width=config.width;target.height=config.height;const ctx=target.getContext('2d');ctx.fillStyle='#fff';ctx.fillRect(0,0,target.width,target.height);ctx.drawImage(background,0,0);
+ photos.forEach((img,i)=>{if(!snapshot.slots[i])return;const r=config.rects[i];ctx.save();ctx.translate(r.x,r.y);paint(ctx,img,r.w,r.h,snapshot.slots[i]);ctx.restore()});
+ if(config.id==='3.5'){paintTableFrame(ctx);paintTableTypography(ctx,background)}
+}
+function render(){const drawing=draw().catch(()=>status('有張照片無法讀取，請點選該格重新選擇。',true));updateButtons();document.querySelectorAll('.grid-button').forEach((b,i)=>b.setAttribute('aria-label',`第 ${i+1} 格：${labels()[i]}，${state.slots[i]?.kind==='none'?'無':['song','unit','objekt'].includes(state.slots[i]?.kind)?state.slots[i].title:state.slots[i]?'已有照片':'尚未填入'}`));if(modal.open)renderCrop();return drawing}
+function buildTargets(){$('gridButtons').replaceChildren();rects.forEach((r,i)=>{const b=document.createElement('button');b.className='grid-button';b.style.cssText=`left:${r.x/template.width*100}%;top:${r.y/template.height*100}%;width:${r.w/template.width*100}%;height:${r.h/template.height*100}%`;b.onclick=()=>openModal(i);$('gridButtons').append(b)})}
+function setFillKind(kind){document.querySelectorAll('.fill-kind').forEach(select=>select.value=kind)}
+function openModal(i,kind){
+ if(!ready)return;const saved=state.slots[i];kind=kind||(['song','unit','objekt'].includes(saved?.kind)?saved.kind:saved?'photo':slotType(state.tableId,i));
+ for(const dialog of [modal,songModal,$('unitModal'),$('objektModal')])if(dialog.open)dialog.close();
+ stopDragging();finishEdit();collectionPickers.cancel();selected=i;setFillKind(kind);
+ if(kind==='song'){openSongModal(i);return}
+ if(kind==='unit'||kind==='objekt'){session++;if(kind==='unit')collectionPickers.openUnit({title:labels()[i]});else collectionPickers.openObjekt({title:labels()[i],member:saved?.member||NAMES[0],number:saved?.number||'',season:saved?.season||''});return}
+ session++;memberPhotos.reset();showUploadStatus('');resetUploadDrag();$('uploadBtn').removeAttribute('aria-busy');$('modalTitle').textContent=`第 ${i+1} 格：${labels()[i]}`;$('searchInput').value='';filterMembers();$('cropSection').open=false;status('',false,true);const rect=rects[i];$('cropPreview').width=rect.w;$('cropPreview').height=rect.h;renderCrop();modal.showModal();
+}
 function closeModal(){stopDragging();finishEdit();modal.close()}
 function renderCrop(){
- const s=state.slots[selected],none=s?.kind==='none';$('noneSelection').hidden=!none;$('cropSection').hidden=!s||none;
- if(!s||none){previewImage=null;previewSource=null;return}
+ const s=state.slots[selected],none=s?.kind==='none',structured=s&&['unit','objekt','song'].includes(s.kind);$('noneSelection').hidden=!none;$('cropSection').hidden=!s||none||structured;
+ if(!s||none||structured){previewImage=null;previewSource=null;return}
  $('zoomRange').value=s.z??1;$('zoomValue').textContent=Math.round((s.z??1)*100)+'%';
  const target=selected;
  image(s.src).then(img=>{
@@ -127,11 +156,22 @@ async function upload(file,request){
  catch{if(active())showUploadStatus('無法讀取這張圖片，請使用 JPG、PNG 或 WebP。',true)}
  finally{if(currentSession===session&&job===jobs[target])$('uploadBtn').removeAttribute('aria-busy')}
 }
-async function openDraft(){return new Promise((resolve,reject)=>{const req=indexedDB.open('wav-studio',1);req.onupgradeneeded=()=>{if(!req.result.objectStoreNames.contains('drafts'))req.result.createObjectStore('drafts')};req.onerror=()=>reject(req.error);req.onsuccess=()=>{db=req.result;db.onversionchange=()=>db.close();const get=db.transaction('drafts','readonly').objectStore('drafts').get('current');get.onsuccess=()=>resolve(get.result);get.onerror=()=>reject(get.error)}})}
+function readDraftKey(key){return new Promise((resolve,reject)=>{if(!db){resolve();return}const req=db.transaction('drafts','readonly').objectStore('drafts').get(key);req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error)})}
+async function openDraft(tableId){await new Promise((resolve,reject)=>{const req=indexedDB.open('wav-studio',1);req.onupgradeneeded=()=>{if(!req.result.objectStoreNames.contains('drafts'))req.result.createObjectStore('drafts')};req.onerror=()=>reject(req.error);req.onsuccess=()=>{db=req.result;db.onversionchange=()=>db.close();resolve()}});return readVersionDraft(tableId)}
+async function readVersionDraft(tableId){if(draftCache.has(tableId))return draftCache.get(tableId);const saved=await readDraftKey('table:'+tableId);return saved||(tableId==='3.5'?await readDraftKey('current'):undefined)}
+async function switchTable(id){
+ if(switching||!TABLE_IDS.includes(id)||id===state.tableId)return;switching=true;const wasReady=ready;stopDragging();finishEdit();ready=false;updateButtons();
+ for(const dialog of document.querySelectorAll('dialog[open]'))dialog.close();collectionPickers.cancel();memberPhotos.cancel();epoch++;session++;clearTimeout(saveTimer);
+ document.querySelectorAll('[data-table]').forEach(b=>b.disabled=true);$('downloadBtn').disabled=true;
+ try{await save();const config=getTable(id),[nextTemplate,draft]=await Promise.all([image(config.template),readVersionDraft(id)]);ready=false;state=validDraft(draft)&&restoreState(draft).tableId===id?restoreState(draft):freshState(id);template=nextTemplate;rects=config.rects;jobs=Array(state.slots.length).fill(0);history.length=0;selected=0;previewImage=null;previewSource=null;buildTargets();updateTableUI();await render();ready=true;updateButtons();try{localStorage.setItem('wav-studio-table',id)}catch{}status('')}
+ catch{ready=wasReady;updateButtons();status('版本載入失敗，請再試一次。',true)}finally{switching=false;document.querySelectorAll('[data-table]').forEach(b=>b.disabled=false);$('downloadBtn').disabled=!ready}
+}
+function updateTableUI(){document.title='tripleS 生涯表 '+state.tableId+' 產生器';$('pageTitle').textContent=document.title;document.querySelectorAll('[data-table]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.table===state.tableId)))}
 function scheduleSave(){if(!ready)return;clearTimeout(saveTimer);status('正在儲存草稿…');saveTimer=setTimeout(save,200)}
-function save(){clearTimeout(saveTimer);const snapshot=cloneState(state);if(!db){status('無法保存草稿，完成後請下載圖片備份。',true);return}writeChain=writeChain.catch(()=>{}).then(()=>new Promise((resolve,reject)=>{try{const tx=db.transaction('drafts','readwrite');tx.objectStore('drafts').put(snapshot,'current');tx.oncomplete=()=>{if(same(snapshot,state))status('草稿已自動保存在此瀏覽器');resolve()};tx.onerror=()=>reject(tx.error);tx.onabort=()=>reject(tx.error)}catch(e){reject(e)}})).catch(()=>status('草稿儲存失敗，完成後請下載圖片備份。',true));return writeChain}
+function save(){clearTimeout(saveTimer);const snapshot=cloneState(state);draftCache.set(snapshot.tableId,snapshot);if(!db){status('無法保存草稿，完成後請下載圖片備份。',true);return}writeChain=writeChain.catch(()=>{}).then(()=>new Promise((resolve,reject)=>{try{const tx=db.transaction('drafts','readwrite');tx.objectStore('drafts').put(snapshot,'table:'+snapshot.tableId);tx.oncomplete=()=>{if(same(snapshot,state))status('草稿已自動保存在此瀏覽器');resolve()};tx.onerror=()=>reject(tx.error);tx.onabort=()=>reject(tx.error)}catch(e){reject(e)}})).catch(()=>status('草稿儲存失敗，完成後請下載圖片備份。',true));return writeChain}
 function undo(){finishEdit();if(!history.length)return;epoch++;jobs=jobs.map(v=>v+1);state=history.pop();render();scheduleSave()}
-async function download(){finishEdit();$('downloadBtn').disabled=true;$('downloadBtn').textContent='正在產生圖片…';try{const c=document.createElement('canvas');await draw(c,cloneState(state));const blob=await new Promise((resolve,reject)=>c.toBlob(v=>v?resolve(v):reject(new Error('blob')),'image/png'));const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='my_tripleS_table.png';a.click();setTimeout(()=>URL.revokeObjectURL(url),60000)}catch{status('圖片匯出失敗，請稍後再試。',true)}finally{$('downloadBtn').disabled=false;$('downloadBtn').textContent='保存我的生涯表 (PNG)'}}
+const snapshotVersion=()=>state.tableId.replace('.','-');
+async function download(){const exportVersion=snapshotVersion();finishEdit();$('downloadBtn').disabled=true;$('downloadBtn').textContent='正在產生圖片…';try{const c=document.createElement('canvas');await draw(c,cloneState(state));const blob=await new Promise((resolve,reject)=>c.toBlob(v=>v?resolve(v):reject(new Error('blob')),'image/png'));const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='my_tripleS_table_'+exportVersion+'.png';a.click();setTimeout(()=>URL.revokeObjectURL(url),60000)}catch{status('圖片匯出失敗，請稍後再試。',true)}finally{$('downloadBtn').disabled=false;$('downloadBtn').textContent='保存我的生涯表 (PNG)'}}
 
 let catalog=null,catalogPromise=null,albumFilter=null;
 const normalizeSearch=text=>String(text).normalize('NFKC').toLocaleLowerCase().replace(/[’‘]/g,"'").replace(/\s+/g,' ').trim();
@@ -145,7 +185,7 @@ async function loadCatalog(){
 }
 async function openSongModal(index){
  stopDragging();finishEdit();selected=index;session++;const currentSession=session;
- $('songModalTitle').textContent=LABELS[index];$('songSearch').value='';albumFilter=null;
+ $('songModalTitle').textContent=labels()[index];$('songSearch').value='';albumFilter=null;
  $('songList').replaceChildren();$('albumGrid').replaceChildren();$('songCount').textContent='';$('songEmpty').hidden=true;
  $('songStatus').textContent='正在載入曲庫…';$('songStatus').classList.remove('error');renderCurrentSong();songModal.showModal();
  try{await loadCatalog();if(!songModal.open||currentSession!==session)return;$('songStatus').textContent='';renderSongLibrary()}
@@ -185,7 +225,7 @@ async function chooseSong(id){
  const album=catalog.albumById.get(track.albumId),target=selected,currentEpoch=epoch,currentSession=session,job=++jobs[target];
  $('songStatus').textContent='正在放入歌曲…';$('songStatus').classList.remove('error');
  try{
-  await image(album.cover);if(currentEpoch!==epoch||jobs[target]!==job)return;
+  await image(album.cover);if(currentEpoch!==epoch||jobs[target]!==job||currentSession!==session||!songModal.open)return;
   change(()=>state.slots[target]={kind:'song',songId:track.id,title:track.title,albumId:album.id,albumTitle:album.title,src:album.cover,label:track.title});
   if(songModal.open&&currentSession===session)songModal.close();
  }catch{if(songModal.open&&currentSession===session){$('songStatus').textContent='封面載入失敗，請再選一次。';$('songStatus').classList.add('error')}}
@@ -207,7 +247,7 @@ uploadZone.addEventListener('dragleave',e=>{e.preventDefault();uploadDragDepth=M
 uploadZone.addEventListener('drop',e=>{e.preventDefault();e.stopPropagation();resetUploadDrag();const files=Array.from(e.dataTransfer?.files||[]);if(files.length!==1){showUploadStatus(files.length>1?'每次請拖入一張圖片。':'請拖入圖片檔案，或點擊框框選擇圖片。',true);return}upload(files[0],newUploadRequest())});
 for(const type of ['dragover','drop'])document.addEventListener(type,e=>{if(hasFiles(e))e.preventDefault()});
 document.addEventListener('paste',e=>{
- if(!modal.open||isSongSlot(selected)||!e.clipboardData)return;
+ if(!modal.open||!e.clipboardData)return;
  const items=Array.from(e.clipboardData.items||[]).filter(item=>item.kind==='file'&&item.type.startsWith('image/'));
  const fromItems=items.map(item=>item.getAsFile()).filter(Boolean);
  const files=fromItems.length?fromItems:Array.from(e.clipboardData.files||[]).filter(file=>file.type.startsWith('image/'));
@@ -229,9 +269,13 @@ cropPreview.addEventListener('blur',()=>{stopDragging();finishEdit()});
 $('resetCropBtn').onclick=()=>change(()=>{if(state.slots[selected])Object.assign(state.slots[selected],defaultCrop(state.slots[selected].photoSource?null:state.slots[selected].memberId),{cropPreset:1})});
 $('clearNoneBtn').onclick=$('clearSlotBtn').onclick=()=>{jobs[selected]++;change(()=>state.slots[selected]=null);closeModal()};
 $('downloadBtn').onclick=download;$('undoBtn').onclick=undo;
-$('clearAllBtn').onclick=()=>$('confirmModal').showModal();$('cancelClearBtn').onclick=()=>$('confirmModal').close();$('confirmClearBtn').onclick=()=>{$('confirmModal').close();epoch++;jobs=jobs.map(v=>v+1);change(()=>state=freshState())};
-for(const d of [modal,songModal,$('confirmModal')])d.addEventListener('click',e=>{if(e.target!==d)return;const r=d.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)d.close()});
+$('clearAllBtn').onclick=()=>$('confirmModal').showModal();$('cancelClearBtn').onclick=()=>$('confirmModal').close();$('confirmClearBtn').onclick=()=>{$('confirmModal').close();epoch++;jobs=jobs.map(v=>v+1);change(()=>state=freshState(state.tableId))};
+for(const d of [modal,songModal,$('unitModal'),$('objektModal'),$('confirmModal')])d.addEventListener('click',e=>{if(e.target!==d)return;const r=d.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)d.close()});
 document.addEventListener('keydown',e=>{if(!e.target.closest('input,textarea')&&!document.querySelector('dialog[open]')&&(e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='z'){e.preventDefault();undo()}});
 document.addEventListener('visibilitychange',()=>{if(document.hidden&&ready)save()});window.addEventListener('pagehide',()=>{if(ready)save()});
-try{template=await image('assets/original-template.png');canvas.width=template.width;canvas.height=template.height;let draft;try{draft=await openDraft()}catch{}if(validDraft(draft))state=restoreState(draft);buildTargets();buildMembers();ready=true;render();$('downloadBtn').disabled=false;status(db?'草稿會自動保存在此瀏覽器':'無法保存草稿，完成後請下載圖片備份。',!db)}catch{status('表格載入失敗，請重新整理頁面。',true)}
-
+document.querySelectorAll('[data-table]').forEach(button=>button.onclick=()=>switchTable(button.dataset.table));
+document.querySelectorAll('.fill-kind').forEach(select=>select.onchange=()=>openModal(selected,select.value));
+try{let preferred='3.5';try{const stored=localStorage.getItem('wav-studio-table');if(TABLE_IDS.includes(stored))preferred=stored}catch{}
+ state=freshState(preferred);let draft;try{draft=await openDraft(preferred)}catch{}
+ if(validDraft(draft)&&restoreState(draft).tableId===preferred)state=restoreState(draft);template=await image(table().template);rects=table().rects;jobs=Array(state.slots.length).fill(0);buildTargets();buildMembers();updateTableUI();ready=true;render();$('downloadBtn').disabled=false;status(db?'各版本會分開保留填寫內容。':'無法保存草稿，完成後請下載圖片備份。',!db)
+}catch{status('表格載入失敗，請重新整理頁面。',true)}

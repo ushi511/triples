@@ -1,49 +1,57 @@
-# tripleS 生涯表 3.5 產生器・改良版
+# tripleS 生涯表產生器
 
-以原站版面及原始表格為基礎的小幅改良。
+以原站簡單白底、黑色表格與紅色 PNG 下載按鈕為基礎，提供 1.0、2.0、3.0、3.5 四種版本。1.0／3.0／3.5 有 12 格，2.0 有 15 格；1.0～3.0 使用原始表格圖片保留標題與線條，3.5 保留既有改版文字。
 
-保留：白底、原始 12 格生涯表、點格子選照片、紅色 PNG 下載按鈕。
-改善：成員縮圖與姓名搜尋、直接拖曳照片調整位置及縮放、單格清除、復原、瀏覽器草稿保存、圖片載入的目標格子保護。
+## 填寫及保存
 
-執行方式：將 studio 設為靜態 HTTP 伺服器的根目錄。例如已安裝 Python 時：
+點擊格子，可切換照片／成員、歌曲、小分隊或 Objekt 小卡。預設歌曲及小卡格會直接開啟對應選單。
+
+- 照片支援選擇成員、搜尋公開照片、拖放檔案、點擊選檔及 Ctrl／Cmd＋V 貼上圖片；可直接拖曳裁切位置及縮放。成員「無」位於名單最後。
+- 歌曲可搜尋歌名／專輯或依封面挑選，表格顯示置中的封面與歌名。
+- 小分隊可依名稱、縮寫或成員搜尋，共 17 個選項，包含以 tripleS 顯示的 OT24 全員選項。
+- Objekt 可依成員、Season 與卡款編號搜尋，點選後顯示完整卡面與名稱。卡款編號如 101Z，並非個別持有卡片的流水號。
+
+各版本草稿分開保存在目前網站來源的 IndexedDB，切換版本不會覆蓋其他版本。舊版 3.5 草稿會沿用。清空及復原只作用於目前版本。清除網站資料、無痕模式或換裝置不保證保留，完成後請下載 PNG 備份。照片與選取的小卡會於瀏覽器內轉換並保存，不會上傳個人圖片。
+
+## 本機執行與 GitHub Pages
+
+以靜態 HTTP 伺服器開啟，例如：
 
     python -m http.server 8080 --directory studio
 
-開啟 http://localhost:8080 。JavaScript 使用模組，請以 HTTP 開啟，勿直接雙擊 HTML。
+開啟 http://localhost:8080 。JavaScript 使用模組，請勿直接雙擊 HTML。
 
-照片於瀏覽器內處理，草稿保存在目前網站來源的 IndexedDB。清除網站資料、無痕模式或換裝置不保證保留，完成後可下載 PNG 備份。
-
-原版及照片素材：https://ushi511.github.io/triples/
+GitHub Pages 使用 main 分支根目錄時，網址為 https://ushi511.github.io/triples/studio/ ，原版首頁保留。
 原始碼：https://github.com/ushi511/triples
-成員名稱：https://www.triples-official.jp/
-
-非官方粉絲工具。原始表格與人物照片的相關權利屬各自權利人。
-
-## 歌曲選擇
-
-最後兩格為「最愛的一首歌」與「最被低估的一首歌」，支援歌名／專輯搜尋及封面挑選，匯出含專輯封面與歌曲名稱。
-
-曲庫核對日期：2026-10-24。包含 35 張發行、183 首曲目（含伴奏、語言及不同專輯版本）。
-曲目資料：Apple Music / iTunes tripleS 藝人目錄；Touch+ 及發行完整性對照 tripleS 官方網站。
-https://music.apple.com/tw/artist/triples/1651595986
-https://www.triples-official.jp/discography/
-https://triples.lnk.to/kS7g0e
-
-專輯封面保存在本網站資產中，避免匯出 PNG 時跨來源污染畫布。原始資料與相關圖像權利歸各權利人。
-
-## 文字排版
-
-頁面與 Canvas 使用同一套 Noto Sans TC 字型，表頭與 12 格標題均重新繪製。歌曲封面與放大的歌名依內容長度整組垂直置中。字型為 Google Fonts 提供的開源子集，授權檔位於 assets/fonts/OFL.txt。
-
-## GitHub Pages
-
-此目錄可放在儲存庫根目錄的 studio/，既有原版首頁保留。
-GitHub Pages 以 main 分支根目錄發佈時，新版網址為 https://ushi511.github.io/triples/studio/ 。
 
 ## 成員網路照片
 
-點選成員後，會透過 tripleS Wiki 與 Kpop Wiki 的公開 MediaWiki API 即時搜尋照片，支援關鍵字與分頁。圖片來源連結附於各張縮圖下方；照片及相關權利屬各權利人。選用的照片會轉成瀏覽器本機 JPEG 保存，以維持 PNG 匯出與草稿還原。沒有使用搜尋金鑰或第三方圖片代理。圖庫連線失敗時可重試、使用原本成員照片或上傳本機照片。
+透過 tripleS Wiki 與 Kpop Wiki 公開 MediaWiki API 即時搜尋，可切換來源、搜尋關鍵字及載入更多。優先排列自拍、SNS 與日常照，依標題排除明顯合照、簽名與 Logo，依 SHA-1 排除完全相同圖片。此篩選仍可能包含非個人照。原本成員照片固定為第一個選項。來源連結附於各縮圖；失敗時可重試或使用本機圖片。
 
-## 多來源圖片搜尋
+目前未直接連接 COSMO Room 帳號或私人內容。
 
-圖片同時搜尋 tripleS Wiki 與 Kpop Wiki，可切換單一來源。標題中含 SNS、photo diary、OOTD 等的照片優先顯示，排除明顯多位成員合照、簽名及 Logo 檔案；依來源提供的 SHA-1 移除完全重複圖片。一個來源連線失敗時仍顯示其他來源結果，並保留分頁及重試。
+## 歌曲資料
+
+核對日期：2026-10-24。包含 35 張發行、183 首曲目，含伴奏、語言及不同專輯版本。封面為本機資產以支援 PNG 匯出。
+
+- https://music.apple.com/tw/artist/triples/1651595986
+- https://www.triples-official.jp/discography/
+- https://triples.lnk.to/kS7g0e
+
+## 小分隊資料
+
+名稱、成員及圖片來源記錄在 units.json。包含 tripleS 全員、Acid Angel from Asia、+(KR)ystal Eyes、ACID EYES、LOVElution、EVOLution、NXT、Aria、Glow、Vision@ry Vision、∞!、Alphie、msnz、moon、sun、neptune、zenith。
+
+一般使用小分隊 Logo；tripleS 使用 LOVE&POP pt.1 官方團體宣傳照，msnz 使用專輯封面並於選項註明。資料來源包含 tripleS 官方網站、日本官方網站、Melon 官方專輯介紹與 tripleS Wiki；各圖片原始來源保留在 units.json。
+
+## Objekt 資料
+
+objekt-catalog.json 為 2026-10-25（台灣時間）建立的公開卡款目錄快照：24 位成員、8 個 Season、11,528 種個人卡面。公開來源：https://apollo.cafe/ 。搜尋在瀏覽器內進行，不需 COSMO 登入、錢包、API 金鑰或訂閱；未查詢個人持有資料。
+
+Season：Atom01、Binary01、Cream01、Divine01、Ever01、Atom02、Binary02、Cream02。新卡不會即時加入，需重新整理目錄。動態卡使用靜態正面圖，不提供動畫。此目錄不包含多人或小分隊卡款。
+
+卡面依賴原始圖片服務；部分 resources.cosmo.fans 圖片透過公開 wsrv.nl 圖片快取載入，以支援瀏覽器跨來源匯出。原始圖片與卡款來源保留在目錄。任何圖片服務或快取不可用時，仍可改用上傳或貼上圖片。
+
+## 字型及素材權利
+
+頁面及動態 Canvas 文字使用 Noto Sans TC；字型授權見 assets/fonts/OFL.txt。原始表格圖片由使用者提供，既有素材來自 https://ushi511.github.io/triples/ 。非官方粉絲工具，表格、人物照片、卡面、Logo、封面及其他素材權利屬各權利人。
