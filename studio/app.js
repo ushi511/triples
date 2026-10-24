@@ -1,7 +1,7 @@
-import {createCollectionPickers} from './collection-pickers.js?v=20';
-import {createMemberPhotoBrowser} from './member-photos.js?v=20';
+import {createCollectionPickers} from './collection-pickers.js?v=21';
+import {createMemberPhotoBrowser} from './member-photos.js?v=21';
 import {FONT_FAMILY,songLayout,wrapText} from './typography.js?v=8';
-import {NAMES,freshState,cloneState,clamp,placement,validDraft,defaultCrop,restoreState,getTable,TABLE_IDS,slotType,TOPIC_OPTIONS,topicFor} from './core.js?v=20';
+import {NAMES,freshState,cloneState,clamp,placement,validDraft,defaultCrop,restoreState,getTable,TABLE_IDS,slotType,TOPIC_OPTIONS,topicFor} from './core.js?v=21';
 const $=id=>document.getElementById(id),canvas=$('canvas'),modal=$('memberModal'),songModal=$('songModal');
 const images=new Map(),history=[],draftCache=new Map();
 const collectionPickers=createCollectionPickers({onChoose:chooseCollection,onClear:clearCollection});
@@ -52,7 +52,7 @@ function paintTableCaptions(ctx,snapshot,config){
  while(size>24&&ctx.measureText(text).width>r.w-20){size--;ctx.font='700 '+size+'px '+FONT_FAMILY}
  let lines=wrapText(ctx,text,r.w-20),lineHeight;
  while(size>8&&(lines.length>2||lines.length*size*1.18>r.h-10)){size--;ctx.font='700 '+size+'px '+FONT_FAMILY;lines=wrapText(ctx,text,r.w-20)}
- lineHeight=size*1.18;ctx.textAlign='center';ctx.fillStyle=text==='不准偷家'?'#e92342':'#111';ctx.save();ctx.beginPath();ctx.rect(r.x,r.y,r.w,r.h);ctx.clip();lines.forEach((line,i)=>centeredText(ctx,line,r.x+r.w/2,r.y+r.h/2+(i-(lines.length-1)/2)*lineHeight));ctx.restore();
+ lineHeight=size*1.18;ctx.textAlign='center';ctx.fillStyle=text==='不准再偷我家'?'#e92342':'#111';ctx.save();ctx.beginPath();ctx.rect(r.x,r.y,r.w,r.h);ctx.clip();lines.forEach((line,i)=>centeredText(ctx,line,r.x+r.w/2,r.y+r.h/2+(i-(lines.length-1)/2)*lineHeight));ctx.restore();
  });ctx.restore();
 }
 function drawContained(ctx,img,x,y,w,h){const scale=Math.min(w/img.width,h/img.height);const dw=img.width*scale,dh=img.height*scale;ctx.drawImage(img,x+(w-dw)/2,y+(h-dh)/2,dw,dh)}

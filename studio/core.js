@@ -1,5 +1,5 @@
-import {getTable,TABLE_IDS} from './table-versions.js?v=20';
-export {getTable,TABLE_IDS,slotType,TOPIC_OPTIONS} from './table-versions.js?v=20';
+import {getTable,TABLE_IDS} from './table-versions.js?v=21';
+export {getTable,TABLE_IDS,slotType,TOPIC_OPTIONS} from './table-versions.js?v=21';
 export const NAMES=['SeoYeon','HyeRin','JiWoo','ChaeYeon','YooYeon','SooMin','NaKyoung','YuBin','Kaede','DaHyun','Kotone','YeonJi','Nien','SoHyun','Xinyu','Mayu','Lynn','JooBin','HaYeon','ShiOn','ChaeWon','Sullin','SeoAh','JiYeon'];
 export const LABELS=getTable('3.5').labels;
 export const freshState=(tableId='3.5')=>({version:5,tableId:getTable(tableId).id,slots:Array(getTable(tableId).labels.length).fill(null),topics:Array(getTable(tableId).labels.length).fill(null)});
