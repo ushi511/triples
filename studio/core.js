@@ -1,5 +1,5 @@
 export const NAMES = ['SeoYeon','HyeRin','JiWoo','ChaeYeon','YooYeon','SooMin','NaKyoung','YuBin','Kaede','DaHyun','Kotone','YeonJi','Nien','SoHyun','Xinyu','Mayu','Lynn','JooBin','HaYeon','ShiOn','ChaeWon','Sullin','SeoAh','JiYeon'];
-export const LABELS = ['我的最愛','人間小甜豆','掌管美貌的女神','羨慕她的粉絲','偷偷關注','希望我朋友入坑她','不准偷家','團寵寶寶大人','好奇怪的人（褒意）','談了不官宣很牛嗎','最愛的一首歌','最被低估的一首歌'];
+export const LABELS = ['我的最愛','人間小甜豆','掌管美貌的女神','羨慕她的粉絲','偷偷關注','希望我朋友入坑','不准偷家','團寵寶寶大人','好奇怪的人（褒意）','談了不官宣很牛嗎','最愛的一首歌','最被低估的一首歌'];
 export const freshState=()=>({version:3,slots:Array(12).fill(null)});
 export const cloneState=s=>({version:3,slots:s.slots.map(v=>v?{...v}:null)});
 export const clamp=(v,min,max)=>Math.max(min,Math.min(max,v));
