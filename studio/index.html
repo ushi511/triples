@@ -4,7 +4,7 @@
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="tripleS 生涯表產生器。點擊格子選擇成員或自己的照片，完成後下載 PNG。">
 <title>tripleS 生涯表 3.5 產生器</title>
-<link rel="stylesheet" href="styles.css?v=10"><script type="module" src="app.js?v=10"></script>
+<link rel="stylesheet" href="styles.css?v=11"><script type="module" src="app.js?v=11"></script>
 </head>
 <body>
 <div class="container">
@@ -18,7 +18,8 @@
 </div>
 <dialog id="memberModal" aria-labelledby="modalTitle">
 <h3 id="modalTitle">選擇照片</h3>
-<button id="uploadBtn" class="upload-btn">📁 從手機／電腦選擇照片</button>
+<button id="uploadBtn" class="upload-btn" type="button" aria-describedby="uploadHint"><span class="upload-title">將圖片拖曳到這裡</span><span id="uploadHint" class="upload-hint">或點一下，從手機／電腦選擇</span></button>
+<p id="uploadStatus" class="status" role="status" aria-live="polite" hidden></p>
 <div class="divider"></div>
 <section id="memberChooser"><p class="member-heading">點選成員，搜尋更多照片</p>
 <input id="searchInput" class="search" type="search" placeholder="搜尋名字或 S 編號" aria-label="搜尋成員" autocomplete="off">

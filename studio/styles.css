@@ -27,8 +27,13 @@ button:focus-visible, input:focus-visible, summary:focus-visible, a:focus-visibl
 dialog { border: none; background: white; padding: 22px 20px; border-radius: 10px; width: 90%; max-width: 500px; max-height: 90dvh; overflow-y: auto; color: #333; }
 dialog::backdrop { background: rgba(0,0,0,0.6); }
 h3 { font-size: 20px; font-weight: 700; line-height: 1.5; letter-spacing: .02em; margin: 0 0 18px; text-wrap: balance; }
-.upload-btn { display: block; width: 100%; padding: 14px 12px; background: #000; color: #fff; font-size: 16px; line-height: 1.5; margin-bottom: 16px; }
-.upload-btn:hover { background: #333; }
+.upload-btn { display:block; width:100%; padding:22px 12px; border:2px dashed #aaa; background:#fafafa; color:#333; line-height:1.5; margin-bottom:0; transition:background-color .15s,border-color .15s; }
+.upload-btn:hover { background:#f2f2f2; border-color:#555; }
+.upload-title { display:block; font-size:16px; font-weight:700; }
+.upload-hint { display:block; margin-top:6px; font-size:13px; color:#777; font-weight:400; }
+.upload-btn.drag-over { border-color:#ff4757; background:#fff0f2; }
+.upload-btn[aria-busy='true'] { cursor:progress; }
+#uploadStatus { text-align:left; margin:10px 0 0; }
 .divider { margin: 16px 0; border-bottom: 2px dashed #eee; }
 .member-heading { margin: 0 0 12px; font-size: 15px; font-weight: 700; color: #555; }
 .search { display: block; width: 100%; padding: 11px 12px; border: 1px solid #ddd; border-radius: 5px; font-size: 15px; line-height: 1.5; margin: 0 0 14px; color: #333; }

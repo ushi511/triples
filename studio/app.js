@@ -53,7 +53,7 @@ function paint(ctx,img,w,h,s){if(s.kind==='song'){paintSong(ctx,img,w,h,s);retur
 async function draw(target=canvas,snapshot=cloneState(state)){const generation=++drawVersion;await typographyReady;const photos=await Promise.all(snapshot.slots.map(s=>s?image(s.src):null));if(target===canvas&&generation!==drawVersion)return;target.width=template.width;target.height=template.height;const ctx=target.getContext('2d');ctx.fillStyle='#fff';ctx.fillRect(0,0,target.width,target.height);photos.forEach((img,i)=>{if(!img)return;const r=rects[i];ctx.save();ctx.translate(r.x,r.y);paint(ctx,img,r.w,r.h,snapshot.slots[i]);ctx.restore()});paintTableFrame(ctx);paintTableTypography(ctx)}
 function render(){draw().catch(()=>status('有張照片無法讀取，請點選該格重新選擇。',true));updateButtons();document.querySelectorAll('.grid-button').forEach((b,i)=>b.setAttribute('aria-label',`第 ${i+1} 格：${LABELS[i]}，${state.slots[i]?.kind==='song'?state.slots[i].title:state.slots[i]?'已有照片':'尚未填入'}`));if(modal.open)renderCrop()}
 function buildTargets(){rects.forEach((r,i)=>{const b=document.createElement('button');b.className='grid-button';b.style.cssText=`left:${r.x/template.width*100}%;top:${r.y/template.height*100}%;width:${r.w/template.width*100}%;height:${r.h/template.height*100}%`;b.onclick=()=>openModal(i);$('gridButtons').append(b)})}
-function openModal(i){if(isSongSlot(i)){openSongModal(i);return}stopDragging();finishEdit();selected=i;session++;memberPhotos.reset();$('modalTitle').textContent=`第 ${i+1} 格：${LABELS[i]}`;$('searchInput').value='';filterMembers();$('cropSection').open=false;status('',false,true);renderCrop();modal.showModal()}
+function openModal(i){if(isSongSlot(i)){openSongModal(i);return}stopDragging();finishEdit();selected=i;session++;memberPhotos.reset();showUploadStatus('');resetUploadDrag();$('uploadBtn').removeAttribute('aria-busy');$('modalTitle').textContent=`第 ${i+1} 格：${LABELS[i]}`;$('searchInput').value='';filterMembers();$('cropSection').open=false;status('',false,true);renderCrop();modal.showModal()}
 function closeModal(){stopDragging();finishEdit();modal.close()}
 function renderCrop(){
  const s=state.slots[selected];$('cropSection').hidden=!s;
@@ -114,7 +114,19 @@ async function chooseInternetPhoto(photo,id,signal){
  await image(src);if(signal.aborted||currentSession!==session||currentEpoch!==epoch||job!==jobs[target]||!modal.open)return;
  change(()=>state.slots[target]={src,label:NAMES[id-1],memberId:id,z:1,x:0,y:0,cropPreset:1,photoSource:photo.source,photoTitle:photo.title});closeModal();
 }
-async function upload(file,request){if(!file||!request)return;const {target,currentEpoch,job}=request;if(!file.type.startsWith('image/')){status('請選擇圖片檔案。',true);return}if(file.size>20*1024*1024){status('照片超過 20 MB，請先縮小檔案。',true);return}status('正在處理照片…');try{const data=await new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(reader.result);reader.onerror=()=>reject(reader.error);reader.readAsDataURL(file)});const img=await image(data);const ratio=Math.min(1,1600/Math.max(img.width,img.height));const c=document.createElement('canvas');c.width=Math.max(1,Math.round(img.width*ratio));c.height=Math.max(1,Math.round(img.height*ratio));const ctx=c.getContext('2d');ctx.fillStyle='#fff';ctx.fillRect(0,0,c.width,c.height);ctx.drawImage(img,0,0,c.width,c.height);const src=c.toDataURL('image/jpeg',.9);images.delete(data);await image(src);if(currentEpoch!==epoch||job!==jobs[target])return;change(()=>state.slots[target]={src,label:'我的照片',memberId:null,z:1,x:0,y:0})}catch{status('無法讀取這張圖片，請使用 JPG、PNG 或 WebP。',true)}}
+function showUploadStatus(text,error=false){const el=$('uploadStatus');el.textContent=text;el.hidden=!text;el.classList.toggle('error',error)}
+function newUploadRequest(){return {target:selected,currentEpoch:epoch,currentSession:session,job:++jobs[selected]}}
+async function upload(file,request){
+ if(!file||!request)return;const {target,currentEpoch,currentSession,job}=request;
+ const active=()=>currentEpoch===epoch&&currentSession===session&&job===jobs[target]&&modal.open;
+ if(!active())return;
+ if(!file.type.startsWith('image/')){showUploadStatus('請拖入圖片檔案，或點擊框框選擇圖片。',true);return}
+ if(file.size>20*1024*1024){showUploadStatus('照片超過 20 MB，請先縮小檔案。',true);return}
+ memberPhotos.cancel();showUploadStatus('正在處理照片…');$('uploadBtn').setAttribute('aria-busy','true');
+ try{const data=await new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(reader.result);reader.onerror=()=>reject(reader.error);reader.readAsDataURL(file)});const img=await image(data);const ratio=Math.min(1,1600/Math.max(img.width,img.height));const c=document.createElement('canvas');c.width=Math.max(1,Math.round(img.width*ratio));c.height=Math.max(1,Math.round(img.height*ratio));const ctx=c.getContext('2d');ctx.fillStyle='#fff';ctx.fillRect(0,0,c.width,c.height);ctx.drawImage(img,0,0,c.width,c.height);const src=c.toDataURL('image/jpeg',.9);images.delete(data);if(!active())return;await image(src);if(!active())return;change(()=>state.slots[target]={src,label:'我的照片',memberId:null,z:1,x:0,y:0});closeModal()}
+ catch{if(active())showUploadStatus('無法讀取這張圖片，請使用 JPG、PNG 或 WebP。',true)}
+ finally{if(currentSession===session&&job===jobs[target])$('uploadBtn').removeAttribute('aria-busy')}
+}
 async function openDraft(){return new Promise((resolve,reject)=>{const req=indexedDB.open('wav-studio',1);req.onupgradeneeded=()=>{if(!req.result.objectStoreNames.contains('drafts'))req.result.createObjectStore('drafts')};req.onerror=()=>reject(req.error);req.onsuccess=()=>{db=req.result;db.onversionchange=()=>db.close();const get=db.transaction('drafts','readonly').objectStore('drafts').get('current');get.onsuccess=()=>resolve(get.result);get.onerror=()=>reject(get.error)}})}
 function scheduleSave(){if(!ready)return;clearTimeout(saveTimer);status('正在儲存草稿…');saveTimer=setTimeout(save,200)}
 function save(){clearTimeout(saveTimer);const snapshot=cloneState(state);if(!db){status('無法保存草稿，完成後請下載圖片備份。',true);return}writeChain=writeChain.catch(()=>{}).then(()=>new Promise((resolve,reject)=>{try{const tx=db.transaction('drafts','readwrite');tx.objectStore('drafts').put(snapshot,'current');tx.oncomplete=()=>{if(same(snapshot,state))status('草稿已自動保存在此瀏覽器');resolve()};tx.onerror=()=>reject(tx.error);tx.onabort=()=>reject(tx.error)}catch(e){reject(e)}})).catch(()=>status('草稿儲存失敗，完成後請下載圖片備份。',true));return writeChain}
@@ -183,9 +195,18 @@ $('allAlbumsBtn').onclick=()=>{albumFilter=null;$('songSearch').value='';renderS
 $('closeSongBtn').onclick=()=>songModal.close();
 $('clearSongBtn').onclick=()=>{jobs[selected]++;change(()=>state.slots[selected]=null);renderSongLibrary()};
 $('searchInput').oninput=filterMembers;
-$('uploadBtn').onclick=()=>{uploadRequest={target:selected,currentEpoch:epoch,job:++jobs[selected]};$('fileInput').click();closeModal()};
+const uploadZone=$('uploadBtn');let uploadDragDepth=0;
+const hasFiles=e=>Array.from(e.dataTransfer?.types||[]).includes('Files');
+function resetUploadDrag(){uploadDragDepth=0;uploadZone.classList.remove('drag-over')}
+uploadZone.onclick=()=>{uploadRequest=newUploadRequest();$('fileInput').click()};
 $('fileInput').onchange=e=>{const file=e.target.files[0],request=uploadRequest;e.target.value='';uploadRequest=null;upload(file,request)};
-$('closeBtn').onclick=closeModal;modal.addEventListener('close',()=>{memberPhotos.cancel();stopDragging();finishEdit()});modal.addEventListener('cancel',()=>{memberPhotos.cancel();stopDragging();finishEdit()});
+$('fileInput').addEventListener('cancel',()=>{uploadRequest=null});
+uploadZone.addEventListener('dragenter',e=>{if(!hasFiles(e))return;e.preventDefault();uploadDragDepth++;uploadZone.classList.add('drag-over')});
+uploadZone.addEventListener('dragover',e=>{if(!hasFiles(e))return;e.preventDefault();e.dataTransfer.dropEffect='copy'});
+uploadZone.addEventListener('dragleave',e=>{e.preventDefault();uploadDragDepth=Math.max(0,uploadDragDepth-1);if(!uploadDragDepth)uploadZone.classList.remove('drag-over')});
+uploadZone.addEventListener('drop',e=>{e.preventDefault();e.stopPropagation();resetUploadDrag();const files=Array.from(e.dataTransfer?.files||[]);if(files.length!==1){showUploadStatus(files.length>1?'每次請拖入一張圖片。':'請拖入圖片檔案，或點擊框框選擇圖片。',true);return}upload(files[0],newUploadRequest())});
+for(const type of ['dragover','drop'])document.addEventListener(type,e=>{if(hasFiles(e))e.preventDefault()});
+$('closeBtn').onclick=closeModal;modal.addEventListener('close',()=>{resetUploadDrag();memberPhotos.cancel();stopDragging();finishEdit()});modal.addEventListener('cancel',()=>{memberPhotos.cancel();stopDragging();finishEdit()});
 for(const [id,key] of [['zoomRange','z']]){const el=$(id);el.onfocus=beginEdit;el.onpointerdown=beginEdit;el.oninput=()=>{beginEdit();if(!state.slots[selected])return;state.slots[selected][key]=Number(el.value);render();scheduleSave()};el.onchange=finishEdit;el.onblur=finishEdit}
 
 const cropPreview=$('cropPreview');
