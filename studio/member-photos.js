@@ -23,6 +23,13 @@ export function createMemberPhotoBrowser({onPhoto,onDefault}){
  function cancel(){version++;clearTimeout(typingTimer);searchAbort?.abort();choiceAbort?.abort();loading=false;choosing=false;root.removeAttribute('aria-busy')}
  function message(text,error=false){status.textContent=text;status.classList.toggle('error',error)}
  function reset(){cancel();memberId=null;root.hidden=true;$('memberChooser').hidden=false;grid.replaceChildren();message('')}
+ function renderOriginal(){
+  const id=memberId;if(!id)return;const card=document.createElement('div');card.className='photo-card';
+  const button=document.createElement('button');button.className='photo-choice photo-original';button.dataset.original=String(id);button.setAttribute('aria-label','使用 S'+id+' '+NAMES[id-1]+' 原本照片');
+  const image=document.createElement('img');image.src='assets/thumbs/s'+id+'.webp?v=5';image.alt=NAMES[id-1]+' 原本的成員照片';
+  const label=document.createElement('span');label.textContent='原本照片';button.append(image,label);button.onclick=()=>onDefault(id);
+  const detail=document.createElement('span');detail.className='photo-source';detail.textContent='S'+id+' '+NAMES[id-1];card.append(button,detail);grid.append(card);
+ }
  function renderPhoto(photo){
   const card=document.createElement('div');card.className='photo-card';const button=document.createElement('button');button.className='photo-choice';button.dataset.photo=photo.id;button.setAttribute('aria-label','使用 '+photo.title);
   const image=document.createElement('img');image.src=photo.thumb;image.alt=photo.title;image.loading='lazy';image.referrerPolicy='no-referrer';image.onerror=()=>{button.disabled=true;button.classList.add('photo-unavailable');button.setAttribute('aria-label',photo.title+'，圖片暫時無法讀取')};
@@ -34,15 +41,15 @@ export function createMemberPhotoBrowser({onPhoto,onDefault}){
   if(!memberId||loading)return;const current=version,id=memberId,offset=append?next:0;if(offset===null)return;
   loading=true;searchAbort=new AbortController();const controller=searchAbort,timeout=setTimeout(()=>controller.abort(),15000);more.disabled=true;message(append?'正在載入更多照片…':'正在搜尋 '+NAMES[id-1]+' 的照片…');
   try{const result=await searchMemberPhotos(id,query,offset,searchAbort.signal);if(current!==version)return;
-   if(!append){photos=[];grid.replaceChildren()}
+   if(!append){photos=[];grid.replaceChildren();renderOriginal()}
    const seen=new Set(photos.map(p=>p.id));for(const photo of result.photos){if(seen.has(photo.id))continue;seen.add(photo.id);photos.push(photo);renderPhoto(photo)}
-   next=result.next;more.hidden=next===null;more.textContent='載入更多照片';$('photoEmpty').hidden=photos.length>0;message(photos.length?'已載入 '+photos.length+' 張照片':'找不到符合的照片，請換個關鍵字。');
+   next=result.next;more.hidden=next===null;more.textContent='載入更多照片';$('photoEmpty').hidden=photos.length>0;message(photos.length?'已載入 '+photos.length+' 張照片':'找不到其他符合的照片，請換個關鍵字。');
   }catch(error){if(current!==version)return;message('圖片搜尋暫時無法連線，請再試一次。',true);more.hidden=false;more.textContent='重新搜尋';more.dataset.retry=append?'more':'first'}
   finally{clearTimeout(timeout);if(current===version){loading=false;more.disabled=false}}
  }
- function search(){if(!memberId)return;cancel();query=$('photoSearchInput').value.trim();next=null;photos=[];grid.replaceChildren();$('photoEmpty').hidden=true;more.hidden=true;delete more.dataset.retry;load()}
- function open(id){reset();memberId=id;query='';next=null;photos=[];$('memberChooser').hidden=true;root.hidden=false;$('photoMemberName').textContent='S'+id+' '+NAMES[id-1];$('photoSearchInput').value='';$('photoSearchInput').setAttribute('aria-label','搜尋 '+NAMES[id-1]+' 的照片關鍵字');$('photoEmpty').hidden=true;more.hidden=true;$('memberModal').scrollTop=0;load()}
- $('backToMembersBtn').onclick=reset;$('defaultPhotoBtn').onclick=()=>{if(memberId)onDefault(memberId)};
+ function search(){if(!memberId)return;cancel();query=$('photoSearchInput').value.trim();next=null;photos=[];grid.replaceChildren();renderOriginal();$('photoEmpty').hidden=true;more.hidden=true;delete more.dataset.retry;load()}
+ function open(id){reset();memberId=id;query='';next=null;photos=[];$('memberChooser').hidden=true;root.hidden=false;renderOriginal();$('photoMemberName').textContent='S'+id+' '+NAMES[id-1];$('photoSearchInput').value='';$('photoSearchInput').setAttribute('aria-label','搜尋 '+NAMES[id-1]+' 的照片關鍵字');$('photoEmpty').hidden=true;more.hidden=true;$('memberModal').scrollTop=0;load()}
+ $('backToMembersBtn').onclick=reset;
  $('photoSearchForm').onsubmit=e=>{e.preventDefault();search()};$('photoSearchInput').oninput=()=>{clearTimeout(typingTimer);typingTimer=setTimeout(search,400)};
  more.onclick=()=>{const retry=more.dataset.retry;delete more.dataset.retry;load(retry==='first'?false:next!==null)};
  return {open,reset,cancel};

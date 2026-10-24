@@ -104,7 +104,6 @@ summary { cursor: pointer; font-size: 15px; font-weight: 700; line-height: 1.6; 
 .photo-choice img { display:block; width:100%; aspect-ratio:4/5; object-fit:cover; object-position:center; background:#eee; border-radius:2px; }
 .photo-choice span { display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:2; overflow:hidden; overflow-wrap:anywhere; min-height:36px; font-size:12px; line-height:1.5; margin:6px 2px 2px; }
 .photo-source { display:inline-block; font-size:11px; margin:3px 0 0; padding:2px 8px; }
-.photo-default { margin:16px 0; }
 #memberPhotos[aria-busy='true'] .photo-choice { opacity:.65; cursor:progress; }
 .photo-unavailable img { opacity:.3; }
 @media(max-width:380px) { .photo-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } .photo-toolbar { gap:8px; } .photo-toolbar .secondary { padding:8px 10px; } }
