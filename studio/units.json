@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-25",
+  "updatedAt": "2026-10-26",
   "sources": [
     "https://www.triplescosmos.com/",
     "https://www.triples-official.jp/",
@@ -46,7 +46,7 @@
         23,
         24
       ],
-      "image": "assets/units/ot24.png",
+      "image": "assets/units/ot24-group.jpg",
       "imageType": "group",
       "source": "https://www.melon.com/musicstory/inform.htm?mstorySeq=16978&snsGate=Y",
       "imageSource": "https://cdnimg.melon.co.kr/resource/image/cds/musicstory/2026/05/48/97a/imgUrl20260529015230387.jpg",
@@ -60,16 +60,17 @@
         "Acid Angel",
         "아시아에서 온 악의 천사"
       ],
-      "image": "assets/units/aaa.png",
-      "imageType": "logo",
+      "image": "assets/units/aaa-group.jpg",
+      "imageType": "group",
       "source": "https://www.triplescosmos.com/member/s7-nakyoung",
-      "imageSource": "https://triples.fandom.com/wiki/File:AAA_logo_transparent_white.png",
+      "imageSource": "https://triples.fandom.com/wiki/File:AAA_access_group_concept_shoot_1.jpeg",
       "members": [
         2,
         5,
         7,
         8
-      ]
+      ],
+      "imageDownloadSource": "https://static.wikia.nocookie.net/triples/images/5/55/AAA_access_group_concept_shoot_1.jpeg/revision/latest?cb=20221014122516"
     },
     {
       "id": "kre",
@@ -79,16 +80,17 @@
         "Krystal Eyes",
         "크리스탈 아이즈"
       ],
-      "image": "assets/units/kre.png",
-      "imageType": "logo",
+      "image": "assets/units/kre-group.jpg",
+      "imageType": "group",
       "source": "https://www.triplescosmos.com/member/s3-jiwoo",
-      "imageSource": "https://triples.fandom.com/wiki/File:KRE_logo_transparent_white.png",
+      "imageSource": "https://triples.fandom.com/wiki/File:KRE_aesthetic_group_concept_shoot_1.jpeg",
       "members": [
         1,
         3,
         4,
         6
-      ]
+      ],
+      "imageDownloadSource": "https://static.wikia.nocookie.net/triples/images/1/1a/KRE_aesthetic_group_concept_shoot_1.jpeg/revision/latest?cb=20230424150603"
     },
     {
       "id": "acid-eyes",
@@ -98,10 +100,10 @@
         "AE",
         "애시드 아이즈"
       ],
-      "image": "assets/units/acid-eyes.png",
-      "imageType": "logo",
+      "image": "assets/units/acid-eyes-group.jpg",
+      "imageType": "group",
       "source": "https://www.triplescosmos.com/member/s21-chaewon",
-      "imageSource": "https://triples.fandom.com/wiki/File:ACID_EYES_logo_transparent_white.png",
+      "imageSource": "https://triples.fandom.com/wiki/File:S1-S8_sns_230723.jpg",
       "members": [
         1,
         2,
@@ -111,7 +113,9 @@
         6,
         7,
         8
-      ]
+      ],
+      "imageDownloadSource": "https://static.wikia.nocookie.net/triples/images/7/76/S1-S8_sns_230723.jpg/revision/latest?cb=20230723152144",
+      "note": "ACID EYES（S1–S8）官方 SNS 合照，2023-07-23。"
     },
     {
       "id": "lovelution",
@@ -120,10 +124,10 @@
         "Love",
         "러블루션"
       ],
-      "image": "assets/units/lovelution.png",
-      "imageType": "logo",
+      "image": "assets/units/lovelution-group.jpg",
+      "imageType": "group",
       "source": "https://www.triplescosmos.com/member/s1-seoyeon",
-      "imageSource": "https://triples.fandom.com/wiki/File:LOVElution_logo_transparent_white.png",
+      "imageSource": "https://triples.fandom.com/wiki/File:Lovelution_muhan_group_concept_shoot_1_(twitter).jpg",
       "members": [
         1,
         2,
@@ -133,7 +137,8 @@
         13,
         14,
         15
-      ]
+      ],
+      "imageDownloadSource": "https://static.wikia.nocookie.net/triples/images/8/89/Lovelution_muhan_group_concept_shoot_1_%28twitter%29.jpg/revision/latest?cb=20230728160127"
     },
     {
       "id": "evolution",
@@ -142,10 +147,10 @@
         "Evol",
         "에볼루션"
       ],
-      "image": "assets/units/evolution.png",
-      "imageType": "logo",
+      "image": "assets/units/evolution-group.jpg",
+      "imageType": "group",
       "source": "https://www.triplescosmos.com/member/s7-nakyoung",
-      "imageSource": "https://triples.fandom.com/wiki/File:EVOLution_logo_white_transparent.png",
+      "imageSource": "https://triples.fandom.com/wiki/File:EVOLution_invincible_group_concept_shoot_2_twitter.jpeg",
       "members": [
         3,
         4,
@@ -155,7 +160,8 @@
         11,
         12,
         16
-      ]
+      ],
+      "imageDownloadSource": "https://static.wikia.nocookie.net/triples/images/5/5b/EVOLution_invincible_group_concept_shoot_2_twitter.jpeg/revision/latest?cb=20230928154908"
     },
     {
       "id": "nxt",
@@ -163,16 +169,17 @@
       "aliases": [
         "넥스트"
       ],
-      "image": "assets/units/nxt.png",
-      "imageType": "logo",
+      "image": "assets/units/nxt-group.jpg",
+      "imageType": "group",
       "source": "https://www.triplescosmos.com/member/s18-joobin",
-      "imageSource": "https://triples.fandom.com/wiki/File:NXT_logo_black_transparent.svg",
+      "imageSource": "https://triples.fandom.com/wiki/File:TripleS_NXT_group_reveal_photo.jpg",
       "members": [
         17,
         18,
         19,
         20
-      ]
+      ],
+      "imageDownloadSource": "https://static.wikia.nocookie.net/triples/images/6/65/TripleS_NXT_group_reveal_photo.jpg/revision/latest?cb=20231225194106"
     },
     {
       "id": "aria",
@@ -181,17 +188,18 @@
         "ARIA",
         "아리아"
       ],
-      "image": "assets/units/aria.png",
-      "imageType": "logo",
+      "image": "assets/units/aria-group.jpg",
+      "imageType": "group",
       "source": "https://www.triplescosmos.com/member/s13-nien",
-      "imageSource": "https://triples.fandom.com/wiki/File:Aria_logo_black_transparent.svg",
+      "imageSource": "https://triples.fandom.com/wiki/File:Aria_Door_group_concept_shoot_1_twitter.jpg",
       "members": [
         3,
         4,
         9,
         10,
         13
-      ]
+      ],
+      "imageDownloadSource": "https://static.wikia.nocookie.net/triples/images/8/84/Aria_Door_group_concept_shoot_1_twitter.jpg/revision/latest?cb=20240107133515"
     },
     {
       "id": "glow",
@@ -200,16 +208,17 @@
         "GLOW",
         "글로우"
       ],
-      "image": "assets/units/glow.png",
-      "imageType": "logo",
+      "image": "assets/units/glow-group.jpg",
+      "imageType": "group",
       "source": "https://triples.fandom.com/wiki/Glow",
-      "imageSource": "https://triples.fandom.com/wiki/File:Glow_logo_white_transparent.svg",
+      "imageSource": "https://triples.fandom.com/wiki/File:Glow_1st_Anniversary_1.jpg",
       "members": [
         21,
         22,
         23,
         24
-      ]
+      ],
+      "imageDownloadSource": "https://static.wikia.nocookie.net/triples/images/2/24/Glow_1st_Anniversary_1.jpg/revision/latest?cb=20250620052119"
     },
     {
       "id": "visionary-vision",
@@ -219,10 +228,10 @@
         "Visionary Vision",
         "비저너리 비전"
       ],
-      "image": "assets/units/visionary-vision.png",
-      "imageType": "logo",
+      "image": "assets/units/visionary-vision-group.jpg",
+      "imageType": "group",
       "source": "https://x.com/triplescosmos/status/1836419918784278773",
-      "imageSource": "https://triples.fandom.com/wiki/File:VV_logo_white_transparent.svg",
+      "imageSource": "https://triples.fandom.com/wiki/File:Visionary_Vision_group_teaser_1.jpeg",
       "members": [
         2,
         5,
@@ -236,7 +245,8 @@
         15,
         17,
         24
-      ]
+      ],
+      "imageDownloadSource": "https://static.wikia.nocookie.net/triples/images/5/59/Visionary_Vision_group_teaser_1.jpeg/revision/latest?cb=20240918151845"
     },
     {
       "id": "hatchi",
@@ -248,10 +258,10 @@
         "ハッチ",
         "핫치"
       ],
-      "image": "assets/units/hatchi.png",
-      "imageType": "logo",
+      "image": "assets/units/hatchi-group.jpg",
+      "imageType": "group",
       "source": "https://x.com/triplescosmos/status/1813921673550447087/photo/1",
-      "imageSource": "https://triples.fandom.com/wiki/File:Hatchi_logo_black_transparent.svg",
+      "imageSource": "https://triples.fandom.com/wiki/File:Hatchi_SHB_teaser_2.jpeg",
       "members": [
         3,
         4,
@@ -261,7 +271,8 @@
         16,
         20,
         21
-      ]
+      ],
+      "imageDownloadSource": "https://static.wikia.nocookie.net/triples/images/6/6c/Hatchi_SHB_teaser_2.jpeg/revision/latest?cb=20250912105516"
     },
     {
       "id": "alphie",
@@ -271,10 +282,10 @@
         "Alpha Percent",
         "알피"
       ],
-      "image": "assets/units/alphie.png",
-      "imageType": "logo",
+      "image": "assets/units/alphie-group.jpg",
+      "imageType": "group",
       "source": "https://triples.fandom.com/wiki/Alphie",
-      "imageSource": "https://triples.fandom.com/wiki/File:Alphie_logo.svg",
+      "imageSource": "https://triples.fandom.com/wiki/File:TripleS_Alpha_Percent_Teaser_Poster.jpeg",
       "members": [
         5,
         11,
@@ -285,7 +296,8 @@
         21,
         24
       ],
-      "note": "Alpha Percent 世界巡演宣傳小分隊"
+      "imageDownloadSource": "https://static.wikia.nocookie.net/triples/images/4/4f/TripleS_Alpha_Percent_Teaser_Poster.jpeg/revision/latest?cb=20250820150422",
+      "note": "Alpha Percent 世界巡演8人官方宣傳合照；保留完整宣傳圖構圖。"
     },
     {
       "id": "msnz",
@@ -295,10 +307,10 @@
         "moon sun neptune zenith",
         "Beyond Beauty"
       ],
-      "image": "assets/units/msnz.png",
-      "imageType": "album",
-      "source": "https://www.melon.com/musicstory/detail.htm?mstorySeq=16589",
-      "imageSource": "https://music.apple.com/tw/album/msnz-beyond-beauty-ep/1852753248?uo=4",
+      "image": "assets/units/msnz-group.jpg",
+      "imageType": "group",
+      "source": "https://commons.wikimedia.org/wiki/File:251124_-_tripleS_at_the_Beyond_Beauty_album_showcase.png",
+      "imageSource": "https://commons.wikimedia.org/wiki/File:251124_-_tripleS_at_the_Beyond_Beauty_album_showcase.png",
       "members": [
         1,
         2,
@@ -325,7 +337,14 @@
         23,
         24
       ],
-      "note": "包含 moon、sun、neptune、zenith 四隊的企劃；圖片為 Beyond Beauty 專輯封面。"
+      "imageDownloadSource": "https://upload.wikimedia.org/wikipedia/commons/c/c4/251124_-_tripleS_at_the_Beyond_Beauty_album_showcase.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "imageOriginalSource": "https://www.youtube.com/watch?v=QsnyhLXs6Ww",
+      "imageCredit": "K-POPIT 케이팝잇 (原 TV Ten)",
+      "imageCreditUrl": "https://www.youtube.com/channel/UCY9QGuU9mBLBp_OCRNKeVSw",
+      "imageLicense": "CC BY 4.0",
+      "imageLicenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "creditLine": "K-POPIT · Wikimedia Commons · CC BY 4.0",
+      "note": "Beyond Beauty 記者會的全24人合照；原影片擷取圖由 Wikimedia Commons 依 CC BY 4.0 提供，已縮小並轉為 JPEG，未裁切。"
     },
     {
       "id": "moon",
@@ -334,10 +353,10 @@
         "Moon",
         "문"
       ],
-      "image": "assets/units/moon.png",
-      "imageType": "logo",
+      "image": "assets/units/moon-group.jpg",
+      "imageType": "group",
       "source": "https://prtimes.jp/main/html/rd/p/000000704.000005358.html",
-      "imageSource": "https://triples.fandom.com/wiki/File:Moon_logo.svg",
+      "imageSource": "https://triples.fandom.com/wiki/File:Moon_Dream_Dress_visual.jpeg",
       "members": [
         9,
         14,
@@ -345,7 +364,8 @@
         20,
         22,
         24
-      ]
+      ],
+      "imageDownloadSource": "https://static.wikia.nocookie.net/triples/images/9/96/Moon_Dream_Dress_visual.jpeg/revision/latest?cb=20260731190002"
     },
     {
       "id": "sun",
@@ -354,10 +374,10 @@
         "Sun",
         "썬"
       ],
-      "image": "assets/units/sun.png",
-      "imageType": "logo",
+      "image": "assets/units/sun-group.jpg",
+      "imageType": "group",
       "source": "https://prtimes.jp/main/html/rd/p/000000711.000005358.html",
-      "imageSource": "https://triples.fandom.com/wiki/File:Sun_logo.svg",
+      "imageSource": "https://triples.fandom.com/wiki/File:Sun_DNA_visual.jpg",
       "members": [
         2,
         4,
@@ -365,7 +385,8 @@
         15,
         16,
         21
-      ]
+      ],
+      "imageDownloadSource": "https://static.wikia.nocookie.net/triples/images/7/7c/Sun_DNA_visual.jpg/revision/latest?cb=20260901022151"
     },
     {
       "id": "neptune",
@@ -374,10 +395,10 @@
         "Neptune",
         "넵튠"
       ],
-      "image": "assets/units/neptune.png",
-      "imageType": "logo",
+      "image": "assets/units/neptune-group.jpg",
+      "imageType": "group",
       "source": "https://www.melon.com/musicstory/detail.htm?mstorySeq=16589",
-      "imageSource": "https://triples.fandom.com/wiki/File:Neptune_logo.svg",
+      "imageSource": "https://triples.fandom.com/wiki/File:Neptune_Welcome_to_Heaven_visual.jpg",
       "members": [
         1,
         7,
@@ -385,7 +406,8 @@
         11,
         13,
         23
-      ]
+      ],
+      "imageDownloadSource": "https://static.wikia.nocookie.net/triples/images/7/74/Neptune_Welcome_to_Heaven_visual.jpg/revision/latest?cb=20261002103509"
     },
     {
       "id": "zenith",
@@ -394,10 +416,10 @@
         "Zenith",
         "제니스"
       ],
-      "image": "assets/units/zenith.png",
-      "imageType": "logo",
+      "image": "assets/units/zenith-group.jpg",
+      "imageType": "group",
       "source": "https://www.melon.com/musicstory/detail.htm?mstorySeq=16589",
-      "imageSource": "https://triples.fandom.com/wiki/File:Zenith_logo.svg",
+      "imageSource": "https://triples.fandom.com/wiki/File:A26_L%26P_pt.1_zenith_Local_Perspective.jpeg",
       "members": [
         3,
         6,
@@ -405,7 +427,8 @@
         12,
         18,
         19
-      ]
+      ],
+      "imageDownloadSource": "https://static.wikia.nocookie.net/triples/images/d/d5/A26_L%26P_pt.1_zenith_Local_Perspective.jpeg/revision/latest?cb=20260508150713"
     }
   ]
 }

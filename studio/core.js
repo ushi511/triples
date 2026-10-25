@@ -1,5 +1,6 @@
-import {getTable,TABLE_IDS,normalizeGrid} from './table-versions.js?v=24';
-export {getTable,TABLE_IDS,slotType,TOPIC_OPTIONS,normalizeGrid} from './table-versions.js?v=24';
+import {UNIT_IMAGES} from './unit-images.js?v=26';
+import {getTable,TABLE_IDS,normalizeGrid} from './table-versions.js?v=26';
+export {getTable,TABLE_IDS,slotType,TOPIC_OPTIONS,normalizeGrid} from './table-versions.js?v=26';
 export const NAMES=['SeoYeon','HyeRin','JiWoo','ChaeYeon','YooYeon','SooMin','NaKyoung','YuBin','Kaede','DaHyun','Kotone','YeonJi','Nien','SoHyun','Xinyu','Mayu','Lynn','JooBin','HaYeon','ShiOn','ChaeWon','Sullin','SeoAh','JiYeon'];
 export const LABELS=getTable('3.5').labels;
 export const DEFAULT_TITLE='tripleS 生涯表';
@@ -28,4 +29,4 @@ export function validDraft(s){
 export function restoreState(s){const slots=s.slots.map(restoreSlot);if(s.version<3)[slots[10],slots[11]]=[slots[11],slots[10]];return {version:7,title:s.version===7?s.title:DEFAULT_TITLE,tableId:s.version>=4?s.tableId:'3.5',...(s.tableId==='custom'?{grid:{...s.grid}}:{}),slots,topics:slots.map((_,i)=>s.version>=5&&s.topics[i]?{...s.topics[i]}:null)}}
 export const isSongSlot=(index,tableId='3.5')=>getTable(tableId).special[index]==='song';
 export const defaultCrop=id=>({z:1,x:Number(id)===2?0.65:0,y:0});
-export function restoreSlot(slot){if(!slot)return null;const restored={...slot};if(restored.kind==='unit'&&restored.unitId==='ot24'){restored.title='tripleS';restored.label='tripleS'}if(Number(restored.memberId)===2&&!restored.cropPreset){if((restored.z??1)===1&&(restored.x??0)===0&&(restored.y??0)===0)Object.assign(restored,defaultCrop(2));restored.cropPreset=1}return restored}
+export function restoreSlot(slot){if(!slot)return null;const restored={...slot};if(restored.kind==='unit'&&UNIT_IMAGES[restored.unitId]){const photo=UNIT_IMAGES[restored.unitId];restored.src=photo.src;if(photo.credit){restored.credit=photo.credit;restored.creditSource=photo.creditSource}else{delete restored.credit;delete restored.creditSource}}if(restored.kind==='unit'&&restored.unitId==='ot24'){restored.title='tripleS';restored.label='tripleS'}if(Number(restored.memberId)===2&&!restored.cropPreset){if((restored.z??1)===1&&(restored.x??0)===0&&(restored.y??0)===0)Object.assign(restored,defaultCrop(2));restored.cropPreset=1}return restored}

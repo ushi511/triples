@@ -56,7 +56,9 @@ GitHub Pages 使用 main 分支根目錄發佈，正式網址為 https://ushi511
 
 名稱、成員及圖片來源記錄在 units.json。包含 tripleS 全員、Acid Angel from Asia、+(KR)ystal Eyes、ACID EYES、LOVElution、EVOLution、NXT、Aria、Glow、Vision@ry Vision、∞!、Alphie、msnz、moon、sun、neptune、zenith。
 
-一般使用小分隊 Logo；tripleS 使用 LOVE&POP pt.1 官方團體宣傳照，msnz 使用專輯封面並於選項註明。資料來源包含 tripleS 官方網站、日本官方網站、Melon 官方專輯介紹與 tripleS Wiki；各圖片原始來源保留在 units.json。
+17 個選項均使用對應成員合照或含完整隊伍的官方宣傳圖，保留完整構圖、不裁掉成員，JPEG 長邊最多 1400px。tripleS 使用 LOVE&POP pt.1 官方團體照，Alphie 使用含正確 8 位成員的巡演宣傳照。資料來源與原始圖片連結保留在 units.json，選單也可點擊圖片來源。已填入草稿的舊 Logo 會依 unit-images.js 對應到新版合照，保留原本的格子名稱與其他內容。
+
+msnz 使用 Beyond Beauty 記者會全 24 人合照，來源：https://commons.wikimedia.org/wiki/File:251124_-_tripleS_at_the_Beyond_Beauty_album_showcase.png 。作者為 K-POPIT 케이팝잇（原 TV Ten），原影片：https://www.youtube.com/watch?v=QsnyhLXs6Ww ，授權 CC BY 4.0：https://creativecommons.org/licenses/by/4.0/ 。圖片已縮小並轉為 JPEG，未裁切；選單與匯出圖片均保留署名。
 
 ## Objekt 資料
 
