@@ -307,8 +307,8 @@
         "moon sun neptune zenith",
         "Beyond Beauty"
       ],
-      "image": "assets/units/msnz-wordmark.png",
-      "imageType": "wordmark",
+      "image": "assets/units/msnz-logo.png",
+      "imageType": "logo",
       "source": "https://www.melon.com/musicstory/detail.htm?mstorySeq=16589",
       "members": [
         1,
@@ -336,7 +336,7 @@
         23,
         24
       ],
-      "note": "使用名稱字標，非官方 Logo。"
+      "imageProvidedBy": "user"
     },
     {
       "id": "moon",

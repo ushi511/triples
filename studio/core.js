@@ -1,6 +1,6 @@
-import {UNIT_IMAGES} from './unit-images.js?v=27';
-import {getTable,TABLE_IDS,normalizeGrid} from './table-versions.js?v=27';
-export {getTable,TABLE_IDS,slotType,TOPIC_OPTIONS,normalizeGrid} from './table-versions.js?v=27';
+import {UNIT_IMAGES} from './unit-images.js?v=28';
+import {getTable,TABLE_IDS,normalizeGrid} from './table-versions.js?v=28';
+export {getTable,TABLE_IDS,slotType,TOPIC_OPTIONS,normalizeGrid} from './table-versions.js?v=28';
 export const NAMES=['SeoYeon','HyeRin','JiWoo','ChaeYeon','YooYeon','SooMin','NaKyoung','YuBin','Kaede','DaHyun','Kotone','YeonJi','Nien','SoHyun','Xinyu','Mayu','Lynn','JooBin','HaYeon','ShiOn','ChaeWon','Sullin','SeoAh','JiYeon'];
 export const LABELS=getTable('3.5').labels;
 export const DEFAULT_TITLE='tripleS 生涯表';

@@ -37,7 +37,7 @@ export const UNIT_IMAGES={
     "src": "assets/units/alphie-group.jpg"
   },
   "msnz": {
-    "src": "assets/units/msnz-wordmark.png"
+    "src": "assets/units/msnz-logo.png"
   },
   "moon": {
     "src": "assets/units/moon-group.jpg"

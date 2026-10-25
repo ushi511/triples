@@ -56,9 +56,9 @@ GitHub Pages 使用 main 分支根目錄發佈，正式網址為 https://ushi511
 
 名稱、成員及圖片來源記錄在 units.json。包含 tripleS 全員、Acid Angel from Asia、+(KR)ystal Eyes、ACID EYES、LOVElution、EVOLution、NXT、Aria、Glow、Vision@ry Vision、∞!、Alphie、msnz、moon、sun、neptune、zenith、Aura。
 
-18 個選項中，16 個使用對應成員合照或含完整隊伍的官方宣傳圖，保留完整構圖、不裁掉成員，JPEG 長邊最多 1400px。Aura 與 msnz 暫時使用簡單名稱字標（非官方 Logo），並在選項註明；未取得可用的獨立官方 Logo 素材。tripleS 使用 LOVE&POP pt.1 官方團體照，Alphie 使用含正確 8 位成員的巡演宣傳照。資料來源與原始圖片連結保留在 units.json，選單也可點擊圖片來源。已填入草稿的舊 Logo 會依 unit-images.js 對應到目前設定的合照或字標，保留原本的格子名稱與其他內容。
+18 個選項中，16 個使用對應成員合照或含完整隊伍的官方宣傳圖，保留完整構圖、不裁掉成員，JPEG 長邊最多 1400px。msnz 使用使用者提供的 DNA／地球圖案（msnz-logo.png），保留原圖尺寸與構圖。Aura 暫時使用簡單名稱字標（非官方 Logo），並在選項註明。tripleS 使用 LOVE&POP pt.1 官方團體照，Alphie 使用含正確 8 位成員的巡演宣傳照。資料來源與原始圖片連結保留在 units.json，選單也可點擊圖片來源。已填入草稿的舊 Logo 會依 unit-images.js 對應到目前設定的合照或字標，保留原本的格子名稱與其他內容。
 
-目前未使用的 msnz-group.jpg 為 Beyond Beauty 記者會全 24 人合照，來源：https://commons.wikimedia.org/wiki/File:251124_-_tripleS_at_the_Beyond_Beauty_album_showcase.png 。作者為 K-POPIT 케이팝잇（原 TV Ten），原影片：https://www.youtube.com/watch?v=QsnyhLXs6Ww ，授權 CC BY 4.0：https://creativecommons.org/licenses/by/4.0/ 。圖片已縮小並轉為 JPEG，未裁切；目前選單及匯出已改用名稱字標；舊圖片的來源與署名保留於此。
+目前未使用的 msnz-group.jpg 為 Beyond Beauty 記者會全 24 人合照，來源：https://commons.wikimedia.org/wiki/File:251124_-_tripleS_at_the_Beyond_Beauty_album_showcase.png 。作者為 K-POPIT 케이팝잇（原 TV Ten），原影片：https://www.youtube.com/watch?v=QsnyhLXs6Ww ，授權 CC BY 4.0：https://creativecommons.org/licenses/by/4.0/ 。圖片已縮小並轉為 JPEG，未裁切；目前選單及匯出已改用使用者提供的圖案；舊圖片的來源與署名保留於此。
 
 ## Objekt 資料
 

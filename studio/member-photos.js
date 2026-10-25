@@ -1,4 +1,4 @@
-import {NAMES} from './core.js?v=27';
+import {NAMES} from './core.js?v=28';
 const SOURCES=[{id:'stories',label:'Joojoo Stories'},{id:'triples',label:'tripleS Wiki'},{id:'kpop',label:'Kpop Wiki'}];
 const cache=new Map();
 const allowedImage=value=>{try{const u=new URL(value);return u.protocol==='https:'&&u.hostname==='static.wikia.nocookie.net'&&/^\/(triples|kpop)\/images\//.test(u.pathname)}catch{return false}};
