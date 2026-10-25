@@ -1,4 +1,4 @@
-// Local unit photo paths and attribution used when restoring older drafts.
+// Canonical unit images used for both new selections and restored drafts.
 export const UNIT_IMAGES={
   "ot24": {
     "src": "assets/units/ot24-group.jpg"
@@ -37,9 +37,7 @@ export const UNIT_IMAGES={
     "src": "assets/units/alphie-group.jpg"
   },
   "msnz": {
-    "src": "assets/units/msnz-group.jpg",
-    "credit": "K-POPIT · Wikimedia Commons · CC BY 4.0 · youtu.be/QsnyhLXs6Ww",
-    "creditSource": "https://www.youtube.com/watch?v=QsnyhLXs6Ww"
+    "src": "assets/units/msnz-wordmark.png"
   },
   "moon": {
     "src": "assets/units/moon-group.jpg"
@@ -52,5 +50,8 @@ export const UNIT_IMAGES={
   },
   "zenith": {
     "src": "assets/units/zenith-group.jpg"
+  },
+  "aura": {
+    "src": "assets/units/aura-wordmark.png"
   }
 };

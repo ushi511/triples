@@ -1,12 +1,24 @@
-import {NAMES} from './core.js?v=26';
-const SOURCES=[{id:'triples',label:'tripleS Wiki'},{id:'kpop',label:'Kpop Wiki'}];
+import {NAMES} from './core.js?v=27';
+const SOURCES=[{id:'stories',label:'Joojoo Stories'},{id:'triples',label:'tripleS Wiki'},{id:'kpop',label:'Kpop Wiki'}];
 const cache=new Map();
 const allowedImage=value=>{try{const u=new URL(value);return u.protocol==='https:'&&u.hostname==='static.wikia.nocookie.net'&&/^\/(triples|kpop)\/images\//.test(u.pathname)}catch{return false}};
 export function photoDownloadURL(value){if(!allowedImage(value))throw new Error('image source');const u=new URL(value);u.pathname=u.pathname.replace(/\/revision\/latest(?:\/.*)?$/,'/revision/latest/scale-to-width-down/1280');return u.href}
 const hasName=(title,name)=>new RegExp('\\b'+name+'\\b','i').test(title);
 function isPersonalPhoto(title,name){return hasName(title,name)&&!NAMES.some(other=>other!==name&&hasName(title,other))&&!/\b(signature|logo|track ?list|schedule|badge|lightstick)\b/i.test(title)}
-function photoPriority(photo){return /\b(sns|photo diary|ootd|selfie|selca|instagram)\b/i.test(photo.title)?0:/\b(profile|portal|message)\b/i.test(photo.title)?2:1}
+function photoPriority(photo){if(photo.sourceId==='stories')return -1;return /\b(sns|photo diary|ootd|selfie|selca|instagram)\b/i.test(photo.title)?0:/\b(profile|portal|message)\b/i.test(photo.title)?2:1}
+let storiesPromise;
+async function searchStories(memberId,keyword,signal){
+ if(!storiesPromise)storiesPromise=fetch('story-photos.json?v=27',{credentials:'omit'}).then(r=>{if(!r.ok)throw new Error('stories');return r.json()}).catch(e=>{storiesPromise=null;throw e});
+ const data=await storiesPromise;if(signal?.aborted)throw new DOMException('Aborted','AbortError');
+ const query=keyword.normalize('NFKC').toLowerCase().trim(),photos=(data.members?.[String(memberId)]||[]).flatMap(p=>{
+  if(!p||!/^assets\/stories\/[a-z0-9-]+\.jpg$/.test(p.url)||p.thumb!==p.url||typeof p.title!=='string'||typeof p.id!=='string')return [];
+  let source;try{source=new URL(p.source);if(source.origin!=='https://itsjoo.xyz'||source.pathname!=='/stories')return []}catch{return []}
+  if(query&&!(p.title+' '+(p.date||'')).normalize('NFKC').toLowerCase().includes(query))return [];
+  return [{id:p.id,key:p.id,sourceId:'stories',sourceLabel:'Joojoo Stories',title:p.title,thumb:p.thumb,url:p.url,source:source.href}];
+ });return {photos,next:null};
+}
 async function searchSource(source,memberId,keyword,offset,signal){
+ if(source.id==='stories')return searchStories(memberId,keyword,signal);
  const name=NAMES[memberId-1],terms=[...(source.id==='kpop'?['tripleS']:[]),name,...keyword.trim().slice(0,100).replace(/["\\]/g,' ').split(/\s+/).filter(Boolean)];
  const query=terms.map(term=>'"'+term+'"').join(' '),key=JSON.stringify([source.id,query,offset]);
  const saved=cache.get(key);if(saved&&Date.now()-saved.time<300000)return saved.value;
@@ -63,8 +75,8 @@ export function createMemberPhotoBrowser({onPhoto,onDefault}){
   }catch(error){if(current!==version)return;message('圖片搜尋暫時無法連線，請再試一次。',true);more.hidden=false;more.textContent='重新搜尋';more.dataset.retry=append?'more':'first'}
   finally{clearTimeout(timeout);if(current===version){loading=false;more.disabled=false}}
  }
- function search(){if(!memberId)return;cancel();query=$('photoSearchInput').value.trim();next=null;photos=[];grid.replaceChildren();renderOriginal();$('photoEmpty').hidden=true;more.hidden=true;delete more.dataset.retry;load()}
- function open(id){reset();memberId=id;query='';next=null;photos=[];$('memberChooser').hidden=true;root.hidden=false;renderOriginal();$('photoMemberName').textContent='S'+id+' '+NAMES[id-1];$('photoSearchInput').value='';$('photoSourceSelect').value='all';$('photoSearchInput').setAttribute('aria-label','搜尋 '+NAMES[id-1]+' 的照片關鍵字');$('photoEmpty').hidden=true;more.hidden=true;$('memberModal').scrollTop=0;load()}
+ function search(){if(!memberId)return;$('photoSearchInput').placeholder=$('photoSourceSelect').value==='stories'?'搜尋成員或日期，例如 2026-10':'關鍵字：sns、photo diary、concept';cancel();query=$('photoSearchInput').value.trim();next=null;photos=[];grid.replaceChildren();renderOriginal();$('photoEmpty').hidden=true;more.hidden=true;delete more.dataset.retry;load()}
+ function open(id){reset();memberId=id;query='';next=null;photos=[];$('memberChooser').hidden=true;root.hidden=false;renderOriginal();$('photoMemberName').textContent='S'+id+' '+NAMES[id-1];$('photoSearchInput').value='';$('photoSourceSelect').value='stories';$('photoSearchInput').placeholder='搜尋成員或日期，例如 2026-10';$('photoSearchInput').setAttribute('aria-label','搜尋 '+NAMES[id-1]+' 的照片關鍵字');$('photoEmpty').hidden=true;more.hidden=true;$('memberModal').scrollTop=0;load()}
  $('backToMembersBtn').onclick=reset;$('photoSourceSelect').onchange=search;
  $('photoSearchForm').onsubmit=e=>{e.preventDefault();search()};$('photoSearchInput').oninput=()=>{clearTimeout(typingTimer);typingTimer=setTimeout(search,400)};
  more.onclick=()=>{const retry=more.dataset.retry;delete more.dataset.retry;load(retry==='first'?false:next!==null)};

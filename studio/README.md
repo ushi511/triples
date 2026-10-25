@@ -54,11 +54,11 @@ GitHub Pages 使用 main 分支根目錄發佈，正式網址為 https://ushi511
 
 ## 小分隊資料
 
-名稱、成員及圖片來源記錄在 units.json。包含 tripleS 全員、Acid Angel from Asia、+(KR)ystal Eyes、ACID EYES、LOVElution、EVOLution、NXT、Aria、Glow、Vision@ry Vision、∞!、Alphie、msnz、moon、sun、neptune、zenith。
+名稱、成員及圖片來源記錄在 units.json。包含 tripleS 全員、Acid Angel from Asia、+(KR)ystal Eyes、ACID EYES、LOVElution、EVOLution、NXT、Aria、Glow、Vision@ry Vision、∞!、Alphie、msnz、moon、sun、neptune、zenith、Aura。
 
-17 個選項均使用對應成員合照或含完整隊伍的官方宣傳圖，保留完整構圖、不裁掉成員，JPEG 長邊最多 1400px。tripleS 使用 LOVE&POP pt.1 官方團體照，Alphie 使用含正確 8 位成員的巡演宣傳照。資料來源與原始圖片連結保留在 units.json，選單也可點擊圖片來源。已填入草稿的舊 Logo 會依 unit-images.js 對應到新版合照，保留原本的格子名稱與其他內容。
+18 個選項中，16 個使用對應成員合照或含完整隊伍的官方宣傳圖，保留完整構圖、不裁掉成員，JPEG 長邊最多 1400px。Aura 與 msnz 暫時使用簡單名稱字標（非官方 Logo），並在選項註明；未取得可用的獨立官方 Logo 素材。tripleS 使用 LOVE&POP pt.1 官方團體照，Alphie 使用含正確 8 位成員的巡演宣傳照。資料來源與原始圖片連結保留在 units.json，選單也可點擊圖片來源。已填入草稿的舊 Logo 會依 unit-images.js 對應到目前設定的合照或字標，保留原本的格子名稱與其他內容。
 
-msnz 使用 Beyond Beauty 記者會全 24 人合照，來源：https://commons.wikimedia.org/wiki/File:251124_-_tripleS_at_the_Beyond_Beauty_album_showcase.png 。作者為 K-POPIT 케이팝잇（原 TV Ten），原影片：https://www.youtube.com/watch?v=QsnyhLXs6Ww ，授權 CC BY 4.0：https://creativecommons.org/licenses/by/4.0/ 。圖片已縮小並轉為 JPEG，未裁切；選單與匯出圖片均保留署名。
+目前未使用的 msnz-group.jpg 為 Beyond Beauty 記者會全 24 人合照，來源：https://commons.wikimedia.org/wiki/File:251124_-_tripleS_at_the_Beyond_Beauty_album_showcase.png 。作者為 K-POPIT 케이팝잇（原 TV Ten），原影片：https://www.youtube.com/watch?v=QsnyhLXs6Ww ，授權 CC BY 4.0：https://creativecommons.org/licenses/by/4.0/ 。圖片已縮小並轉為 JPEG，未裁切；目前選單及匯出已改用名稱字標；舊圖片的來源與署名保留於此。
 
 ## Objekt 資料
 
@@ -71,3 +71,7 @@ Season：Atom01、Binary01、Cream01、Divine01、Ever01、Atom02、Binary02、C
 ## 字型及素材權利
 
 頁面、表單控制項、四個版本的表頭與項目名稱、自訂文字及動態 Canvas 文字均使用同一套 Noto Sans TC。使用完整可變字型 WOFF2（常用繁中及拉丁字元），避免新輸入的中文字落回不同的系統字型；原有子集字型檔保留以相容快取頁面。字型來源：https://github.com/google/fonts/tree/main/ofl/notosanstc 。字型授權見 assets/fonts/OFL.txt。原始表格圖片由使用者提供，既有素材來自 https://ushi511.github.io/triples/ 。非官方粉絲工具，表格、人物照片、卡面、Logo、封面及其他素材權利屬各權利人。
+
+## Joojoo Stories 照片選集
+
+成員照片預設顯示 Joojoo Stories 的近期公開照片選集，每位最多 6 張，只收錄靜態圖片。資料記錄於 story-photos.json，圖片存於 assets/stories，保留各成員原站頁面連結；縮小及 JPEG 壓縮以加快載入。來源：https://itsjoo.xyz/stories?artist=tripleS 。原站未提供跨來源讀取，因此目前為 2026-10-26 整理的靜態選集，非即時同步；更新需重新整理資料並發佈。其他 Wiki 搜尋來源仍可使用。

@@ -307,10 +307,9 @@
         "moon sun neptune zenith",
         "Beyond Beauty"
       ],
-      "image": "assets/units/msnz-group.jpg",
-      "imageType": "group",
-      "source": "https://commons.wikimedia.org/wiki/File:251124_-_tripleS_at_the_Beyond_Beauty_album_showcase.png",
-      "imageSource": "https://commons.wikimedia.org/wiki/File:251124_-_tripleS_at_the_Beyond_Beauty_album_showcase.png",
+      "image": "assets/units/msnz-wordmark.png",
+      "imageType": "wordmark",
+      "source": "https://www.melon.com/musicstory/detail.htm?mstorySeq=16589",
       "members": [
         1,
         2,
@@ -337,14 +336,7 @@
         23,
         24
       ],
-      "imageDownloadSource": "https://upload.wikimedia.org/wikipedia/commons/c/c4/251124_-_tripleS_at_the_Beyond_Beauty_album_showcase.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "imageOriginalSource": "https://www.youtube.com/watch?v=QsnyhLXs6Ww",
-      "imageCredit": "K-POPIT 케이팝잇 (原 TV Ten)",
-      "imageCreditUrl": "https://www.youtube.com/channel/UCY9QGuU9mBLBp_OCRNKeVSw",
-      "imageLicense": "CC BY 4.0",
-      "imageLicenseUrl": "https://creativecommons.org/licenses/by/4.0/",
-      "creditLine": "K-POPIT · Wikimedia Commons · CC BY 4.0",
-      "note": "Beyond Beauty 記者會的全24人合照；原影片擷取圖由 Wikimedia Commons 依 CC BY 4.0 提供，已縮小並轉為 JPEG，未裁切。"
+      "note": "使用名稱字標，非官方 Logo。"
     },
     {
       "id": "moon",
@@ -429,6 +421,27 @@
         19
       ],
       "imageDownloadSource": "https://static.wikia.nocookie.net/triples/images/d/d5/A26_L%26P_pt.1_zenith_Local_Perspective.jpeg/revision/latest?cb=20260508150713"
+    },
+    {
+      "id": "aura",
+      "name": "Aura",
+      "aliases": [
+        "AURA",
+        "아우라",
+        "Ballad Dimension 2",
+        "第二抒情小分隊",
+        "Dream Drip"
+      ],
+      "image": "assets/units/aura-wordmark.png",
+      "imageType": "wordmark",
+      "source": "https://triples.fandom.com/wiki/Aura",
+      "members": [
+        1,
+        18,
+        20,
+        23
+      ],
+      "note": "暫用名稱字標，非官方 Logo。"
     }
   ]
 }

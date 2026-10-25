@@ -1,8 +1,8 @@
 const TABLE_COLORS={background:'#FFFFFF',text:'#111111',line:'#000000',accent:'#E92342',muted:'#555555'};
-import {createCollectionPickers} from './collection-pickers.js?v=26';
-import {createMemberPhotoBrowser} from './member-photos.js?v=26';
-import {FONT_FAMILY,songLayout,wrapText,headerLayout} from './typography.js?v=26';
-import {NAMES,freshState,cloneState,clamp,placement,validDraft,defaultCrop,restoreState,restoreSlot,getTable,TABLE_IDS,slotType,TOPIC_OPTIONS,topicFor,normalizeGrid,resizeCustomState,DEFAULT_TITLE} from './core.js?v=26';
+import {createCollectionPickers} from './collection-pickers.js?v=27';
+import {createMemberPhotoBrowser} from './member-photos.js?v=27';
+import {FONT_FAMILY,songLayout,wrapText,headerLayout} from './typography.js?v=27';
+import {NAMES,freshState,cloneState,clamp,placement,validDraft,defaultCrop,restoreState,restoreSlot,getTable,TABLE_IDS,slotType,TOPIC_OPTIONS,topicFor,normalizeGrid,resizeCustomState,DEFAULT_TITLE} from './core.js?v=27';
 const $=id=>document.getElementById(id),canvas=$('canvas'),modal=$('memberModal'),songModal=$('songModal');
 const images=new Map(),history=[],draftCache=new Map();
 const collectionPickers=createCollectionPickers({onChoose:chooseCollection,onClear:clearCollection});
